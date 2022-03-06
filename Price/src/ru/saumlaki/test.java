@@ -1,0 +1,7 @@
+package ru.saumlaki;
+
+public class test {
+    public static void main(String[] args) {
+
+    }
+}
