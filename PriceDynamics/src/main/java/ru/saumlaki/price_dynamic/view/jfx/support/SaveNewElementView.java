@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.PriceDynamics;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class SaveNewElementView {
 
         if (stage == null) stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/jfxView/support/saveNewElement.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PriceDynamics.class.getResource("/jfxView/support/saveNewElement.fxml"));
         VBox root = null;
         try {
             root = fxmlLoader.load();

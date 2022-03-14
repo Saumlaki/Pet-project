@@ -5,43 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9036020f-78f5-4502-8ce1-aad394a45202" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/interfaces/Refreshable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/interfaces/Initializable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/64fbf42b-feb2-48e5-86c2-193bd9b97955.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/64fbf42b-feb2-48e5-86c2-193bd9b97955.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/PriceDynamics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/config/DataConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/config/DataConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/interfaces/Refreshable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/interfaces/Refreshable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/support/SaveChangeElementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/support/SaveChangeElementController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/CityDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/CityDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/PriceDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/PriceDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/ProductDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/ProductDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/SeasonDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/SeasonDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/interfaces/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/interfaces/DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/service/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/service/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/interfaces/Showable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/interfaces/Showable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/ErrorMessageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/ErrorMessageView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/SaveChangeElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/SaveChangeElementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/SaveNewElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/SaveNewElementView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/DataBase/db.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DataBase/db.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jfxView/shop/shopElementView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jfxView/shop/shopElementView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jfxView/shop/shopListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jfxView/shop/shopListView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DataBase/db.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DataBase/db.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jfxView/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jfxView/mainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jfxView/shop/shopElementView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jfxView/shop/shopElementView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jfxView/shop/shopListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jfxView/shop/shopListView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/CityDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/CityDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/PriceDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/PriceDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/ProductDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/ProductDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/SeasonDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/SeasonDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/interfaces/DAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/interfaces/DAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/service/ShopServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/service/ShopServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/interfaces/Showable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/interfaces/Showable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/MainView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/support/ErrorMessageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/support/ErrorMessageView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListViewController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,8 +111,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.saumlaki.price_dynamic.Main" />
+    <configuration name="PriceDynamics" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.saumlaki.price_dynamic.PriceDynamics" />
       <module name="PriceDynamics" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Git\Pet-project\Libs\javafx-sdk-17.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
@@ -132,7 +127,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.PriceDynamics" />
       </list>
     </recent_temporary>
   </component>
@@ -146,6 +141,7 @@
       <updated>1647239787618</updated>
       <workItem from="1647239799422" duration="955000" />
       <workItem from="1647240971286" duration="16999000" />
+      <workItem from="1647266424086" duration="2440000" />
     </task>
     <servers />
   </component>
@@ -172,23 +168,23 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementController.java</url>
           <line>48</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementController.java</url>
           <line>36</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementController.java</url>
           <line>35</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.java</url>
-          <line>101</line>
+          <line>102</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

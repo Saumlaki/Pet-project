@@ -6,18 +6,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import lombok.Getter;
-import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.PriceDynamics;
+import ru.saumlaki.price_dynamic.controller.interfaces.Initializable;
 import ru.saumlaki.price_dynamic.controller.interfaces.Refreshable;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
-import ru.saumlaki.price_dynamic.service.interfaces.Service;
 import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
 import ru.saumlaki.price_dynamic.view.interfaces.Showable;
 
 import java.util.List;
 
-public class MainViewController implements Refreshable {
+public class MainViewController implements Initializable, Refreshable {
 
+    Refreshable parentView;
 
     //*************************************************
     //Идентификаторы элементов формы
@@ -30,38 +31,38 @@ public class MainViewController implements Refreshable {
 
     @FXML
     void cityOpenList(ActionEvent event) {
-        Showable showable = (Showable) Main.applicationContext.getBean("cityListView");
+        Showable showable = (Showable) PriceDynamics.applicationContext.getBean("cityListView");
         showable.show(null, this);
     }
 
     @FXML
     void shopOpenList(ActionEvent event) {
 
-        Showable showable = (Showable) Main.applicationContext.getBean("shopListView");
+        Showable showable = (Showable) PriceDynamics.applicationContext.getBean("shopList");
         showable.show(null, this);
     }
 
     @FXML
     void seasonOpenList(ActionEvent event) {
-        Showable showable = (Showable) Main.applicationContext.getBean("seasonListView");
+        Showable showable = (Showable) PriceDynamics.applicationContext.getBean("seasonListView");
         showable.show(null, this);
     }
 
     @FXML
     void productOpenList(ActionEvent event) {
-        Showable showable = (Showable) Main.applicationContext.getBean("productListView");
+        Showable showable = (Showable) PriceDynamics.applicationContext.getBean("productListView");
         showable.show(null, this);
     }
 
     @FXML
     void priceOpenList(ActionEvent event) {
-        Showable showable = (Showable) Main.applicationContext.getBean("priceListView");
+        Showable showable = (Showable) PriceDynamics.applicationContext.getBean("priceListView");
         showable.show(null, this);
     }
 
     @FXML
     void about(ActionEvent event) {
-        Showable showable = (Showable) Main.applicationContext.getBean("about");
+        Showable showable = (Showable) PriceDynamics.applicationContext.getBean("about");
         showable.show(null, this);
     }
 
@@ -99,7 +100,7 @@ public class MainViewController implements Refreshable {
     private void createColumnShop() {
 
 
-        List<Shop> shopList = ((ShopService)Main.applicationContext.getBean("shopServiceImpl")).getAll();
+        List<Shop> shopList = ((ShopService) PriceDynamics.applicationContext.getBean("shopServiceImpl")).getAll();
 
         TreeTableColumn<TableRow, String> shopColumnGroup = new TreeTableColumn<>("Магазины");
 
@@ -129,26 +130,34 @@ public class MainViewController implements Refreshable {
     //*************************************************
     //Реализация интерфейса Refreshable
 
-    @Override
-    public void addRefreshable(Refreshable refreshable) {
-
-    }
-
-    @Override
-    public void removeRefreshable(Refreshable refreshable) {
-
-    }
 
     @Override
     public void refresh() {
 
+        //В случае необходимости обновления перерисовываем форму
+        //Под обновлением у нас могут быть
+        //1.Добавили/убрали магазин
+        //2.Добавили убрали товар
+
+        creteColumn();
+
+
+        //Если есть форма владелец то обновляем ее
+        if(parentView!=null) parentView.refresh();
+    }
+
+
+    //*************************************************
+    //Реализация интерфейса Initializable
+
+    @Override
+    public void initialization(Refreshable parentView) {
+
+        this.parentView = parentView;
+
         creteColumn();
     }
 
-    @Override
-    public void sendRefreshCommand() {
-
-    }
 
     //*************************************************
     //Внутренний класс для отображения в таблице

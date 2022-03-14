@@ -1,17 +1,11 @@
 package ru.saumlaki.price_dynamic.view.jfx.support;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.Main;
-import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
-import ru.saumlaki.price_dynamic.entity.Shop;
+import ru.saumlaki.price_dynamic.PriceDynamics;
 
 import java.io.IOException;
 
@@ -22,7 +16,7 @@ public class SaveChangeElementView {
 
         if (stage == null) stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/jfxView/support/saveChangeElement.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PriceDynamics.class.getResource("/jfxView/support/saveChangeElement.fxml"));
         VBox root = null;
         try {
             root = fxmlLoader.load();

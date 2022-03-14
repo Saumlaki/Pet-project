@@ -1,6 +1,7 @@
 package ru.saumlaki.price_dynamic.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javafx.fxml.FXMLLoader;
 import org.hibernate.SessionFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ru.saumlaki.price_dynamic.PriceDynamics;
+import ru.saumlaki.price_dynamic.view.jfx.Main;
 
 import java.beans.PropertyVetoException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -74,4 +79,12 @@ public class DataConfig {
         return transactionManager;
     }
 
+    @Bean
+    public FXMLLoader viewFactory(Class object) {
+
+        Map<Class, FXMLLoader> map = new HashMap<>();
+        map.put(Main.class, new FXMLLoader(this.getClass().getResource("/jfxView/mainView.fxml")));
+
+        return map.get(object);
+    }
 }

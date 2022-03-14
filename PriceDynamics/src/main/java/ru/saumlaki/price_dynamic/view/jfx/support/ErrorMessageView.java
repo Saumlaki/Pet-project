@@ -4,16 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.PriceDynamics;
 import ru.saumlaki.price_dynamic.controller.interfaces.Refreshable;
-import ru.saumlaki.price_dynamic.controller.jfx.MainViewController;
 import ru.saumlaki.price_dynamic.controller.jfx.support.ErrorMessageController;
-import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.view.interfaces.Erroreble;
 
 import java.io.IOException;
@@ -42,7 +39,7 @@ public class ErrorMessageView implements Erroreble {
         //1. Подключение формы
         if (stage == null) stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/jfxView/support/errorMessage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PriceDynamics.class.getResource("/jfxView/support/errorMessage.fxml"));
         VBox root = null;
         try {
             root = fxmlLoader.load();
