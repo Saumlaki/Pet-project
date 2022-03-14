@@ -1,6 +1,9 @@
 package ru.saumlaki.price_dynamic.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
+import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
 import ru.saumlaki.price_dynamic.entity.Shop;
 
@@ -24,6 +27,10 @@ public class ShopDAOImpl implements ShopDAO {
 
     @Override
     public List<Shop> getAll() {
-        return null;
+
+        SessionFactory sessionFactory= (SessionFactory) Main.applicationContext.getBean("sessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.createQuery("from Shop").getResultList();
     }
 }

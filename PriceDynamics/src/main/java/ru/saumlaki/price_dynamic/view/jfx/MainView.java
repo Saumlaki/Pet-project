@@ -51,7 +51,7 @@ public class MainView {
         stage.show();
 
         //2. Настройка формы
-        TreeTableView<Product> treeTableView = (TreeTableView<Product>) scene.lookup("#goodsTable");
+        TreeTableView<Product> treeTableView = (TreeTableView<Product>) scene.lookup("#table");
         creteColumn(treeTableView);
     }
 

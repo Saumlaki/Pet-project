@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.saumlaki.price_dynamic.config.DataConfig;
 import ru.saumlaki.price_dynamic.view.jfx.MainView;
 
 /**
@@ -11,16 +12,17 @@ import ru.saumlaki.price_dynamic.view.jfx.MainView;
  */
 public class Main extends Application {
 
-    public static ApplicationContext applicationContext;
+    public static AnnotationConfigApplicationContext applicationContext;
 
     public static void main(String[] args) {
 
-        applicationContext = new AnnotationConfigApplicationContext("ru/saumlaki/price_dynamic/config/DataConfig.java");
+        applicationContext = new AnnotationConfigApplicationContext(DataConfig.class);
+        launch(args);
     }
 
     @Override
     public void start(Stage stage) {
-        MainView mainView = (MainView) applicationContext.getBean("mainView");
+        MainView mainView = (MainView) Main.applicationContext.getBean("mainView");
         mainView.show(stage);
     }
 }
