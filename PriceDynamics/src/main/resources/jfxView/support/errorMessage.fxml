@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#pres" onKeyReleased="#relas" prefHeight="200.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controller.jfx.support.DialogMessengerFormController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#pres" prefHeight="200.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controller.jfx.support.ErrorMessageController">
    <children>
       <Label prefHeight="35.0" prefWidth="137.0" text="ОШИБКА">
          <font>
@@ -26,7 +26,7 @@
       </TextArea>
       <HBox alignment="TOP_RIGHT" prefHeight="31.0" prefWidth="471.0">
          <children>
-            <Button fx:id="buttonCancel" cancelButton="true" defaultButton="true" mnemonicParsing="false" onAction="#onClickButtonCancel" text="Отмена(ESC)" />
+            <Button cancelButton="true" defaultButton="true" mnemonicParsing="false" onAction="#onClickButtonCancel" text="Отмена(ESC)" />
          </children>
       </HBox>
    </children>

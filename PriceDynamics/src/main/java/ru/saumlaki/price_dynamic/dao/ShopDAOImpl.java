@@ -14,6 +14,11 @@ public class ShopDAOImpl implements ShopDAO {
 
     @Override
     public void add(Shop object) {
+
+        SessionFactory sessionFactory = (SessionFactory) Main.applicationContext.getBean("sessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+
+        session.save(object);
     }
 
     @Override
@@ -28,7 +33,7 @@ public class ShopDAOImpl implements ShopDAO {
     @Override
     public List<Shop> getAll() {
 
-        SessionFactory sessionFactory= (SessionFactory) Main.applicationContext.getBean("sessionFactory");
+        SessionFactory sessionFactory = (SessionFactory) Main.applicationContext.getBean("sessionFactory");
         Session session = sessionFactory.getCurrentSession();
 
         return session.createQuery("from Shop").getResultList();

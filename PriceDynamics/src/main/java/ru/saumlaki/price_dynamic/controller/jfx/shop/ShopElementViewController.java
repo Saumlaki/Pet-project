@@ -9,6 +9,7 @@ import lombok.Setter;
 import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.interfaces.Service;
+import ru.saumlaki.price_dynamic.view.interfaces.Erroreble;
 import ru.saumlaki.price_dynamic.view.jfx.shop.ShopElementView;
 import ru.saumlaki.price_dynamic.view.jfx.support.SaveNewElementView;
 
@@ -18,7 +19,7 @@ public class ShopElementViewController {
 
     public void setShop(Shop shop) {
         this.shop = shop==null?new Shop():shop;
-        this.name.setText(shop.getName());
+        this.name.setText(this.shop.getName());
     }
 
     @FXML
@@ -51,9 +52,15 @@ public class ShopElementViewController {
 
     @FXML
     void save(ActionEvent event) {
-        Service<Shop> service = (Service<Shop>) Main.applicationContext.getBean("shopServiceImpl");
-        shop.setName(name.getText());
-        service.add(shop);
+
+        if (name.getText().isEmpty()) {
+            ((Erroreble) Main.applicationContext.getBean("errorMessageView")).error("Ошибка заполнения",
+                    "Наименование магазина не может быть пустым");
+        } else {
+            Service<Shop> service = (Service<Shop>) Main.applicationContext.getBean("shopServiceImpl");
+            shop.setName(name.getText());
+            service.add(shop);
+        }
     }
 }
 

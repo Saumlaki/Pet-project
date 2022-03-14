@@ -16,6 +16,7 @@ import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
+import ru.saumlaki.price_dynamic.view.interfaces.Showable;
 
 import javax.swing.text.TableView;
 import java.io.IOException;
@@ -25,11 +26,12 @@ import java.util.List;
  * Компонент отвечающий за инициализацию главной формы приложения
  */
 @Component
-public class MainView {
+public class MainView implements Showable {
 
     @Autowired
     ShopService shopService;
 
+    @Override
     public void show(Stage stage) {
 
         //1. Подключение формы

@@ -14,15 +14,19 @@ import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.controller.jfx.shop.ShopListViewController;
 import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
 import ru.saumlaki.price_dynamic.entity.Shop;
+import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
+import ru.saumlaki.price_dynamic.view.interfaces.Erroreble;
+import ru.saumlaki.price_dynamic.view.interfaces.Showable;
 
 import java.io.IOException;
 
 @Component
-public class ShopListView {
+public class ShopListView implements Showable {
 
     @Autowired
-    private ShopDAO shopDAO;
+    private ShopService shopService;
 
+    @Override
     public void show(Stage stage) {
 
         if (stage == null) stage = new Stage();
@@ -32,9 +36,8 @@ public class ShopListView {
         try {
             root = fxmlLoader.load();
         } catch (IOException e) {
-            System.out.println("-->Ошибка");
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            ((Erroreble)Main.applicationContext.getBean("errorMessageView")).error("Ошибка загрузки формы списка магазинов",
+                    e.getMessage());
         }
         Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
 
@@ -63,7 +66,7 @@ public class ShopListView {
     //Наполнение формы
     private void fillTable(TableView<Shop> tableView) {
 
-        shopDAO.getAll().stream().forEach(shop -> tableView.getItems().add(shop));
+        shopService.getAll().stream().forEach(shop -> tableView.getItems().add(shop));
     }
     //Наполнение формы
     /////////////////////////////////////////////////////////////////

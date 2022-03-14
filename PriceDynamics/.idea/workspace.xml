@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9036020f-78f5-4502-8ce1-aad394a45202" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/interfaces/Erroreble.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/interfaces/Showable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/support/DialogMessengerFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/support/ErrorMessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElementView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/shop/ShopListView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/DialogMessengerElementForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/view/jfx/support/ErrorMessageView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/jfxView/listView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/jfxView/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jfxView/mainView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jfxView/support/dialogMessengerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jfxView/support/errorMessage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/jfxView/listView.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.class" afterDir="false" />
@@ -81,6 +88,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.25632185" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -117,7 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1647239787618</updated>
       <workItem from="1647239799422" duration="955000" />
-      <workItem from="1647240971286" duration="5111000" />
+      <workItem from="1647240971286" duration="10559000" />
     </task>
     <servers />
   </component>
@@ -144,14 +152,9 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/Main.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/main/java/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementViewController.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

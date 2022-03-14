@@ -15,17 +15,20 @@ import ru.saumlaki.price_dynamic.controller.jfx.shop.ShopElementViewController;
 import ru.saumlaki.price_dynamic.controller.jfx.shop.ShopListViewController;
 import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
 import ru.saumlaki.price_dynamic.entity.Shop;
+import ru.saumlaki.price_dynamic.view.interfaces.Erroreble;
+import ru.saumlaki.price_dynamic.view.interfaces.Showable;
 
 import java.io.IOException;
 
 @Component
-public class ShopElementView {
+public class ShopElementView implements Showable {
     @Autowired
     private ShopDAO shopDAO;
 
     //Текущий магазин
     private Shop shop = null;
 
+    @Override
     public void show(Stage stage) {
 
         if (stage == null) stage = new Stage();
@@ -35,9 +38,8 @@ public class ShopElementView {
         try {
             root = fxmlLoader.load();
         } catch (IOException e) {
-            System.out.println("-->Ошибка");
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            ((Erroreble)Main.applicationContext.getBean("errorMessageView")).error("Ошибка загрузки формы элемента магазина",
+                    e.getMessage());
         }
         Scene scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
 
