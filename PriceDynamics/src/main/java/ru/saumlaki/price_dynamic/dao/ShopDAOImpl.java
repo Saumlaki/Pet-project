@@ -22,11 +22,26 @@ public class ShopDAOImpl implements ShopDAO {
     }
 
     @Override
+    public void update(Shop object) {
+
+        SessionFactory sessionFactory = (SessionFactory) Main.applicationContext.getBean("sessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+
+        session.update(object);
+    }
+
+    @Override
     public void remove(Shop object) {
+
+        SessionFactory sessionFactory = (SessionFactory) Main.applicationContext.getBean("sessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+
+        session.remove(object);
     }
 
     @Override
     public Shop getByID(int id) {
+
         return null;
     }
 

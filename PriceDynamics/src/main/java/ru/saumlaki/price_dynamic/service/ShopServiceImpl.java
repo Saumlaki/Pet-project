@@ -19,7 +19,11 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void add(Shop object) {
 
-        dao.add(object);
+        if (object.getId() != 0) {
+            dao.update(object);
+        } else {
+            dao.add(object);
+        }
     }
 
     @Transactional

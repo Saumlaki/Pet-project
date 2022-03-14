@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.controller.interfaces.Refreshable;
 import ru.saumlaki.price_dynamic.controller.jfx.shop.ShopListViewController;
 import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
 import ru.saumlaki.price_dynamic.entity.Shop;
@@ -27,7 +28,7 @@ public class ShopListView implements Showable {
     private ShopService shopService;
 
     @Override
-    public void show(Stage stage) {
+    public void show(Stage stage, Refreshable refreshable) {
 
         if (stage == null) stage = new Stage();
 

@@ -13,6 +13,11 @@ public interface DAO<T> {
     void add(T object);
 
     /**
+     * Метод обновления объекта в БД
+     */
+    void update(T object);
+
+    /**
      * Метод удаления объекта из БП
      */
     void remove(T object);

@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controller.jfx.MainViewController">
    <children>
       <MenuBar>
@@ -16,21 +15,21 @@
             <items>
                   <Menu mnemonicParsing="false" text="Справочники">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Города" />
+                        <MenuItem mnemonicParsing="false" onAction="#cityOpenList" text="Города" />
                         <MenuItem mnemonicParsing="false" onAction="#shopOpenList" text="Магазины" />
-                        <MenuItem mnemonicParsing="false" text="Сезоны" />
-                      <MenuItem mnemonicParsing="false" text="Товары" />
+                        <MenuItem mnemonicParsing="false" onAction="#seasonOpenList" text="Сезоны" />
+                      <MenuItem mnemonicParsing="false" onAction="#productOpenList" text="Товары" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Документы">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Регистрации цен" />
+                        <MenuItem mnemonicParsing="false" onAction="#priceOpenList" text="Регистрации цен" />
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="О программе..." />
+                  <MenuItem mnemonicParsing="false" onAction="#about" text="О программе..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem mnemonicParsing="false" text="Выход" />
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Выход" />
             </items>
           </Menu>
         </menus>

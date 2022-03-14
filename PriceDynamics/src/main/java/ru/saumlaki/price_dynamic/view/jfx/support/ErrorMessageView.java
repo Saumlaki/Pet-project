@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.controller.interfaces.Refreshable;
 import ru.saumlaki.price_dynamic.controller.jfx.MainViewController;
 import ru.saumlaki.price_dynamic.controller.jfx.support.ErrorMessageController;
 import ru.saumlaki.price_dynamic.entity.Product;
@@ -32,11 +33,11 @@ public class ErrorMessageView implements Erroreble {
         this.text = text;
         this.errorMessage = errorMessage;
 
-        show(null);
+        show(null, null);
     }
 
     @Override
-    public void show(Stage stage) {
+    public void show(Stage stage, Refreshable refreshable) {
 
         //1. Подключение формы
         if (stage == null) stage = new Stage();

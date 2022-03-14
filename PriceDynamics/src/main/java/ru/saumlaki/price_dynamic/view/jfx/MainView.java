@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.controller.interfaces.Refreshable;
 import ru.saumlaki.price_dynamic.controller.jfx.MainViewController;
 import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
 import ru.saumlaki.price_dynamic.entity.Product;
@@ -32,7 +33,7 @@ public class MainView implements Showable {
     ShopService shopService;
 
     @Override
-    public void show(Stage stage) {
+    public void show(Stage stage, Refreshable refreshable) {
 
         //1. Подключение формы
         if (stage == null) stage = new Stage();
@@ -52,58 +53,7 @@ public class MainView implements Showable {
         stage.setScene(scene);
         stage.show();
 
-        //2. Настройка формы
-        TreeTableView<Product> treeTableView = (TreeTableView<Product>) scene.lookup("#table");
-        creteColumn(treeTableView);
+        //Инициализируем заполнение формы
+        ((Refreshable)fxmlLoader.getController()).refresh();
     }
-
-
-    /////////////////////////////////////////////////////////////////
-    //Создание таблицы
-
-    private void creteColumn(TreeTableView<Product> treeTableView) {
-
-        createColumnProduct(treeTableView);
-        createColumnShop(treeTableView);
-        createColumnPrice(treeTableView);
-    }
-
-    private void createColumnProduct(TreeTableView<Product> treeTableView) {
-        TreeTableColumn<Product, String> productColumn = new TreeTableColumn<>("Товары");
-        productColumn.setCellValueFactory(new TreeItemPropertyValueFactory<Product, String>("name"));
-
-        productColumn.setPrefWidth(500);
-
-        treeTableView.getColumns().add(productColumn);
-    }
-
-    private void createColumnShop(TreeTableView<Product> treeTableView) {
-        List<Shop> shopList = shopService.getAll();
-
-        TreeTableColumn<Product, String> shopColumnGroup = new TreeTableColumn<>("Магазины");
-
-        for (Shop shop : shopList) {
-            TreeTableColumn<Product, String> shopColumn = new TreeTableColumn<>(shop.getName());
-            shopColumnGroup.getColumns().add(shopColumn);
-        }
-
-        treeTableView.getColumns().add(shopColumnGroup);
-    }
-
-    private void createColumnPrice(TreeTableView<Product> treeTableView) {
-        TreeTableColumn<Product, String> priceColumnGroup = new TreeTableColumn<>("Цены");
-        TreeTableColumn<Product, String> priceColumnBeginningYear = new TreeTableColumn<>("Начало года");
-        TreeTableColumn<Product, String> priceColumnBeginningMonth = new TreeTableColumn<>("Прошлый мес.");
-        TreeTableColumn<Product, String> priceColumnCurrentMonth = new TreeTableColumn<>("Текущий мес.");
-
-        priceColumnBeginningYear.setPrefWidth(100);
-        priceColumnBeginningMonth.setPrefWidth(100);
-        priceColumnCurrentMonth.setPrefWidth(100);
-
-        priceColumnGroup.getColumns().addAll(priceColumnBeginningYear, priceColumnBeginningMonth, priceColumnCurrentMonth);
-        treeTableView.getColumns().add(priceColumnGroup);
-    }
-
-    //Создание таблицы
-    /////////////////////////////////////////////////////////////////
 }

@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.saumlaki.price_dynamic.config.DataConfig;
+import ru.saumlaki.price_dynamic.view.interfaces.Showable;
 import ru.saumlaki.price_dynamic.view.jfx.MainView;
 
 /**
@@ -22,7 +23,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        MainView mainView = (MainView) Main.applicationContext.getBean("mainView");
-        mainView.show(stage);
+        Showable showable = (Showable) Main.applicationContext.getBean("mainView");
+        showable.show(stage, null);
     }
 }
