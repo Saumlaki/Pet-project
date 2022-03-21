@@ -5,26 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9036020f-78f5-4502-8ce1-aad394a45202" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Time tracker/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/.idea/libraries/JavaFX17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/DialogMessengerElementForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/TimeTracker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/controllers/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/DataOfTimeDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/TimeDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/TypeOfTimeDAOImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/interfaces/DAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/interfaces/DataOfTimeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/interfaces/TimeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/dao/interfaces/TypeOfTimeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/entity/DataOfTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/entity/Time.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/entity/TypeOfTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/DataOfTimeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/TimeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/TypeOfTimeServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/interfaces/DataOfTimeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/interfaces/Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/interfaces/TimeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/service/interfaces/TypeOfTimeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/supporting/TimerWatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/supporting/data/SimpleCalendar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/java/ru/saumlaki/time_tracker/view/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/resources/View/MainView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/resources/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/main/resources/settings.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/test/java/ru/saumlaki/time_tracker/TimeTrackerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/test/java/ru/saumlaki/time_tracker/dao/DataOfTimeDAOImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/test/java/ru/saumlaki/time_tracker/dao/TimeDAOImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Time tracker/src/test/java/ru/saumlaki/time_tracker/dao/TypeOfTimeDAOImpTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/config/DataConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/config/DataConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/interfaces/Refreshable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/interfaces/Refreshable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/MainViewController$TableRow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/MainViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopElementController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/shop/ShopListController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/controller/jfx/support/SaveChangeElementController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/CityDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/PriceDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/ProductDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/SeasonDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/dao/ShopDAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/MainView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopElement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/shop/ShopList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/support/ErrorMessageView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/support/SaveChangeElementView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/saumlaki/price_dynamic/view/jfx/support/SaveNewElementView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Архивы/Calendar/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Архивы/Calendar/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Архивы/Calendar/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Архивы/Calendar/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Архивы/Timer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Архивы/Timer/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Архивы/Timer/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Архивы/Timer/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Архивы/Timer/Timer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Архивы/Timer/Timer.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +151,8 @@
       <workItem from="1647240971286" duration="16999000" />
       <workItem from="1647266424086" duration="2440000" />
       <workItem from="1647419643204" duration="1890000" />
+      <workItem from="1647502395340" duration="52000" />
+      <workItem from="1647844948182" duration="4653000" />
     </task>
     <servers />
   </component>
