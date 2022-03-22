@@ -14,42 +14,10 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
-public class Main {
+public class Main extends AbstractView{
 
-    public void showElementForm(Stage stage) {
+    public void showForm(Stage stage) {
 
-        stage = stage == null ? new Stage() : stage;
-
-        FXMLLoader fxmlLoader = null;
-        try {
-
-            fxmlLoader = new FXMLLoader(new URL("file:/" + new File(TimeTracker.getPropertyForName("MainView")).getAbsolutePath().replace("\\","/")));
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        HBox hBox = null;
-        try {
-            hBox = (HBox) fxmlLoader.load();
-        } catch (IOException ex) {
-
-            DialogMessengerElementForm.showError("Ошибка загрузки главного окна", ex.getMessage());
-        }
-
-        Scene scene = new Scene(hBox, 600, 400);
-        stage.setTitle("Учет времени");
-        stage.setScene(scene);
-
-     //   stage.getIcons().add(new Image(new File(TimeTracker.getPropertyForName("Icon")).getAbsolutePath()));
-
-//        Bean.timeTrackerController = fxmlLoader.getController();
-
-//        Bean.timeTrackerController.setComboBoxTime(Bean.timeList);
-//        Bean.timeTrackerController.setComboBoxTypeTimeDiagram();
-//        Bean.timeTrackerController.setTimePie();
-
-        stage.show();
+        super.showForm(stage, "MainView", "Учет времени", "chart.css", "Icon");
     }
 }

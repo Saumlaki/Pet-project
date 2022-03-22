@@ -1,28 +1,29 @@
 package ru.saumlaki.time_tracker;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import ru.saumlaki.time_tracker.dao.interfaces.DAO;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
+import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.view.Main;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Properties;
 
 public class TimeTracker extends Application {
 
-    /**
-     * Общие переменные сосредоточенные в одном месте
-     */
-    public static String propertyFileName = "src/main/resources/settings.properties";
-    public static Connection connection;
+    //***Общие переменные сосредоточенные в одном месте***
+    public static String propertyFileName = "src/main/resources/settings.properties";//Адрес файла настроек
+    public static Connection connection;//Подключение для работы с БД
 
+    public static ObservableList<TypeOfTime> typeOfTimeObsList = FXCollections.observableArrayList();
+    public static ObservableList<Time> timeObsList = FXCollections.observableArrayList();
+    public static ObservableList<DataOfTime> dataOfTimeObsList = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
 
@@ -31,13 +32,18 @@ public class TimeTracker extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
 
-        new Main().showElementForm(stage);
+        new Main().showForm(stage);
     }
 
-    /////////////////////////////////////////////////
-    // Прочие методы
+    @Override
+    public void stop() throws Exception {
+
+        if(connection!=null) connection.close();
+    }
+
+    //***Прочие методы***
 
     /**
      * Метод получения настройки по имени
@@ -60,13 +66,11 @@ public class TimeTracker extends Application {
 
     }
 
-    /////////////////////////////////////////////////
-    // Настройка соединения с базой данных
+    //***Настройка соединения с базой данных***
 
     /**
      * Метод создает и возвращает подключение к базе данных
      */
-
     public static void createConnection() {
 
         //1. Получаем имя файла базы данных
@@ -78,7 +82,6 @@ public class TimeTracker extends Application {
         //3. Создаем собственно само соединение с БД
         try {
             String url = "jdbc:sqlite:" + new File(dbFilename).getAbsolutePath();
-            url.replace("\\","/");
             connection = DriverManager.getConnection(url);
         } catch (SQLException ex) {
             DialogMessengerElementForm.showError("Ошибка подключения к базе данных", ex.getMessage());
@@ -96,7 +99,9 @@ public class TimeTracker extends Application {
         File dbFile = new File(dbName);
         if (!dbFile.exists()) {
             try {
-                dbFile.createNewFile();
+                if (!dbFile.createNewFile()) {
+                    System.out.println("err. Ошибка создания файла базы данных");
+                }
             } catch (IOException e) {
                 System.out.println("err. Ошибка создания файла базы данных");
             }

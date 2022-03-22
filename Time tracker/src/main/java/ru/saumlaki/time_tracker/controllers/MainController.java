@@ -1,15 +1,21 @@
 package ru.saumlaki.time_tracker.controllers;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import ru.saumlaki.time_tracker.dao.TimeDAOImpl;
-import ru.saumlaki.time_tracker.dao.interfaces.TimeDAO;
+import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.Time;
-import ru.saumlaki.time_tracker.entity.TypeOfTime;
+import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
+import ru.saumlaki.time_tracker.service.TimeServiceImpl;
+import ru.saumlaki.time_tracker.view.Setting;
 
 public class MainController {
+
+
+    //***Поля формы***
 
     @FXML
     private TextField hourText;
@@ -24,23 +30,68 @@ public class MainController {
     private ComboBox<Time> listTime;
 
     @FXML
-    void initialize() throws InterruptedException {
+    private PieChart pieChart;
+
+    //***Инициализация формы***
+
+    @FXML
+    void initialize() {
+
+        //Инициализация списка типов времени
+        TimeTracker.timeObsList.addListener((ListChangeListener) change -> {
+            listTime.getItems().clear();
+            listTime.getItems().addAll(TimeTracker.timeObsList);
+        });
+
+        //Инициализация списка временных затрат
+        TimeTracker.dataOfTimeObsList.addListener((ListChangeListener) change -> {
+            pieChart.getData().clear();
+            TimeTracker.dataOfTimeObsList.stream().forEach(a -> pieChart.getData().add(new PieChart.Data(a.getTime().toString(), a.getValues())));
+        });
 
         //1. Заполняем список видов времени(Time)
-        fillListTypeOfTime();
+        fillListTimeObs();
+
+        //2. Заполняем круговую диаграмму
+        fillListDataOfTimesObs();
     }
 
+    //***Обработчики событий формы***
 
+    /***/
     @FXML
     void listTimeOnAction(ActionEvent event) {
 
     }
 
+    /**
+     * Обработчик кнопки обновить. Обновляет круговую диаграмму
+     */
+    @FXML
+    void updateOnAction(ActionEvent event) {
 
-    private void fillListTypeOfTime() {
-
-        TimeDAO dao = new TimeDAOImpl();
-        listTime.getItems().addAll(dao.getAll());
+        pieChart.getData().clear();
+        TimeTracker.dataOfTimeObsList.forEach(a -> pieChart.getData().add(new PieChart.Data(a.getTime().toString(), a.getValues())));
     }
 
+    /**
+     * Обработчик кнопки "Настройки". Открывает окно настроек программы
+     */
+    @FXML
+    void settingOnAction(ActionEvent event) {
+
+        new Setting().showForm(null);
+    }
+
+    //***Заполнение списков***
+
+    private void fillListTimeObs() {
+
+        TimeTracker.timeObsList.addAll(new TimeServiceImpl().getAll());
+    }
+
+    private void fillListDataOfTimesObs() {
+
+        TimeTracker.dataOfTimeObsList.addAll(new DataOfTimeServiceImpl().getAll());
+    }
 }

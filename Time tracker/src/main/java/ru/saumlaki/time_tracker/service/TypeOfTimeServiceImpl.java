@@ -4,9 +4,11 @@ import ru.saumlaki.time_tracker.dao.DataOfTimeDAOImpl;
 import ru.saumlaki.time_tracker.dao.TypeOfTimeDAOImp;
 import ru.saumlaki.time_tracker.dao.interfaces.DataOfTimeDAO;
 import ru.saumlaki.time_tracker.dao.interfaces.TypeOfTimeDAO;
+import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.interfaces.TypeOfTimeService;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class TypeOfTimeServiceImpl implements TypeOfTimeService {
@@ -38,6 +40,8 @@ public class TypeOfTimeServiceImpl implements TypeOfTimeService {
 
     @Override
     public List<TypeOfTime> getAll() {
+        List<TypeOfTime> list = dao.getAll();
+        list.sort(Comparator.comparing(a -> a.toString()));
         return dao.getAll();
     }
 }

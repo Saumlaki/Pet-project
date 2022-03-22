@@ -19,6 +19,9 @@ public class TypeOfTime {
     @Getter
     String description;
 
+    public TypeOfTime() {
+    }
+
     public TypeOfTime(int id, String description) {
         this.id = id;
         this.description = description;

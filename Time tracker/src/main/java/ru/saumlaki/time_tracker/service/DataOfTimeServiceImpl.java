@@ -6,6 +6,7 @@ import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.interfaces.DataOfTimeService;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class DataOfTimeServiceImpl implements DataOfTimeService {
@@ -37,6 +38,9 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
 
     @Override
     public List<DataOfTime> getAll() {
-        return dao.getAll();
+
+        List<DataOfTime> list = dao.getAll();
+        list.sort(Comparator.comparing(a -> a.getTime().toString()));
+        return list;
     }
 }
