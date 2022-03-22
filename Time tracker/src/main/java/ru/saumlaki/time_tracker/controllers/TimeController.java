@@ -1,23 +1,23 @@
 package ru.saumlaki.time_tracker.controllers;
 
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.DialogMessengerElementForm;
 import ru.saumlaki.time_tracker.TimeTracker;
+import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
+import ru.saumlaki.time_tracker.service.TimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TypeOfTimeServiceImpl;
+import ru.saumlaki.time_tracker.service.interfaces.TimeService;
 import ru.saumlaki.time_tracker.service.interfaces.TypeOfTimeService;
-import ru.saumlaki.time_tracker.view.Main;
 
-public class TypeOfTimeController {
+public class TimeController {
 
     //***Элемент данных"***
-    TypeOfTime element;
+    Time element;
     Stage stage;
 
     //***Поля формы***
@@ -49,12 +49,12 @@ public class TypeOfTimeController {
         if(element.getDescription().isEmpty())
             DialogMessengerElementForm.showError("Ошибка заполнения", "Наименование не может быть пустым");
         else {
-            TypeOfTimeService typeOfTimeService = new TypeOfTimeServiceImpl();
+            TimeService timeService = new TimeServiceImpl();
 
-            typeOfTimeService.add(element);
+            timeService.add(element);
 
-            TimeTracker.typeOfTimeObsList.clear();
-            TimeTracker.typeOfTimeObsList.addAll(typeOfTimeService.getAll());
+            TimeTracker.timeObsList.clear();
+            TimeTracker.timeObsList.addAll(timeService.getAll());
             stage.close();
         }
     }
@@ -67,7 +67,7 @@ public class TypeOfTimeController {
 
     //***Прочее***
 
-    public void setElement(TypeOfTime element) {
+    public void setElement(Time element) {
 
         this.element = element;
         initialize();

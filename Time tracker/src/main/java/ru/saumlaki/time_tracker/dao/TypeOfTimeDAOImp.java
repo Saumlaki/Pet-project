@@ -97,4 +97,25 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
 
         return list;
     }
+
+    @Override
+    public int getNextId() {
+
+        int id = 1;
+
+        String sqlQuery = "SELECT max(id) as id FROM type_of_time";
+
+        try (Statement stmt = TimeTracker.connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sqlQuery)) {
+
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                id++;
+            }
+        } catch (SQLException ex) {
+            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
+        }
+
+        return id;
+    }
 }

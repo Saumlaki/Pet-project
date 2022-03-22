@@ -18,13 +18,12 @@ public class TypeOfTimeServiceImpl implements TypeOfTimeService {
     @Override
     public void add(TypeOfTime object) {
 
-        dao.add(object);
-    }
+        if (object.getId() == 0) {
 
-    @Override
-    public void update(TypeOfTime object) {
-
-        dao.update(object);
+            object.setId(dao.getNextId());
+            dao.add(object);
+        } else
+            dao.update(object);
     }
 
     @Override

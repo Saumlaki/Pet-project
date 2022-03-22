@@ -21,8 +21,8 @@ public abstract class AbstractView {
 
         FXMLLoader fxmlLoader = null;
         try {
-            fxmlLoader = new FXMLLoader(new URL("file:/" + new File(TimeTracker.getPropertyForName(formName)).getAbsolutePath().replace("\\", "/")));
-
+            String fileName  = new File(TimeTracker.getPropertyForName(formName)).getAbsolutePath().replace("\\", "/");
+            fxmlLoader = new FXMLLoader(new URL("file:/" + fileName));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

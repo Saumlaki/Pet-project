@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="74.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.time_tracker.controllers.TypeOfTimeController">
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.time_tracker.controllers.TypeOfTimeController">
    <children>
-      <VBox prefHeight="95.0" prefWidth="101.0">
+      <VBox>
          <children>
             <Label prefHeight="25.0" prefWidth="95.0" text="Наименование:">
                <VBox.margin>
@@ -21,21 +21,21 @@
             <Insets />
          </HBox.margin>
       </VBox>
-      <VBox alignment="TOP_CENTER" prefHeight="57.0" prefWidth="171.0">
+      <VBox alignment="TOP_CENTER">
          <children>
-            <TextField fx:id="description" maxWidth="-Infinity" prefHeight="25.0" prefWidth="170.0">
+            <TextField fx:id="description" maxWidth="-Infinity" onKeyReleased="#descriptionOnKeyReleased" prefHeight="25.0" prefWidth="170.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </TextField>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="170.0">
+            <HBox alignment="BOTTOM_RIGHT">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" text="ОК" underline="true">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#okOnAction" text="ОК" underline="true">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button cancelButton="true" mnemonicParsing="false" text="Отмена" />
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelOnAction" text="Отмена" />
                </children>
             </HBox>
          </children>

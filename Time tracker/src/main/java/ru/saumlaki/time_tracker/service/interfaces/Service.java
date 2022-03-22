@@ -11,11 +11,6 @@ public interface Service<T> {
     void add(T object);
 
     /**
-     * Метод обновления объекта
-     */
-    void update(T object);
-
-    /**
      * Метод удаления объекта
      */
     void remove(T object);

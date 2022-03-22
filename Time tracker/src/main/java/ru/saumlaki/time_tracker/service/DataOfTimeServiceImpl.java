@@ -20,12 +20,6 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
     }
 
     @Override
-    public void update(DataOfTime object) {
-
-        dao.update(object);
-    }
-
-    @Override
     public void remove(DataOfTime object) {
 
         dao.remove(object);

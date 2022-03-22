@@ -46,4 +46,10 @@ public interface DAO<T> {
      * @return объект типа List
      */
     List<T> getAll();
+
+    /**
+     * Метод возвращает значение следующего уникального ключа
+     */
+    int getNextId();
+
 }

@@ -21,12 +21,6 @@ public class TimeServiceImpl implements TimeService {
     }
 
     @Override
-    public void update(Time object) {
-
-        dao.update(object);
-    }
-
-    @Override
     public void remove(Time object) {
 
         dao.remove(object);
