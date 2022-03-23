@@ -17,7 +17,12 @@ public class TimeServiceImpl implements TimeService {
     @Override
     public void add(Time object) {
 
-        dao.add(object);
+        if (object.getId() == 0) {
+
+            object.setId(dao.getNextId());
+            dao.add(object);
+        } else
+            dao.update(object);
     }
 
     @Override

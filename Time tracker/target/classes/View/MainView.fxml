@@ -76,7 +76,7 @@
                         </TextField>
                     </children>
                 </HBox>
-                <ComboBox fx:id="listTime" onAction="#listTimeOnAction" prefHeight="25.0" prefWidth="233.0">
+                <ComboBox fx:id="timeList" onAction="#listTimeOnAction" prefHeight="25.0" prefWidth="233.0">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets></ComboBox>

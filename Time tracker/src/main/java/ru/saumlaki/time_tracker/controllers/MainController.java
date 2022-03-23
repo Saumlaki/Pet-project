@@ -14,7 +14,6 @@ import ru.saumlaki.time_tracker.view.Setting;
 
 public class MainController {
 
-
     //***Поля формы***
 
     @FXML
@@ -27,7 +26,7 @@ public class MainController {
     private TextField secText;
 
     @FXML
-    private ComboBox<Time> listTime;
+    private ComboBox<Time> timeList;
 
     @FXML
     private PieChart pieChart;
@@ -39,8 +38,8 @@ public class MainController {
 
         //Инициализация списка типов времени
         TimeTracker.timeObsList.addListener((ListChangeListener) change -> {
-            listTime.getItems().clear();
-            listTime.getItems().addAll(TimeTracker.timeObsList);
+            timeList.getItems().clear();
+            timeList.getItems().addAll(TimeTracker.timeObsList);
         });
 
         //Инициализация списка временных затрат
@@ -54,11 +53,13 @@ public class MainController {
 
         //2. Заполняем круговую диаграмму
         fillListDataOfTimesObs();
+
+        //Устанавливаем начальные значения
+        setInitialValue();
     }
 
     //***Обработчики событий формы***
 
-    /***/
     @FXML
     void listTimeOnAction(ActionEvent event) {
 
@@ -93,5 +94,11 @@ public class MainController {
     private void fillListDataOfTimesObs() {
 
         TimeTracker.dataOfTimeObsList.addAll(new DataOfTimeServiceImpl().getAll());
+    }
+
+    private void setInitialValue() {
+
+        if(timeList.getItems().size()>0)
+        timeList.setValue(timeList.getItems().get(0));
     }
 }

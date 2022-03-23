@@ -13,6 +13,7 @@ import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TypeOfTimeServiceImpl;
 import ru.saumlaki.time_tracker.view.Setting;
+import ru.saumlaki.time_tracker.view.TimeElement;
 import ru.saumlaki.time_tracker.view.TypeOfTimeElement;
 
 public class SettingController {
@@ -52,26 +53,59 @@ public class SettingController {
 
         TimeTracker.dataOfTimeObsList.clear();
         TimeTracker.dataOfTimeObsList.addAll(new DataOfTimeServiceImpl().getAll());
-
-        //
     }
 
     //***Обработчики событий формы***
 
+    //---Time---
+
     @FXML
-    void TypeOfTimeAdd(ActionEvent event) {
+    void timeAdd(ActionEvent event) {
+        new TimeElement().showForm(null, new Time());
+    }
+
+    @FXML
+    void timeChange(ActionEvent event) {
+        new TimeElement().showForm(null, timeTable.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void timeRemove(ActionEvent event) {
+
+    }
+
+    //---TypeOfTime---
+
+    @FXML
+    void typeOfTimeAdd(ActionEvent event) {
 
         new TypeOfTimeElement().showForm(null, new TypeOfTime());
     }
 
     @FXML
-    void TypeOfTimeChange(ActionEvent event) {
+    void typeOfTimeChange(ActionEvent event) {
 
         new TypeOfTimeElement().showForm(null, typeOfTimeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
-    void TypeOfTimeRemove(ActionEvent event) {
+    void typeOfTimeRemove(ActionEvent event) {
+
+    }
+
+    //---DataOfTime---
+
+    @FXML
+    void dataOfTimeAdd(ActionEvent event) {
+
+    }
+    @FXML
+    void dataOfTimeChange(ActionEvent event) {
+
+    }
+
+    @FXML
+    void dataOfTimeRemove(ActionEvent event) {
 
     }
 
@@ -110,13 +144,13 @@ public class SettingController {
     private void createColumnDataOfTime() {
 
         TableColumn<DataOfTime, String> dataColumn = new TableColumn<>("Дата");
-        dataColumn.setCellValueFactory(StringCellDataFeatures -> new SimpleStringProperty(StringCellDataFeatures.getValue().getCalendar().toString()));
+        dataColumn.setCellValueFactory(StringCellDataFeatures -> new SimpleStringProperty(StringCellDataFeatures.getValue().getDateToStr()));
 
         TableColumn<DataOfTime, String> timeColumn = new TableColumn<>("Вид времени");
         timeColumn.setCellValueFactory(StringCellDataFeatures -> new SimpleStringProperty(StringCellDataFeatures.getValue().getTime().toString()));
 
-        TableColumn<DataOfTime, String> valueColumn = new TableColumn<>("Время(сек)");
-        valueColumn.setCellValueFactory(StringCellDataFeatures -> new SimpleStringProperty(String.valueOf(StringCellDataFeatures.getValue().getValues())));
+        TableColumn<DataOfTime, String> valueColumn = new TableColumn<>("Время");
+        valueColumn.setCellValueFactory(StringCellDataFeatures -> new SimpleStringProperty(String.valueOf(StringCellDataFeatures.getValue().getValueToStr())));
 
         dataColumn.setPrefWidth(100);
         timeColumn.setPrefWidth(100);

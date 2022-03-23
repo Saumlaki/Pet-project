@@ -24,17 +24,17 @@
                                                     <children>
                                                         <HBox AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                                             <children>
-                                                                <Button mnemonicParsing="false" text="Добавить">
+                                                                <Button mnemonicParsing="false" onAction="#timeAdd" text="Добавить">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button mnemonicParsing="false" text="Изменить">
+                                                                <Button mnemonicParsing="false" onAction="#timeChange" text="Изменить">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button mnemonicParsing="false" text="Удалить" />
+                                                                <Button mnemonicParsing="false" onAction="#timeRemove" text="Удалить" />
                                                             </children>
                                                             <padding>
                                                                 <Insets bottom="5.0" right="5.0" top="5.0" />
@@ -51,17 +51,17 @@
                                                     <children>
                                                         <HBox AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                                             <children>
-                                                                <Button mnemonicParsing="false" onAction="#TypeOfTimeAdd" text="Добавить">
+                                                                <Button mnemonicParsing="false" onAction="#typeOfTimeAdd" text="Добавить">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button mnemonicParsing="false" onAction="#TypeOfTimeChange" text="Изменить">
+                                                                <Button mnemonicParsing="false" onAction="#typeOfTimeChange" text="Изменить">
                                                                     <HBox.margin>
                                                                         <Insets right="5.0" />
                                                                     </HBox.margin>
                                                                 </Button>
-                                                                <Button mnemonicParsing="false" onAction="#TypeOfTimeRemove" text="Удалить" />
+                                                                <Button mnemonicParsing="false" onAction="#typeOfTimeRemove" text="Удалить" />
                                                             </children>
                                                             <padding>
                                                                 <Insets bottom="5.0" right="5.0" top="5.0" />
@@ -78,17 +78,17 @@
                                        <children>
                                           <HBox AnchorPane.bottomAnchor="290.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Добавить">
+                                                <Button mnemonicParsing="false" onAction="#dataOfTimeAdd" text="Добавить">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" text="Изменить">
+                                                <Button mnemonicParsing="false" onAction="#dataOfTimeChange" text="Изменить">
                                                    <HBox.margin>
                                                       <Insets right="5.0" />
                                                    </HBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" text="Удалить" />
+                                                <Button mnemonicParsing="false" onAction="#dataOfTimeRemove" text="Удалить" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="5.0" right="5.0" top="5.0" />

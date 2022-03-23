@@ -2,6 +2,7 @@ package ru.saumlaki.time_tracker.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -24,14 +25,21 @@ public class TimeController {
     @FXML
     private TextField description;
 
+    @FXML
+    private ComboBox<TypeOfTime> typeOfTime;
+
 
     //***Инициализация формы***
 
     @FXML
     void initialize() {
 
-        if (element != null)
+        if (element != null) {
             description.setText(element.getDescription());
+            typeOfTime.setValue(element.getTypeOfTime());
+        }
+
+        typeOfTime.setItems(TimeTracker.typeOfTimeObsList);
     }
 
     //***Обработчики событий формы***
@@ -40,6 +48,12 @@ public class TimeController {
     void descriptionOnKeyReleased(KeyEvent event) {
 
         element.setDescription(description.getText());
+    }
+
+    @FXML
+    void typeOfTimeOnAction(ActionEvent event) {
+
+        element.setTypeOfTime(typeOfTime.getValue());
     }
 
     @FXML
