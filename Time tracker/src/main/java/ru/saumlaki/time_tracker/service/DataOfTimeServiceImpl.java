@@ -16,7 +16,12 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
     @Override
     public void add(DataOfTime object) {
 
-        dao.add(object);
+        if (object.getId() == 0) {
+
+            object.setId(dao.getNextId());
+            dao.add(object);
+        } else
+            dao.update(object);
     }
 
     @Override

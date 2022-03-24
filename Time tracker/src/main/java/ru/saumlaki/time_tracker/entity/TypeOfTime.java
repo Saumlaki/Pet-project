@@ -29,7 +29,7 @@ public class TypeOfTime {
 
     @Override
     public String toString() {
-        return description + "(" + id + ")";
+        return description;
     }
 
     @Override

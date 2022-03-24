@@ -27,6 +27,9 @@ public class DataOfTime {
     @Getter
     private int values;
 
+    public DataOfTime() {
+    }
+
     public DataOfTime(int id, Calendar calendar, Time time, int values) {
         this.id = id;
         this.calendar = calendar;

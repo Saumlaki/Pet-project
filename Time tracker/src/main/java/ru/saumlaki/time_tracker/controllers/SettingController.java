@@ -12,6 +12,7 @@ import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TypeOfTimeServiceImpl;
+import ru.saumlaki.time_tracker.view.DataOfTimeElement;
 import ru.saumlaki.time_tracker.view.Setting;
 import ru.saumlaki.time_tracker.view.TimeElement;
 import ru.saumlaki.time_tracker.view.TypeOfTimeElement;
@@ -97,11 +98,11 @@ public class SettingController {
 
     @FXML
     void dataOfTimeAdd(ActionEvent event) {
-
+        new DataOfTimeElement().showForm(null, new DataOfTime());
     }
     @FXML
     void dataOfTimeChange(ActionEvent event) {
-
+        new DataOfTimeElement().showForm(null, dataOfTimeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML

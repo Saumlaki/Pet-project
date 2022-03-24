@@ -4,10 +4,12 @@ import ru.saumlaki.time_tracker.dao.DataOfTimeDAOImpl;
 import ru.saumlaki.time_tracker.dao.TimeDAOImpl;
 import ru.saumlaki.time_tracker.dao.interfaces.DataOfTimeDAO;
 import ru.saumlaki.time_tracker.dao.interfaces.TimeDAO;
+import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.interfaces.TimeService;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class TimeServiceImpl implements TimeService {
@@ -38,6 +40,8 @@ public class TimeServiceImpl implements TimeService {
 
     @Override
     public List<Time> getAll() {
-        return dao.getAll();
+        List<Time> list = dao.getAll();
+        list.sort(Comparator.comparing(a -> a.toString()));
+        return list;
     }
 }

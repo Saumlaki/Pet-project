@@ -32,7 +32,7 @@ public class Time {
 
     @Override
     public String toString() {
-        return description + "(" + id + ")";
+        return description;
     }
 
     @Override
