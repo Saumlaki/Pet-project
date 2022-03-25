@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
+import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
@@ -47,25 +48,24 @@ public class TimeTracker extends Application {
 
     //***Прочие методы***
 
-    /**
-     * Метод получения настройки по имени
-     */
-    public static String getPropertyForName(String propertyName) {
+    //---Группа методов обновления листов---
 
-        String value = "";
-        Properties property = new Properties();
-        try (FileInputStream fis = new FileInputStream(TimeTracker.propertyFileName)) {
+    public static void typeOfTimeObsListUpdate() {
 
-            property.load(fis);
+        typeOfTimeObsList.clear();
+        typeOfTimeObsList.addAll(ServiceFactory.getService(TypeOfTime.class).getAll());
+    }
 
-            value = property.getProperty(propertyName);
-        } catch (IOException ex) {
-            System.out.println("err.Ошибка загрузки файла настроек.");
-        }
+    public static void timeObsListUpdate() {
 
-        return value;
+        timeObsList.clear();
+        timeObsList.addAll(ServiceFactory.getService(Time.class).getAll());
+    }
 
+    public static void dataOfTimeObsListUpdate() {
 
+        dataOfTimeObsList.clear();
+        dataOfTimeObsList.addAll(ServiceFactory.getService(DataOfTime.class).getAll());
     }
 
     //***Настройка соединения с базой данных***
@@ -194,5 +194,28 @@ public class TimeTracker extends Application {
         } catch (SQLException ex) {
             Error.showError("Ошибка создания таблицы таблицы", ex.getMessage());
         }
+    }
+
+    //---Прочие---
+
+    /**
+     * Метод получения настройки по имени
+     */
+    public static String getPropertyForName(String propertyName) {
+
+        String value = "";
+        Properties property = new Properties();
+        try (FileInputStream fis = new FileInputStream(TimeTracker.propertyFileName)) {
+
+            property.load(fis);
+
+            value = property.getProperty(propertyName);
+        } catch (IOException ex) {
+            System.out.println("err.Ошибка загрузки файла настроек.");
+        }
+
+        return value;
+
+
     }
 }

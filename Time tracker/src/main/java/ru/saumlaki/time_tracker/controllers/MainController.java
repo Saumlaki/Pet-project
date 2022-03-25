@@ -11,9 +11,8 @@ import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
-import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
-import ru.saumlaki.time_tracker.service.TimeServiceImpl;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
+import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.supporting.TimerWatch;
 import ru.saumlaki.time_tracker.supporting.TypeTimeDiagram;
 import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
@@ -47,6 +46,8 @@ public class MainController extends AbstractElementController<TimerWatch> {
     @FXML
     private Button startButton;
 
+    Time currentTime;
+
     //***БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ***
 
     //***Инициализация формы***
@@ -55,14 +56,10 @@ public class MainController extends AbstractElementController<TimerWatch> {
     void initialize() {
 
         //Инициализация списка типов времени
-        TimeTracker.timeObsList.addListener((ListChangeListener) change -> {
-            timeListUpdate();
-        });
+        TimeTracker.timeObsList.addListener((ListChangeListener) change -> timeListUpdate());
 
         //Инициализация списка временных затрат
-        TimeTracker.dataOfTimeObsList.addListener((ListChangeListener) change -> {
-            pieChartUpdate();
-        });
+        TimeTracker.dataOfTimeObsList.addListener((ListChangeListener) change -> pieChartUpdate());
 
         //Заполнение списка типов диаграмм
         typeTimeDiagram.getItems().add(TypeTimeDiagram.Time);
@@ -75,14 +72,15 @@ public class MainController extends AbstractElementController<TimerWatch> {
     @Override
     public void updateForm() {
 
-        //1. Заполняем круговую диаграмму
-        fillListDataOfTimesObs();
+        //1. Обновляем данные по временным затратам
+        TimeTracker.dataOfTimeObsListUpdate();
 
         //2. Заполняем список видов времени(Time)
-        fillTimeObsList();
+        TimeTracker.timeObsListUpdate();
 
-        //Устанавливаем начальные значения
-        setInitialValue();
+        //Устанавливаем начальные значения для списка выбора вида времени
+        if (timeList.getItems().size() > 0)
+            timeList.setValue(timeList.getItems().get(0));;
     }
 
     @Override
@@ -97,7 +95,15 @@ public class MainController extends AbstractElementController<TimerWatch> {
      * Обработчик кнопки запуска таймера
      */
     @FXML
-    void startOnaAction(ActionEvent event) {
+    void startOnAction(ActionEvent event) {
+
+        //Проверяем что тип времени выбран
+        if (timeList.getValue() == null) {
+
+            Error.showError("Не указан вид времени", "Перед запускам таймеа необходимо выбрать вид времени.\n" +
+                    "Если список видов времени не заполнен, то его необходимо заполнить в настройках.");
+            return;
+        }
 
         if (element.isRun()) {
 
@@ -111,24 +117,25 @@ public class MainController extends AbstractElementController<TimerWatch> {
             //Обнуляем поля отображения времени
             setTime(0);
 
-            //Обновляем диаграмму
-            fillListDataOfTimesObs();
+            //Обновляем данные по временным затратам
+            TimeTracker.dataOfTimeObsListUpdate();
 
+            //Ставим доступность выбора типа времени
+            timeList.setDisable(false);
         } else {
             element.startTimer();
             startButton.setText("Стоп");
+
+            //Убираем доступность выбора типа времени
+            timeList.setDisable(true);
         }
     }
 
     //***Обработчики событий формы***
 
     @FXML
-    void listTimeOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void typeTimeDiagramOnAction(ActionEvent event) {
+
         pieChartUpdate();
     }
 
@@ -138,7 +145,8 @@ public class MainController extends AbstractElementController<TimerWatch> {
     @FXML
     void updateOnAction(ActionEvent event) {
 
-        pieChartUpdate();
+        //Обновляем данные по временным затратам
+        TimeTracker.dataOfTimeObsListUpdate();
     }
 
     /**
@@ -152,27 +160,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
 
     //***ПРОЧИЕ МЕТОДЫ***
 
-    //---Заполнение Obs списков---
-
-    private void fillTimeObsList() {
-
-        TimeTracker.timeObsList.clear();
-        TimeTracker.timeObsList.addAll(ServiceFactory.getService(Time.class).getAll());
-    }
-
-    private void fillListDataOfTimesObs() {
-
-        TimeTracker.dataOfTimeObsList.clear();
-        TimeTracker.dataOfTimeObsList.addAll(ServiceFactory.getService(DataOfTime.class).getAll());
-    }
-
     //---Установка начальных значений---
-
-    private void setInitialValue() {
-
-        if (timeList.getItems().size() > 0)
-            timeList.setValue(timeList.getItems().get(0));
-    }
 
     //---Обновление данных элементов формы---
 
@@ -198,16 +186,23 @@ public class MainController extends AbstractElementController<TimerWatch> {
 
     }
 
+    /**
+     * Метод обновляет поле выбора <code>timeList</code> актуальными данными
+     */
     private void timeListUpdate() {
 
-        //Получаем текущее значение
-        Time currentValue = timeList.getValue();
+        //Получаем текущее/прошлое значение
+        currentTime = timeList.getValue() == null ? currentTime : timeList.getValue();
 
+        //Обновляем список
         timeList.getItems().clear();
         timeList.getItems().addAll(TimeTracker.timeObsList);
 
-        if (currentValue != null&&TimeTracker.timeObsList.contains(currentValue)) {
-            timeList.setValue(currentValue);
+        //Устанавливаем текущее значение списка
+        if (timeList.getItems().contains(currentTime)) {
+            timeList.setValue(currentTime);
+        } else if (timeList.getItems().size() > 0) {
+            timeList.setValue(timeList.getItems().get(0));
         }
     }
 

@@ -2,8 +2,11 @@ package ru.saumlaki.time_tracker.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Класс содержит информацию о временных затратах на определенный день
@@ -27,6 +30,8 @@ public class DataOfTime {
     private int values;
 
     public DataOfTime() {
+
+        calendar = SimpleCalendar.getBeginningCurrentDay();
     }
 
     public DataOfTime(int id, Calendar calendar, Time time, int values) {

@@ -50,7 +50,7 @@ public class TypeOfTimeController extends AbstractElementController<TypeOfTime> 
             //Обновление подчиненных форм
             TimeTracker.typeOfTimeObsList.clear();
             TimeTracker.typeOfTimeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
-            stage.close();
+            closeForm();
         }
     }
 

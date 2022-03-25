@@ -12,6 +12,7 @@ import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TimeServiceImpl;
 import ru.saumlaki.time_tracker.service.TypeOfTimeServiceImpl;
+import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 import ru.saumlaki.time_tracker.view.DataOfTimeElement;
 import ru.saumlaki.time_tracker.view.Setting;
 import ru.saumlaki.time_tracker.view.TimeElement;
@@ -30,8 +31,6 @@ public class SettingController {
     @FXML
     private TableView<DataOfTime> dataOfTimeTable;
 
-
-
     //***Инициализация формы***
 
     @FXML
@@ -41,19 +40,14 @@ public class SettingController {
         creteColumn();
 
         //Подключаем слушателей к спискам
-        TimeTracker.typeOfTimeObsList.addListener(new TypeOfTimeListener());
-        TimeTracker.timeObsList.addListener(new TimeListener());
-        TimeTracker.dataOfTimeObsList.addListener(new DataOfTimeListener());
+        TimeTracker.typeOfTimeObsList.addListener((ListChangeListener) change ->  typeOfTimeTable.setItems(TimeTracker.typeOfTimeObsList));
+        TimeTracker.timeObsList.addListener((ListChangeListener) change -> timeTable.setItems(TimeTracker.timeObsList));
+        TimeTracker.dataOfTimeObsList.addListener((ListChangeListener) change -> dataOfTimeTable.setItems(TimeTracker.dataOfTimeObsList));
 
         //Обновляем данные на форме
-        TimeTracker.typeOfTimeObsList.clear();
-        TimeTracker.typeOfTimeObsList.addAll(new TypeOfTimeServiceImpl().getAll());
-
-        TimeTracker.timeObsList.clear();
-        TimeTracker.timeObsList.addAll(new TimeServiceImpl().getAll());
-
-        TimeTracker.dataOfTimeObsList.clear();
-        TimeTracker.dataOfTimeObsList.addAll(new DataOfTimeServiceImpl().getAll());
+        typeOfTimeTable.setItems(TimeTracker.typeOfTimeObsList);
+        timeTable.setItems(TimeTracker.timeObsList);
+        dataOfTimeTable.setItems(TimeTracker.dataOfTimeObsList);
     }
 
     //***Обработчики событий формы***
@@ -62,17 +56,23 @@ public class SettingController {
 
     @FXML
     void timeAdd(ActionEvent event) {
+
         new TimeElement().showForm(null, new Time());
     }
 
     @FXML
     void timeChange(ActionEvent event) {
-        new TimeElement().showForm(null, timeTable.getSelectionModel().getSelectedItem());
+
+       new TimeElement().showForm(null, timeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     void timeRemove(ActionEvent event) {
 
+        ServiceFactory.getService(Time.class).remove(timeTable.getSelectionModel().getSelectedItem());
+
+        TimeTracker.timeObsListUpdate();
+        TimeTracker.dataOfTimeObsListUpdate();
     }
 
     //---TypeOfTime---
@@ -92,23 +92,33 @@ public class SettingController {
     @FXML
     void typeOfTimeRemove(ActionEvent event) {
 
+        ServiceFactory.getService(TypeOfTime.class).remove(typeOfTimeTable.getSelectionModel().getSelectedItem());
+
+        TimeTracker.typeOfTimeObsListUpdate();
+        TimeTracker.timeObsListUpdate();
+        TimeTracker.dataOfTimeObsListUpdate();
     }
 
     //---DataOfTime---
 
     @FXML
     void dataOfTimeAdd(ActionEvent event) {
+
         new DataOfTimeElement().showForm(null, new DataOfTime());
     }
 
     @FXML
     void dataOfTimeChange(ActionEvent event) {
+
         new DataOfTimeElement().showForm(null, dataOfTimeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     void dataOfTimeRemove(ActionEvent event) {
 
+        ServiceFactory.getService(DataOfTime.class).remove(dataOfTimeTable.getSelectionModel().getSelectedItem());
+
+        TimeTracker.dataOfTimeObsListUpdate();
     }
 
     //***Создание таблиц***
@@ -160,46 +170,4 @@ public class SettingController {
 
         dataOfTimeTable.getColumns().addAll(dataColumn, timeColumn, valueColumn);
     }
-
-    //***Классы слушатели для таблиц***
-
-    class TimeListener implements ListChangeListener<Time> {
-
-        @Override
-        public void onChanged(Change<? extends Time> change) {
-            timeTable.setItems(TimeTracker.timeObsList);
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return true;
-        }
-    }
-
-    class TypeOfTimeListener implements ListChangeListener<TypeOfTime> {
-
-        @Override
-        public void onChanged(Change<? extends TypeOfTime> change) {
-            typeOfTimeTable.setItems(TimeTracker.typeOfTimeObsList);
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return true;
-        }
-    }
-
-    class DataOfTimeListener implements ListChangeListener<DataOfTime> {
-
-        @Override
-        public void onChanged(Change<? extends DataOfTime> change) {
-            dataOfTimeTable.setItems(TimeTracker.dataOfTimeObsList);
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return true;
-        }
-    }
-
 }

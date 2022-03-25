@@ -20,7 +20,7 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
         // Если на текущую дату есть запись с текущим днем и типом времени то просто приплюсовываем к ней значения
         List<DataOfTime> allElements = dao.getAll();
 
-        if (allElements.contains(object)) {
+        if (allElements.contains(object)&&object.getId()==0) {
 
             DataOfTime oldDataOfTime = allElements.stream().filter(a -> a.equals(object)).findFirst().get();
             oldDataOfTime.setValues(oldDataOfTime.getValues() + object.getValues());
@@ -36,7 +36,7 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
 
     @Override
     public void remove(DataOfTime object) {
-
+        //Тут просто удаляем
         dao.remove(object);
     }
 

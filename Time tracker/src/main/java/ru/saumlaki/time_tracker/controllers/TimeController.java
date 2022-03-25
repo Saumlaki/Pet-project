@@ -58,7 +58,7 @@ public class TimeController extends AbstractElementController<Time> {
             //Обновление подчиненных форм
             TimeTracker.timeObsList.clear();
             TimeTracker.timeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
-            stage.close();
+            closeForm();
         }
     }
 

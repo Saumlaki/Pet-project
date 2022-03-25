@@ -1,5 +1,7 @@
 package ru.saumlaki.time_tracker.service.interfaces;
 
+import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
+
 import java.util.List;
 
 /**Интерфейс определяет бизнес логику работы с основными объектами программы*/

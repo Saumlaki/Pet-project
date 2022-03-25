@@ -76,13 +76,13 @@
                         </TextField>
                     </children>
                 </HBox>
-                <ComboBox fx:id="timeList" onAction="#listTimeOnAction" prefHeight="25.0" prefWidth="233.0">
+                <ComboBox fx:id="timeList" prefHeight="25.0" prefWidth="233.0">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets></ComboBox>
                 <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="274.0">
                     <children>
-                        <Button fx:id="startButton" defaultButton="true" mnemonicParsing="false" onAction="#startOnaAction" prefHeight="25.0" prefWidth="253.0" text="Старт">
+                        <Button fx:id="startButton" defaultButton="true" mnemonicParsing="false" onAction="#startOnAction" prefHeight="25.0" prefWidth="253.0" text="Старт">
                             <HBox.margin>
                                 <Insets top="5.0" />
                             </HBox.margin></Button>

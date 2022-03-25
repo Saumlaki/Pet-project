@@ -50,12 +50,12 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
     @Override
     public void updateForm() {
         if (element != null) {
-            // calendar = new DatePicker(LocalDate.of(element.getCalendar().YEAR, element.getCalendar().MONTH, element.getCalendar().DAY_OF_MONTH));
 
             calendar.setValue(LocalDate.of(element.getCalendar().get(Calendar.YEAR),
-                    element.getCalendar().get(Calendar.MONTH),
+                    element.getCalendar().get(Calendar.MONTH)+1,
                     element.getCalendar().get(Calendar.DAY_OF_MONTH)));
 
+            time.getItems().clear();
             time.setItems(TimeTracker.timeObsList);
             time.setValue(element.getTime());
 
@@ -88,6 +88,7 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
             //Обновление подчиненных форм
             TimeTracker.dataOfTimeObsList.clear();
             TimeTracker.dataOfTimeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
+            closeForm();
         }
     }
 
