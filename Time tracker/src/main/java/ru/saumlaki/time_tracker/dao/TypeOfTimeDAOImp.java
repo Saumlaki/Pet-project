@@ -1,10 +1,9 @@
 package ru.saumlaki.time_tracker.dao;
 
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.dao.interfaces.TypeOfTimeDAO;
+import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +20,7 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка вставки данных", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка вставки данных", ex.getMessage());
         }
     }
 
@@ -36,7 +35,7 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка обновления данных", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка обновления данных", ex.getMessage());
         }
     }
 
@@ -48,7 +47,7 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка удаления", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка удаления", ex.getMessage());
         }
     }
 
@@ -69,7 +68,7 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
                 result = new TypeOfTime(id, description);
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка выборки данных по id", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка выборки данных по id", ex.getMessage());
         }
         return result;
     }
@@ -92,7 +91,7 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
                 list.add(new TypeOfTime(id, description));
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
         }
 
         return list;
@@ -113,7 +112,7 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
                 id++;
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
         }
 
         return id;

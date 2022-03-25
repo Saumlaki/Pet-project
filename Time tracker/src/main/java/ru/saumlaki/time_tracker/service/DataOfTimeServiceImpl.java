@@ -16,11 +16,21 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
     @Override
     public void add(DataOfTime object) {
 
-        if (object.getId() == 0) {
+        //Сохраняться только новые записи по времени.
+        // Если на текущую дату есть запись с текущим днем и типом времени то просто приплюсовываем к ней значения
+        List<DataOfTime> allElements = dao.getAll();
+
+        if (allElements.contains(object)) {
+
+            DataOfTime oldDataOfTime = allElements.stream().filter(a -> a.equals(object)).findFirst().get();
+            oldDataOfTime.setValues(oldDataOfTime.getValues() + object.getValues());
+            dao.update(oldDataOfTime);
+        } else if (object.getId() == 0) {
 
             object.setId(dao.getNextId());
             dao.add(object);
         } else
+
             dao.update(object);
     }
 

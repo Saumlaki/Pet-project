@@ -1,12 +1,10 @@
 package ru.saumlaki.time_tracker.dao;
 
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.dao.interfaces.DataOfTimeDAO;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
-import ru.saumlaki.time_tracker.entity.Time;
+import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +27,7 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[DataOfTimeDAOImpl]Ошибка вставки данных", ex.getMessage());
+            Error.showError("[DataOfTimeDAOImpl]Ошибка вставки данных", ex.getMessage());
         }
     }
 
@@ -47,7 +45,7 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[DataOfTimeDAOImpl]Ошибка обновления данных", ex.getMessage());
+            Error.showError("[DataOfTimeDAOImpl]Ошибка обновления данных", ex.getMessage());
         }
     }
 
@@ -59,7 +57,7 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[DataOfTimeDAOImpl]Ошибка удаления", ex.getMessage());
+            Error.showError("[DataOfTimeDAOImpl]Ошибка удаления", ex.getMessage());
         }
     }
 
@@ -86,7 +84,7 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
                         seconds);
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[DataOfTimeDAOImpl]Ошибка выборки данных по id", ex.getMessage());
+            Error.showError("[DataOfTimeDAOImpl]Ошибка выборки данных по id", ex.getMessage());
         }
         return result;
     }
@@ -116,7 +114,7 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
                 list.add(dataOfTime);
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[DataOfTimeDAOImpl]Ошибка выборки данных", ex.getMessage());
+            Error.showError("[DataOfTimeDAOImpl]Ошибка выборки данных", ex.getMessage());
         }
 
         return list;
@@ -136,7 +134,7 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
                 id++;
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
         }
 
         return id;

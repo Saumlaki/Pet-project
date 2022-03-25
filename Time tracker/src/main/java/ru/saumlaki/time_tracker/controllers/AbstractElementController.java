@@ -1,7 +1,7 @@
 package ru.saumlaki.time_tracker.controllers;
 
 import javafx.stage.Stage;
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
+import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 
 import java.lang.reflect.Field;
@@ -48,16 +48,16 @@ public abstract class AbstractElementController<T> {
                 Object fieldObject = field.get(element);
 
                 if (fieldObject == null) {
-                    DialogMessengerElementForm.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
+                    Error.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
                     return false;
                 } else if (fieldObject instanceof String) {
                     if (((String) fieldObject).isEmpty()) {
-                        DialogMessengerElementForm.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
+                        Error.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
                         return false;
                     }
                 } else if (fieldObject instanceof Integer) {
                     if ((Integer) fieldObject == 0) {
-                        DialogMessengerElementForm.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
+                        Error.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
                         return false;
                     }
                 }
@@ -75,8 +75,11 @@ public abstract class AbstractElementController<T> {
      * Метод сохраняет объекта основной элемент формы в БД.
      *
      * @param details строка реквизитов для проверки корректного заполнения
+     * @return boolean - возвращает истину если объект прошел проверку на заполненость реквизитов и его удалось сохранить(тут момент - исключения не пробрасываются так что не факт что удалось сохранить, нао будет как-нибудь доделать)
      */
-    void save(String details) {
+    boolean save(String details) {
+
+        boolean result = true;
 
         //Обновляем основной элемент формы
         updateElement();
@@ -84,8 +87,10 @@ public abstract class AbstractElementController<T> {
         //Проверка корректного заполнения реквизитов, если все ок то сохраняем и закрываем форму
         if (checkTheDetails(String.valueOf(details))) {
             ServiceFactory.getService(element.getClass()).add(element);
-            closeForm();
-        }
+        }else
+            result = false;
+
+        return result;
     }
 
     /**

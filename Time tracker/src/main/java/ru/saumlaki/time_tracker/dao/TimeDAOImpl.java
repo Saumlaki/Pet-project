@@ -1,11 +1,9 @@
 package ru.saumlaki.time_tracker.dao;
 
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.dao.interfaces.TimeDAO;
+import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.entity.Time;
-import ru.saumlaki.time_tracker.entity.TypeOfTime;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,7 +21,7 @@ public class TimeDAOImpl implements TimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TimeDAOImpl]Ошибка вставки данных", ex.getMessage());
+            Error.showError("[TimeDAOImpl]Ошибка вставки данных", ex.getMessage());
         }
     }
 
@@ -39,7 +37,7 @@ public class TimeDAOImpl implements TimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TimeDAOImpl]Ошибка обновления данных", ex.getMessage());
+            Error.showError("[TimeDAOImpl]Ошибка обновления данных", ex.getMessage());
         }
     }
 
@@ -51,7 +49,7 @@ public class TimeDAOImpl implements TimeDAO {
         try (Statement stmt = TimeTracker.connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TimeDAOImpl]Ошибка удаления", ex.getMessage());
+            Error.showError("[TimeDAOImpl]Ошибка удаления", ex.getMessage());
         }
     }
 
@@ -73,7 +71,7 @@ public class TimeDAOImpl implements TimeDAO {
                 result = new Time(id, description, new TypeOfTimeDAOImp().getByID(type_of_time_id));
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TimeDAOImpl]Ошибка выборки данных по id", ex.getMessage());
+            Error.showError("[TimeDAOImpl]Ошибка выборки данных по id", ex.getMessage());
         }
         return result;
     }
@@ -97,7 +95,7 @@ public class TimeDAOImpl implements TimeDAO {
                 list.add(new Time(id, description, new TypeOfTimeDAOImp().getByID(type_of_time_id)));
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TimeDAOImpl]Ошибка выборки данных", ex.getMessage());
+            Error.showError("[TimeDAOImpl]Ошибка выборки данных", ex.getMessage());
         }
 
         return list;
@@ -117,7 +115,7 @@ public class TimeDAOImpl implements TimeDAO {
                 id++;
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
+            Error.showError("[TypeOfTimeDAOImp]Ошибка выборки данных", ex.getMessage());
         }
 
         return id;

@@ -4,10 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
 import ru.saumlaki.time_tracker.TimeTracker;
-
-import java.awt.*;
+import ru.saumlaki.time_tracker.supporting.Error;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -32,7 +30,7 @@ public abstract class AbstractView {
             hBox = (HBox) fxmlLoader.load();
         } catch (IOException ex) {
 
-            DialogMessengerElementForm.showError("Ошибка загрузки окна " + formName, ex.getMessage());
+            Error.showError("Ошибка загрузки окна " + formName, ex.getMessage());
         }
 
         Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());

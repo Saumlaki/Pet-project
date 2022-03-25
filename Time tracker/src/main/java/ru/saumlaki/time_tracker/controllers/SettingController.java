@@ -100,6 +100,7 @@ public class SettingController {
     void dataOfTimeAdd(ActionEvent event) {
         new DataOfTimeElement().showForm(null, new DataOfTime());
     }
+
     @FXML
     void dataOfTimeChange(ActionEvent event) {
         new DataOfTimeElement().showForm(null, dataOfTimeTable.getSelectionModel().getSelectedItem());

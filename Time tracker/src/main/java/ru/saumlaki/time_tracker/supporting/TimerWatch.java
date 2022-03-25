@@ -1,16 +1,54 @@
 package ru.saumlaki.time_tracker.supporting;
 
-
-
-
+import lombok.Getter;
+import lombok.Setter;
+import ru.saumlaki.time_tracker.controllers.MainController;
 
 /**
  * Класс реализующий функцию секундомера
  */
-public class TimerWatch implements Runnable {
+public class TimerWatch  implements Runnable{
+
+    //Определяет статус таймера - истина запущен, ложь - остановлен
+    @Getter
+    private boolean run  =false;
+    int value;
+    @Setter
+    MainController mainController;
+    Thread thread;
+
+
+    /**Активирует таймер если он не запушен или останавливает если он запущен*/
+
+    public void startTimer() {
+
+        thread = new Thread(this);
+        thread.start();
+        run = true;
+    }
+
+    public int stopTimer() {
+
+        thread.interrupt();
+        run = false;
+        return value;
+    }
+
+
     @Override
     public void run() {
 
+        value = 0;
+
+        while (true) {
+            try {
+                Thread.sleep(1000);
+                value++;
+                mainController.setTime(value);
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
     }
 
 //    @Override

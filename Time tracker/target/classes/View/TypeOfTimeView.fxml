@@ -23,7 +23,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER">
          <children>
-            <TextField fx:id="description" maxWidth="-Infinity" onKeyReleased="#descriptionOnKeyReleased" prefHeight="25.0" prefWidth="170.0">
+            <TextField fx:id="description" maxWidth="-Infinity"  prefHeight="25.0" prefWidth="170.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>

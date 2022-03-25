@@ -5,13 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyEvent;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
-import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -20,6 +17,7 @@ import java.util.GregorianCalendar;
 public class DataOfTimeElementController extends AbstractElementController<DataOfTime> {
 
     //***ПОЛЯ ФОРМЫ***
+
     @FXML
     private DatePicker calendar;
 
@@ -52,7 +50,11 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
     @Override
     public void updateForm() {
         if (element != null) {
-           // calendar = new DatePicker(LocalDate.of(element.getCalendar().YEAR, element.getCalendar().MONTH, element.getCalendar().DAY_OF_MONTH));
+            // calendar = new DatePicker(LocalDate.of(element.getCalendar().YEAR, element.getCalendar().MONTH, element.getCalendar().DAY_OF_MONTH));
+
+            calendar.setValue(LocalDate.of(element.getCalendar().get(Calendar.YEAR),
+                    element.getCalendar().get(Calendar.MONTH),
+                    element.getCalendar().get(Calendar.DAY_OF_MONTH)));
 
             time.setItems(TimeTracker.timeObsList);
             time.setValue(element.getTime());
@@ -63,12 +65,12 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
 
     @Override
     public void updateElement() {
-        //1. Заполнение полей объекта
+        //Заполнение полей объекта
         element.setValues(Integer.parseInt(values.getText()));
         element.setTime(time.getValue());
 
         Calendar calendarTemp = new GregorianCalendar(calendar.getValue().getYear(),
-                calendar.getValue().getMonth().getValue()-1,
+                calendar.getValue().getMonth().getValue() - 1,
                 calendar.getValue().getDayOfMonth());
 
         element.setCalendar(calendarTemp);
@@ -81,11 +83,12 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
     @FXML
     void okOnAction(ActionEvent event) {
 
-        save("values, time, calendar");
+        if (save("values, time, calendar")) {
 
-        //Обновление подчиненых форм
-        TimeTracker.dataOfTimeObsList.clear();
-        TimeTracker.dataOfTimeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
+            //Обновление подчиненных форм
+            TimeTracker.dataOfTimeObsList.clear();
+            TimeTracker.dataOfTimeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
+        }
     }
 
     @FXML

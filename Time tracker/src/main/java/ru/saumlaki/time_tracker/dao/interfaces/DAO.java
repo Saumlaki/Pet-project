@@ -1,19 +1,6 @@
 package ru.saumlaki.time_tracker.dao.interfaces;
 
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
-import ru.saumlaki.time_tracker.TimeTracker;
-import ru.saumlaki.time_tracker.entity.DataOfTime;
-import ru.saumlaki.time_tracker.entity.TypeOfTime;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.*;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Интерфейс определяет основные методы для работы с БД

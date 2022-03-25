@@ -4,71 +4,60 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
-import ru.saumlaki.time_tracker.DialogMessengerElementForm;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
-import ru.saumlaki.time_tracker.service.TimeServiceImpl;
-import ru.saumlaki.time_tracker.service.TypeOfTimeServiceImpl;
-import ru.saumlaki.time_tracker.service.interfaces.TimeService;
-import ru.saumlaki.time_tracker.service.interfaces.TypeOfTimeService;
+import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 
-public class TimeController {
+public class TimeController extends AbstractElementController<Time> {
 
-    //***Элемент данных"***
-    Time element;
-    Stage stage;
+    //***ПОЛЯ ФОРМЫ***
 
-    //***Поля формы***
     @FXML
     private TextField description;
 
     @FXML
     private ComboBox<TypeOfTime> typeOfTime;
 
+    //***БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ***
 
     //***Инициализация формы***
 
     @FXML
     void initialize() {
 
+        typeOfTime.setItems(TimeTracker.typeOfTimeObsList);
+    }
+
+    //***Обновление формы и элемента***
+
+    @Override
+    public void updateForm() {
         if (element != null) {
             description.setText(element.getDescription());
             typeOfTime.setValue(element.getTypeOfTime());
         }
-
-        typeOfTime.setItems(TimeTracker.typeOfTimeObsList);
     }
 
-    //***Обработчики событий формы***
-
-    @FXML
-    void descriptionOnKeyReleased(KeyEvent event) {
-
+    @Override
+    public void updateElement() {
+        //Заполнение полей объекта
         element.setDescription(description.getText());
-    }
-
-    @FXML
-    void typeOfTimeOnAction(ActionEvent event) {
-
         element.setTypeOfTime(typeOfTime.getValue());
     }
+
+    //***ОБРАБОТЧИКИ КНОПОК***
+
+    //---Группа - Ок, Отмена---
 
     @FXML
     void okOnAction(ActionEvent event) {
 
-        //Проверка корректности заполнения
-        if(element.getDescription().isEmpty())
-            DialogMessengerElementForm.showError("Ошибка заполнения", "Наименование не может быть пустым");
-        else {
-            TimeService timeService = new TimeServiceImpl();
+        if (save("description, typeOfTime")) {
 
-            timeService.add(element);
-
+            //Обновление подчиненных форм
             TimeTracker.timeObsList.clear();
-            TimeTracker.timeObsList.addAll(timeService.getAll());
+            TimeTracker.timeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
             stage.close();
         }
     }
@@ -76,19 +65,6 @@ public class TimeController {
     @FXML
     void cancelOnAction(ActionEvent event) {
 
-        stage.close();
-    }
-
-    //***Прочее***
-
-    public void setElement(Time element) {
-
-        this.element = element;
-        initialize();
-    }
-
-    public void setStage(Stage stage) {
-
-        this.stage = stage;
+        closeForm();
     }
 }

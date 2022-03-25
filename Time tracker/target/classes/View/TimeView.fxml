@@ -29,12 +29,12 @@
       </VBox>
       <VBox alignment="TOP_CENTER" prefHeight="85.0" prefWidth="182.0">
          <children>
-            <TextField fx:id="description" maxWidth="-Infinity" onKeyReleased="#descriptionOnKeyReleased" prefHeight="25.0" prefWidth="150.0">
+            <TextField fx:id="description" maxWidth="-Infinity"  prefHeight="25.0" prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </TextField>
-            <ComboBox fx:id="typeOfTime" maxWidth="-Infinity" onAction="#typeOfTimeOnAction" prefHeight="25.0" prefWidth="150.0">
+            <ComboBox fx:id="typeOfTime" maxWidth="-Infinity"  prefHeight="25.0" prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>

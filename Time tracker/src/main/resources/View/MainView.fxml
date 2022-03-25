@@ -20,7 +20,7 @@
                                 <Insets right="5.0" />
                             </HBox.margin>
                         </Button>
-                        <ComboBox>
+                        <ComboBox fx:id="typeTimeDiagram" onAction="#typeTimeDiagramOnAction">
                             <HBox.margin>
                                 <Insets right="5.0" />
                             </HBox.margin>
@@ -82,7 +82,7 @@
                     </opaqueInsets></ComboBox>
                 <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="274.0">
                     <children>
-                        <Button defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="253.0" text="Старт">
+                        <Button fx:id="startButton" defaultButton="true" mnemonicParsing="false" onAction="#startOnaAction" prefHeight="25.0" prefWidth="253.0" text="Старт">
                             <HBox.margin>
                                 <Insets top="5.0" />
                             </HBox.margin></Button>

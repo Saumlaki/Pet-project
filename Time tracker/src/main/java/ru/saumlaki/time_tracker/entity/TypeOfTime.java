@@ -39,4 +39,9 @@ public class TypeOfTime {
         TypeOfTime that = (TypeOfTime) o;
         return id == that.id||description.equals(that.description);
     }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
 }

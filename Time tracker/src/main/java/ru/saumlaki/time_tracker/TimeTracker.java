@@ -5,8 +5,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
+import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
+import ru.saumlaki.time_tracker.supporting.TimerWatch;
 import ru.saumlaki.time_tracker.view.Main;
 
 import java.io.File;
@@ -34,7 +36,7 @@ public class TimeTracker extends Application {
     @Override
     public void start(Stage stage) {
 
-        new Main().showForm(stage);
+        new Main().showForm(stage, new TimerWatch());
     }
 
     @Override
@@ -84,7 +86,7 @@ public class TimeTracker extends Application {
             String url = "jdbc:sqlite:" + new File(dbFilename).getAbsolutePath();
             connection = DriverManager.getConnection(url);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("Ошибка подключения к базе данных", ex.getMessage());
+            Error.showError("Ошибка подключения к базе данных", ex.getMessage());
         }
 
         //4. Проверяем что присутствуют все необходимые таблицы. Если их нет, то создаем их
@@ -100,10 +102,10 @@ public class TimeTracker extends Application {
         if (!dbFile.exists()) {
             try {
                 if (!dbFile.createNewFile()) {
-                    System.out.println("err. Ошибка создания файла базы данных");
+                   Error.showError("Ошибка создания файла базы данных");
                 }
             } catch (IOException e) {
-                System.out.println("err. Ошибка создания файла базы данных");
+                Error.showError("Ошибка создания файла базы данных");
             }
         }
     }
@@ -135,7 +137,7 @@ public class TimeTracker extends Application {
                 tableIsExist = resultSet.getBoolean("tableIsExist");
             }
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("Ошибка проверки наличия таблицы", ex.getMessage());
+            Error.showError("Ошибка проверки наличия таблицы", ex.getMessage());
         }
 
         //2. Создаем таблицу если она отсутствует
@@ -144,7 +146,7 @@ public class TimeTracker extends Application {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sqlQuery);
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("Ошибка создания таблицы", ex.getMessage());
+            Error.showError("Ошибка создания таблицы", ex.getMessage());
         }
 
         //3. Если в п.1 таблица не была найдена, то созданную в п.2 таблицу заполняем начальными данными
@@ -153,7 +155,7 @@ public class TimeTracker extends Application {
             try (Statement stmt = connection.createStatement()) {
                 stmt.execute(sqlQuery);
             } catch (SQLException ex) {
-                DialogMessengerElementForm.showError("Ошибка заполнения таблицы", ex.getMessage());
+                Error.showError("Ошибка заполнения таблицы", ex.getMessage());
             }
         }
     }
@@ -172,7 +174,7 @@ public class TimeTracker extends Application {
             stmt.execute(sqlQuery);
 
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("Ошибка создания таблицы таблицы", ex.getMessage());
+            Error.showError("Ошибка создания таблицы таблицы", ex.getMessage());
         }
     }
 
@@ -190,7 +192,7 @@ public class TimeTracker extends Application {
             stmt.execute(sqlQuery);
 
         } catch (SQLException ex) {
-            DialogMessengerElementForm.showError("Ошибка создания таблицы таблицы", ex.getMessage());
+            Error.showError("Ошибка создания таблицы таблицы", ex.getMessage());
         }
     }
 }
