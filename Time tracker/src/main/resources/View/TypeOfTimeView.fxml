@@ -23,19 +23,19 @@
       </VBox>
       <VBox alignment="TOP_CENTER">
          <children>
-            <TextField fx:id="description" maxWidth="-Infinity"  prefHeight="25.0" prefWidth="170.0">
+            <TextField fx:id="description" maxWidth="-Infinity" prefHeight="25.0" prefWidth="170.0">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
             </TextField>
             <HBox alignment="BOTTOM_RIGHT">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#okOnAction" text="ОК" underline="true">
+                  <Button fx:id="okButton" defaultButton="true" mnemonicParsing="false" onAction="#okOnAction" text="ОК" underline="true">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelOnAction" text="Отмена" />
+                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelOnAction" text="Отмена" />
                </children>
             </HBox>
          </children>

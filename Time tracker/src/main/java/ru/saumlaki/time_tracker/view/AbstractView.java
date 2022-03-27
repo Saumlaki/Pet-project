@@ -2,6 +2,7 @@ package ru.saumlaki.time_tracker.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.TimeTracker;

@@ -2,7 +2,10 @@ package ru.saumlaki.time_tracker.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.*;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
@@ -14,6 +17,12 @@ public class TypeOfTimeController extends AbstractElementController<TypeOfTime> 
     @FXML
     private TextField description;
 
+    @FXML
+    private Button cancelButton;
+
+    @FXML
+    private Button okButton;
+
     //***БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ***
 
     //***Инициализация формы***
@@ -21,7 +30,21 @@ public class TypeOfTimeController extends AbstractElementController<TypeOfTime> 
     @FXML
     void initialize() {
 
-        //Место для вашей реклама!
+    }
+
+    /**
+     * Метод устанавлиает горячие клавиши формы
+     */
+    @Override
+    public void setMnemonic() {
+
+        //Установка всплывающих подсказок
+        okButton.setTooltip(new Tooltip("Сохраняет элемент в базу(CRT+S)"));
+        cancelButton.setTooltip(new Tooltip("Закрыть без сохранения(Esc)"));
+
+        //Добавление быстрых кнопок
+//        scene.addMnemonic(new Mnemonic(okButton, new KeyCodeCombination(KeyCode.S, KeyCode.CONTROL)));
+        scene.addMnemonic(new Mnemonic(okButton, KeyCombination.keyCombination("Alt+'Ы'")));
     }
 
     //***Обновление формы и элемента***
@@ -38,6 +61,7 @@ public class TypeOfTimeController extends AbstractElementController<TypeOfTime> 
         //Заполнение полей объекта
         element.setDescription(description.getText());
     }
+
 
     //***ОБРАБОТЧИКИ КНОПОК***
 
@@ -59,4 +83,5 @@ public class TypeOfTimeController extends AbstractElementController<TypeOfTime> 
 
         closeForm();
     }
+
 }

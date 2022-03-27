@@ -1,5 +1,8 @@
 package ru.saumlaki.time_tracker.controllers;
 
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
@@ -16,10 +19,24 @@ public abstract class AbstractElementController<T> {
     public T element;//Основной элемент формы
 
     Stage stage;//Основное окно формы
+    Scene scene;//Основная сцена
 
     public void setStage(Stage stage) {
 
+        //Установка значения полей
         this.stage = stage;
+        this.scene = stage.getScene();
+
+        //Установка клавиши закрытия формы
+        scene.setOnKeyPressed(e -> {
+
+            switch (e.getCode()) {
+                case ESCAPE -> stage.close();
+            }
+        });
+
+        //Установка горячих клавиш
+        setMnemonic();
     }
 
     /**
@@ -87,7 +104,7 @@ public abstract class AbstractElementController<T> {
         //Проверка корректного заполнения реквизитов, если все ок то сохраняем и закрываем форму
         if (checkTheDetails(String.valueOf(details))) {
             ServiceFactory.getService(element.getClass()).add(element);
-        }else
+        } else
             result = false;
 
         return result;
@@ -114,13 +131,18 @@ public abstract class AbstractElementController<T> {
     }
 
     /**
-     * Метод обновления формы. В данном методе рекомендуется располагать обработчики связанные с изменением значения основного элемента формы
+     * В данном методе необходимо переопределить логику обновдения формы
      */
     public abstract void updateForm();
 
     /**
-     * Метод обновления основного элемента.
+     * В данном методе необходимо переопределить логику обновления основного элемента формы.
      */
     public abstract void updateElement();
+
+    /**
+     * В данном методе необходимо переопределить горячии клавищи для формы
+     */
+    public abstract void setMnemonic();
 
 }

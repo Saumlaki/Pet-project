@@ -1,6 +1,7 @@
 package ru.saumlaki.time_tracker;
 
 import javafx.application.Application;
+import javafx.application.Preloader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -30,13 +31,26 @@ public class TimeTracker extends Application {
 
     public static void main(String[] args) {
 
-        createConnection();
-        launch(args);
+        System.setProperty("javafx.preloader", "ru.saumlaki.time_tracker.view.PreloaderElement");
+        Application.launch(TimeTracker.class, args);
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws InterruptedException {
 
+        //Подготавливаем приложение
+        //1. Создание соединения с БД
+        createConnection();
+
+        //2. Заполнение списков
+        typeOfTimeObsListUpdate();
+        timeObsListUpdate();
+        dataOfTimeObsListUpdate();
+
+        //3. Закрываем заставку
+        this.notifyPreloader(new Preloader.StateChangeNotification(null));
+
+        //4. Начинаем рабту основного приложения
         new Main().showForm(stage, new TimerWatch());
     }
 

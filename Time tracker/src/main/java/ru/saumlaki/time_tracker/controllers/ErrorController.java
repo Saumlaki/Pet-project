@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import ru.saumlaki.time_tracker.supporting.Error;
 
 public class ErrorController extends AbstractElementController<Error>{
@@ -31,5 +32,10 @@ public class ErrorController extends AbstractElementController<Error>{
 
         //Место для вашей рекламы!
         //Заглушка для реализации абстрактного метода
+    }
+
+    @Override
+    public void setMnemonic() {
+
     }
 }

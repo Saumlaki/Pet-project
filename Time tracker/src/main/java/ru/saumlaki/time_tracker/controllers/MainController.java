@@ -7,6 +7,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.Mnemonic;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
@@ -18,7 +23,9 @@ import ru.saumlaki.time_tracker.supporting.TypeTimeDiagram;
 import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
 import ru.saumlaki.time_tracker.view.Setting;
 
+import javax.swing.*;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class MainController extends AbstractElementController<TimerWatch> {
@@ -46,6 +53,12 @@ public class MainController extends AbstractElementController<TimerWatch> {
     @FXML
     private Button startButton;
 
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private Button settingButton;
+
     Time currentTime;
 
     //***БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ***
@@ -65,6 +78,30 @@ public class MainController extends AbstractElementController<TimerWatch> {
         typeTimeDiagram.getItems().add(TypeTimeDiagram.Time);
         typeTimeDiagram.getItems().add(TypeTimeDiagram.TypeTime);
         typeTimeDiagram.setValue(TypeTimeDiagram.Time);
+
+
+
+
+    }
+
+    /**
+     * Метод устанавлиает горячие клавиши формы
+     */
+    @Override
+    public void setMnemonic() {
+
+        //Установка всплывающих подсказок
+        updateButton.setTooltip(new Tooltip("Обновляет круговую диаграмму(Alt+U)"));
+        settingButton.setTooltip(new Tooltip("Открывает окно настроек(Alt+S)"));
+        startButton.setTooltip(new Tooltip("Запускает/останавливает таймер(Alt+R)"));
+
+        //Добавление быстрых кнопок
+        scene.addMnemonic(new Mnemonic(updateButton, KeyCombination.keyCombination("Alt+'U'")));
+        scene.addMnemonic(new Mnemonic(updateButton, KeyCombination.keyCombination("Alt+'Г'")));
+        scene.addMnemonic(new Mnemonic(settingButton, KeyCombination.keyCombination("Alt+'S'")));
+        scene.addMnemonic(new Mnemonic(settingButton, KeyCombination.keyCombination("Alt+'Ы'")));
+        scene.addMnemonic(new Mnemonic(startButton, KeyCombination.keyCombination("Alt+'R'")));
+        scene.addMnemonic(new Mnemonic(startButton, KeyCombination.keyCombination("Alt+'K'")));
     }
 
     //***Обновление формы и элемента***
@@ -80,7 +117,8 @@ public class MainController extends AbstractElementController<TimerWatch> {
 
         //Устанавливаем начальные значения для списка выбора вида времени
         if (timeList.getItems().size() > 0)
-            timeList.setValue(timeList.getItems().get(0));;
+            timeList.setValue(timeList.getItems().get(0));
+        ;
     }
 
     @Override
@@ -164,6 +202,9 @@ public class MainController extends AbstractElementController<TimerWatch> {
 
     //---Обновление данных элементов формы---
 
+    /**
+     * Метод обновляет круговую диаграмму времени.
+     */
     private void pieChartUpdate() {
 
         pieChart.getData().clear();
@@ -234,6 +275,8 @@ public class MainController extends AbstractElementController<TimerWatch> {
         secText.setText(getFormattedTime(seconds));
     }
 
+    //---Прочее--
+
     private String getFormattedTime(int time) {
 
         String formattedTime = String.valueOf(time);
@@ -249,4 +292,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
         if (value == null) return 0;
         else return value;
     }
+
+
+
 }

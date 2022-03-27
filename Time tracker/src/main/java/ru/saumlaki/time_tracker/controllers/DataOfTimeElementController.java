@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
@@ -13,6 +14,7 @@ import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class DataOfTimeElementController extends AbstractElementController<DataOfTime> {
 
@@ -52,7 +54,7 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
         if (element != null) {
 
             calendar.setValue(LocalDate.of(element.getCalendar().get(Calendar.YEAR),
-                    element.getCalendar().get(Calendar.MONTH)+1,
+                    element.getCalendar().get(Calendar.MONTH) + 1,
                     element.getCalendar().get(Calendar.DAY_OF_MONTH)));
 
             time.getItems().clear();
@@ -96,6 +98,11 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
     void cancelOnAction(ActionEvent event) {
 
         closeForm();
+    }
+
+    @Override
+    public void setMnemonic() {
+
     }
 }
 
