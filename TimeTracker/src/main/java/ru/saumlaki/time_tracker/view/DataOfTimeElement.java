@@ -11,7 +11,7 @@ public class DataOfTimeElement extends AbstractView {
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "DataOfTimeView", "Данные по затратам времени", null, null);
+        FXMLLoader fxmlLoader = super.showForm(stage, "DataOfTimeView", "Данные по затратам времени", null, "Icon");
         ((DataOfTimeElementController) fxmlLoader.getController()).setElement(element);
         ((DataOfTimeElementController) fxmlLoader.getController()).setStage(stage);
     }

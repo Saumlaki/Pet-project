@@ -38,8 +38,9 @@ public class TimeTracker extends Application {
 
     public static void main(String[] args) {
 
-        //   System.setProperty("javafx.preloader", "ru.saumlaki.time_tracker.view.PreloaderElement");
-        // Application.launch(TimeTracker.class, args);launch
+        //Заставку пока отключим...
+        //System.setProperty("javafx.preloader", "view.PreloaderElement");
+        //Application.launch(TimeTracker.class, args);
         launch();
     }
 
@@ -57,10 +58,10 @@ public class TimeTracker extends Application {
         dataOfTimeObsListAllUpdate();
 
         //3. Закрываем заставку
-        //   Thread.sleep(500);
-        //   this.notifyPreloader(new Preloader.StateChangeNotification(null));
+        //Thread.sleep(500);
+        //this.notifyPreloader(new Preloader.StateChangeNotification(null));
 
-        //4. Начинаем рабту основного приложения
+        //4. Начинаем работу основного приложения
         new Main().showForm(stage, new TimerWatch());
     }
 

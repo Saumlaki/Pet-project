@@ -6,6 +6,6 @@ public class Setting extends  AbstractView{
 
     public void showForm(Stage stage) {
 
-        super.showForm(stage, "SettingView", "Настройки", null, null);
+        super.showForm(stage, "SettingView", "Настройки", null, "Icon");
     }
 }

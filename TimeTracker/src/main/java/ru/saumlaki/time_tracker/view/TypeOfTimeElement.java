@@ -11,7 +11,7 @@ public class TypeOfTimeElement extends AbstractView{
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "TypeOfTimeView", "Тип времени", null, null);
+        FXMLLoader fxmlLoader = super.showForm(stage, "TypeOfTimeView", "Тип времени", null, "Icon");
         ((TypeOfTimeController)fxmlLoader.getController()).setElement(element);
         ((TypeOfTimeController)fxmlLoader.getController()).setStage(stage);
     }

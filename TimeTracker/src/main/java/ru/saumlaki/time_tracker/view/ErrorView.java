@@ -10,7 +10,7 @@ public class ErrorView extends AbstractView{
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "ErrorView", "Ошибка выполнения программы", null, null);
+        FXMLLoader fxmlLoader = super.showForm(stage, "ErrorView", "Ошибка выполнения программы", null, "Icon");
         ((ErrorController) fxmlLoader.getController()).setElement(element);
         ((ErrorController) fxmlLoader.getController()).setStage(stage);
     }

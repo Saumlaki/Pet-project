@@ -2,15 +2,13 @@ package ru.saumlaki.time_tracker.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.supporting.Error;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class AbstractView {
@@ -30,7 +28,7 @@ public abstract class AbstractView {
             hBox = (HBox) fxmlLoader.load();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            //      Error.showError("Ошибка загрузки окна " + formName, ex.getMessage());
+            Error.showError("Ошибка загрузки окна " + formName, ex.getMessage());
         }
 
         Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
@@ -39,10 +37,16 @@ public abstract class AbstractView {
 
         if (css != null && !css.isEmpty())
             scene.getStylesheets().add(css);
-        //stage.getIcons().add(new Image(new File(TimeTracker.getPropertyForName("Icon")).getAbsolutePath()));
+        if(icon!=null&&!icon.isEmpty()){
+            URL iconURL = getClass().getClassLoader().getResource(TimeTracker.getPropertyForName(icon));
+            try {
+                stage.getIcons().add(new Image(iconURL.openStream()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         stage.show();
-
         return fxmlLoader;
     }
 }

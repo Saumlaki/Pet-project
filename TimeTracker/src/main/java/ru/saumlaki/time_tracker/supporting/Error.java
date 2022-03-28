@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.saumlaki.time_tracker.view.ErrorView;
 
 /**
  * Класс ошибки. Данный класс идет как заглушка для реализации абстрактного класса <code>AbstractElementController</code>
