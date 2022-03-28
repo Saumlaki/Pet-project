@@ -1,24 +1,20 @@
 package ru.saumlaki.time_tracker;
 
 import javafx.application.Application;
-import javafx.application.Preloader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
-import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
-import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
-import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
+import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
+import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 import ru.saumlaki.time_tracker.supporting.TimerWatch;
 import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
 import ru.saumlaki.time_tracker.view.Main;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;

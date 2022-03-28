@@ -42,4 +42,9 @@ public class Time {
         Time that = (Time) o;
         return id == that.id||description.equals(that.description);
     }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
 }

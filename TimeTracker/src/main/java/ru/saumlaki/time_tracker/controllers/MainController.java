@@ -8,9 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.Mnemonic;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
@@ -23,9 +21,7 @@ import ru.saumlaki.time_tracker.supporting.TypeTimeDiagram;
 import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
 import ru.saumlaki.time_tracker.view.Setting;
 
-import javax.swing.*;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class MainController extends AbstractElementController<TimerWatch> {
@@ -211,7 +207,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
 
         //Заполнение диаграммы в зависимости от типа времени
         if (typeTimeDiagram.getValue() == TypeTimeDiagram.Time) {
-            TimeTracker.dataOfTimeObsList.forEach(a -> pieChart.getData().add(new PieChart.Data(a.getValueToStr(), a.getValues())));
+            TimeTracker.dataOfTimeObsList.forEach(a -> pieChart.getData().add(new PieChart.Data(a.toString(), a.getValues())));
         } else {
 
             Map<TypeOfTime, Integer> map = new HashMap<>();
@@ -225,7 +221,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
                 dto.setTime(new Time(1, entry.getKey().toString(), new TypeOfTime()));
                 dto.setValues(entry.getValue());
 
-                pieChart.getData().add(new PieChart.Data(dto.getValueToStr() , dto.getValues()));
+                pieChart.getData().add(new PieChart.Data(dto.toString() , dto.getValues()));
             }
         }
     }

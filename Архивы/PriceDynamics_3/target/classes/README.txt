@@ -1,1 +1,0 @@
-//"http://hibernate-refdoc.3141.ru/ch3.Configuration"

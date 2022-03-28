@@ -1,11 +1,9 @@
 package ru.saumlaki.time_tracker.controllers;
 
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
+import ru.saumlaki.time_tracker.supporting.Error;
 
 import java.lang.reflect.Field;
 
@@ -14,13 +12,31 @@ import java.lang.reflect.Field;
  */
 public abstract class AbstractElementController<T> {
 
-    //***Элемент данных"***
+    //************************************************************************
+    // Обязательные элементы данных
+    //************************************************************************
 
-    public T element;//Основной элемент формы
+    /**
+     * Данный элемент являеться основным элеентом формы
+     */
+    public T element;
 
-    Stage stage;//Основное окно формы
-    Scene scene;//Основная сцена
+    /**
+     * Stage текущей формы
+     */
+    Stage stage;
+    /**
+     * Scene текущей формы
+     */
+    Scene scene;
 
+    //************************************************************************
+    // Сеттеры
+    //************************************************************************
+
+    /**
+     * Устанавливает основной Stage
+     */
     public void setStage(Stage stage) {
 
         //Установка значения полей
@@ -40,12 +56,17 @@ public abstract class AbstractElementController<T> {
     }
 
     /**
-     * Метод закрывает текущую форму без сохранения объекта
+     * Метод установки основного элемента. Вызов данного метода вызывает метод обновления формы <code>update</code>
      */
-    void closeForm() {
+    public void setElement(T element) {
 
-        stage.close();
+        this.element = element;
+        updateForm();
     }
+
+    //************************************************************************
+    // Методы формы
+    //************************************************************************
 
     /**
      * Метод проверки корректно заполнения реквизитов. Доступ к реквизитам осуществляется с помощью рефликсии. Простые реквизиты(String, int и пр.) проверяються на пустые значения
@@ -111,24 +132,16 @@ public abstract class AbstractElementController<T> {
     }
 
     /**
-     * Метод сохраняет объекта основной элемент формы в БД
+     * Метод закрывает текущую форму без сохранения объекта
      */
-    void save(String... details) {
+    void closeForm() {
 
-        //Проверка корректного заполнения реквизитов
-        checkTheDetails(String.valueOf(details));
-
-        ServiceFactory.getService(element.getClass()).add(element);
+        stage.close();
     }
 
-    /**
-     * Метод установки основного элемента. Вызов данного метода вызывает метод обновления формы <code>update</code>
-     */
-    public void setElement(T element) {
-
-        this.element = element;
-        updateForm();
-    }
+    //************************************************************************
+    // Абстрактные методы
+    //************************************************************************
 
     /**
      * В данном методе необходимо переопределить логику обновдения формы

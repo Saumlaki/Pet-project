@@ -2,19 +2,19 @@ package ru.saumlaki.time_tracker.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.Mnemonic;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
-import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class DataOfTimeElementController extends AbstractElementController<DataOfTime> {
 
@@ -28,6 +28,9 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
 
     @FXML
     private TextField values;
+
+    @FXML
+    private Button okButton;
 
     //***БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ***
 
@@ -88,8 +91,8 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
         if (save("values, time, calendar")) {
 
             //Обновление подчиненных форм
-            TimeTracker.dataOfTimeObsList.clear();
-            TimeTracker.dataOfTimeObsList.addAll(ServiceFactory.getService(element.getClass()).getAll());
+            TimeTracker.dataOfTimeObsListUpdate();
+            TimeTracker.dataOfTimeObsListAllUpdate();
             closeForm();
         }
     }
@@ -103,6 +106,8 @@ public class DataOfTimeElementController extends AbstractElementController<DataO
     @Override
     public void setMnemonic() {
 
+        scene.addMnemonic(new Mnemonic(okButton, KeyCombination.keyCombination("Ctrl+'S'")));
+        scene.addMnemonic(new Mnemonic(okButton, KeyCombination.keyCombination("Ctrl+'Ы'")));
     }
 }
 

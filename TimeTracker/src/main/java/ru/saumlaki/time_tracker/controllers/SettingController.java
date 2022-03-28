@@ -1,25 +1,37 @@
 package ru.saumlaki.time_tracker.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
+import ru.saumlaki.time_tracker.service.DataOfTimeServiceImpl;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
 import ru.saumlaki.time_tracker.view.DataOfTimeElement;
 import ru.saumlaki.time_tracker.view.TimeElement;
 import ru.saumlaki.time_tracker.view.TypeOfTimeElement;
 
 import java.awt.event.MouseEvent;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SettingController {
 
-    //***Поля формы***
+    //***ПОЛЯ ФОРМЫ***
 
     @FXML
     private TableView<TypeOfTime> typeOfTimeTable;
@@ -30,7 +42,17 @@ public class SettingController {
     @FXML
     private TableView<DataOfTime> dataOfTimeTable;
 
-    //***Инициализация формы***
+    @FXML
+    private LineChart<String, Number> dataOfTimeLineChart;
+
+    @FXML
+    private DatePicker periodBegin;
+
+    @FXML
+    private DatePicker periodEnd;
+
+
+    //***ИНИЦИАЛИЗАЦИЯ ФОРМЫ***
 
     @FXML
     void initialize() throws InterruptedException {
@@ -42,7 +64,7 @@ public class SettingController {
         createContextMenu();
 
         //Подключаем слушателей к спискам
-        TimeTracker.typeOfTimeObsList.addListener((ListChangeListener) change ->  typeOfTimeTable.setItems(TimeTracker.typeOfTimeObsList));
+        TimeTracker.typeOfTimeObsList.addListener((ListChangeListener) change -> typeOfTimeTable.setItems(TimeTracker.typeOfTimeObsList));
         TimeTracker.timeObsList.addListener((ListChangeListener) change -> timeTable.setItems(TimeTracker.timeObsList));
         TimeTracker.dataOfTimeObsListALL.addListener((ListChangeListener) change -> dataOfTimeTable.setItems(TimeTracker.dataOfTimeObsListALL));
 
@@ -50,11 +72,19 @@ public class SettingController {
         typeOfTimeTable.setItems(TimeTracker.typeOfTimeObsList);
         timeTable.setItems(TimeTracker.timeObsList);
         dataOfTimeTable.setItems(TimeTracker.dataOfTimeObsListALL);
+
+        //Обновление данных диагарммы
+        periodEnd.setValue(LocalDate.now());
+        periodBegin.setValue(LocalDate.of(periodEnd.getValue().getYear(),
+                periodEnd.getValue().getMonth(),
+                1));
+
+        dataOfTimeLineChartUpdate();
     }
 
-    //***Обработчики событий формы***
+    //***ОБРАБОТЧИКИ СОБЫТИЙ ФОРМЫ***
 
-    //---Time---
+    //---Обработчики событий таблицы time---
 
     @FXML
     void timeAdd(ActionEvent event) {
@@ -65,7 +95,7 @@ public class SettingController {
     @FXML
     void timeChange(ActionEvent event) {
 
-       new TimeElement().showForm(null, timeTable.getSelectionModel().getSelectedItem());
+        new TimeElement().showForm(null, timeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -77,7 +107,7 @@ public class SettingController {
         TimeTracker.dataOfTimeObsListUpdate();
     }
 
-    //---TypeOfTime---
+    //---Обработчики событий таблицы typeOfTime---
 
     @FXML
     void typeOfTimeAdd(ActionEvent event) {
@@ -101,7 +131,7 @@ public class SettingController {
         TimeTracker.dataOfTimeObsListUpdate();
     }
 
-    //---DataOfTime---
+    //---Обработчики событий таблицы dataOfTime---
 
     @FXML
     void dataOfTimeAdd(ActionEvent event) {
@@ -123,7 +153,23 @@ public class SettingController {
         TimeTracker.dataOfTimeObsListUpdate();
     }
 
-    //***Создание таблиц***
+    //---Обработчики выбора периода отображения диаграммы---
+
+    @FXML
+    void periodBeginOnAction(ActionEvent event) {
+
+        dataOfTimeLineChartUpdate();
+    }
+
+    @FXML
+    void periodEndOnAction(ActionEvent event) {
+
+        dataOfTimeLineChartUpdate();
+    }
+
+    //***ПРОЧИЕ МЕТОДЫ***
+
+    //---Создание колонок таблиц формы---
 
     private void creteColumn() {
 
@@ -226,6 +272,65 @@ public class SettingController {
         dataOfTimeTable.getColumns().addAll(dataColumn, timeColumn, valueColumn);
     }
 
+    //---ОБновление элементов формы---
+
+    private void dataOfTimeLineChartUpdate() {
+
+        dataOfTimeLineChart.getData().clear();
+        dataOfTimeLineChart.setTitle("Динамика временных затрат за период с " + periodBegin.getValue() + " по " + periodEnd.getValue());
+        dataOfTimeLineChart.setCreateSymbols(false);
+
+        //Строим временную шкалу по дням по заданному периоду
+        ObservableList<String> dateList = FXCollections.observableArrayList();
+        LocalDate tempDate = periodBegin.getValue();
+        while (tempDate.isBefore(periodEnd.getValue())) {
+            dateList.add(tempDate.toString());
+            tempDate = tempDate.plusDays(1);
+        }
+
+        dateList.add(periodEnd.getValue().toString());
+
+        //Формируем шкалу X
+        CategoryAxis xAxis = new CategoryAxis(dateList);
+        xAxis.setRotate(-90.0);
+
+        //Формируем шкалу Y
+        NumberAxis yAxis = new NumberAxis();
+
+        //Формируем серии
+        Instant instBegin = periodBegin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Instant instEnd = periodEnd.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant();
+        List<DataOfTime> dataOfTimeList = new DataOfTimeServiceImpl().getByPeriod(Date.from(instBegin), Date.from(instEnd));
+
+        //Получаем множество типов времени
+        Set<Time> timeSet = new HashSet<>();
+        dataOfTimeList.stream().forEach(a -> timeSet.add(a.getTime()));
+
+        //Для каждого типа времени получаем его даты и временные ограничения
+        for (Time time : timeSet) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName(time.toString());
+
+            //Пройдемся по датам что бы на имнтервале заполнить пустые значения
+            tempDate = periodBegin.getValue();
+            while (tempDate.isBefore(periodEnd.getValue())) {
 
 
+                Calendar calendarTemp = new GregorianCalendar(tempDate.getYear(),
+                        tempDate.getMonth().getValue() - 1,
+                        tempDate.getDayOfMonth());
+
+                List<DataOfTime> tempList = dataOfTimeList.stream().filter(a -> a.getTime().equals(time) && a.getCalendar().equals(calendarTemp)).collect(Collectors.toList());
+                if (tempList.size() > 0)
+                    series.getData().add(new XYChart.Data<String, Number>(tempDate.toString(), tempList.get(0).getValues() / 60));
+                else
+                    series.getData().add(new XYChart.Data<String, Number>(tempDate.toString(), 0));
+
+                tempDate = tempDate.plusDays(1);
+
+            }
+
+            dataOfTimeLineChart.getData().add(series);
+        }
+    }
 }
