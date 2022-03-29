@@ -6,7 +6,6 @@ import ru.saumlaki.time_tracker.supporting.data.SimpleCalendar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Класс содержит информацию о временных затратах на определенный день

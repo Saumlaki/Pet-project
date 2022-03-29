@@ -4,16 +4,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.saumlaki.time_tracker.TimeTracker;
+import ru.saumlaki.time_tracker.controllers.AbstractElementController;
 import ru.saumlaki.time_tracker.supporting.Error;
 
 import java.io.IOException;
 import java.net.URL;
 
+
+
 public abstract class AbstractView {
 
-    public FXMLLoader showForm(Stage stage, String formName, String title, String css, String icon) {
+    public FXMLLoader showForm(Stage stage, Stage parentStage, Object element, String formName, String title, String css, String icon) {
 
         stage = stage == null ? new Stage() : stage;
 
@@ -45,8 +49,22 @@ public abstract class AbstractView {
                 e.printStackTrace();
             }
         }
+        //Заполнение полей контроллера
+        if (fxmlLoader.getController() instanceof AbstractElementController) {
+            AbstractElementController controller = fxmlLoader.getController();
+            controller.setStage(stage);
+            controller.setElement(element);
+        }
 
-        stage.show();
+        //Модальность окна если нужно
+        if (parentStage != null) {
+            stage.initOwner(parentStage);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.showAndWait();
+        } else {
+            stage.show();
+        }
+
         return fxmlLoader;
     }
 }

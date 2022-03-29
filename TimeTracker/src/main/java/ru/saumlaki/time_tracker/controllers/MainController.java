@@ -189,7 +189,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
     @FXML
     void settingOnAction(ActionEvent event) {
 
-        new Setting().showForm(null);
+        new Setting().showForm(null, stage);
     }
 
     //***ПРОЧИЕ МЕТОДЫ***

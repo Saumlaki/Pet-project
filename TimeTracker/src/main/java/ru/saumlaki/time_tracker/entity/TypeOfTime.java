@@ -3,8 +3,6 @@ package ru.saumlaki.time_tracker.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 /**Класс описывает возможные типы времени.
  * Допустим мы можем работать как по основной работе, так и по подработке. В этом случае у нас будет 2 Time с одним TimeType.
  * @see Time

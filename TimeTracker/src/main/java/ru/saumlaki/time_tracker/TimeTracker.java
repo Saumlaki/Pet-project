@@ -58,7 +58,7 @@ public class TimeTracker extends Application {
         //this.notifyPreloader(new Preloader.StateChangeNotification(null));
 
         //4. Начинаем работу основного приложения
-        new Main().showForm(stage, new TimerWatch());
+        new Main().showForm(stage, null, new TimerWatch());
     }
 
     @Override

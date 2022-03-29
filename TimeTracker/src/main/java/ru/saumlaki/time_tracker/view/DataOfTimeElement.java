@@ -7,12 +7,12 @@ import ru.saumlaki.time_tracker.entity.DataOfTime;
 
 public class DataOfTimeElement extends AbstractView {
 
-    public void showForm(Stage stage, DataOfTime element) {
+    public void showForm(Stage stage, Stage parentStage, DataOfTime element) {
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "DataOfTimeView", "Данные по затратам времени", null, "Icon");
-        ((DataOfTimeElementController) fxmlLoader.getController()).setElement(element);
-        ((DataOfTimeElementController) fxmlLoader.getController()).setStage(stage);
+        FXMLLoader fxmlLoader = super.showForm(stage, parentStage, element, "DataOfTimeView", "Данные по затратам времени", null, "Icon");
+//        ((DataOfTimeElementController) fxmlLoader.getController()).setElement(element);
+//        ((DataOfTimeElementController) fxmlLoader.getController()).setStage(stage);
     }
 }

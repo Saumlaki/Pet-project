@@ -7,12 +7,12 @@ import ru.saumlaki.time_tracker.entity.Time;
 
 public class TimeElement extends AbstractView{
 
-    public void showForm(Stage stage, Time element) {
+    public void showForm(Stage stage, Stage parentStage, Time element) {
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "TimeView", "Тип времени", null, "Icon");
-        ((TimeController)fxmlLoader.getController()).setElement(element);
-        ((TimeController)fxmlLoader.getController()).setStage(stage);
+        FXMLLoader fxmlLoader = super.showForm(stage, parentStage, element, "TimeView", "Тип времени", null, "Icon");
+//        ((TimeController)fxmlLoader.getController()).setElement(element);
+//        ((TimeController)fxmlLoader.getController()).setStage(stage);
     }
 }

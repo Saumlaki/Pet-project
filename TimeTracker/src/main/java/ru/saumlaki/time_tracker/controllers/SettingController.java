@@ -12,6 +12,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
+import lombok.Setter;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
@@ -22,14 +24,13 @@ import ru.saumlaki.time_tracker.view.DataOfTimeElement;
 import ru.saumlaki.time_tracker.view.TimeElement;
 import ru.saumlaki.time_tracker.view.TypeOfTimeElement;
 
-import java.awt.event.MouseEvent;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class SettingController {
+public class SettingController extends AbstractElementController<Object> {
 
     //***ПОЛЯ ФОРМЫ***
 
@@ -89,13 +90,13 @@ public class SettingController {
     @FXML
     void timeAdd(ActionEvent event) {
 
-        new TimeElement().showForm(null, new Time());
+        new TimeElement().showForm(null, stage, new Time());
     }
 
     @FXML
     void timeChange(ActionEvent event) {
 
-        new TimeElement().showForm(null, timeTable.getSelectionModel().getSelectedItem());
+        new TimeElement().showForm(null, stage, timeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -112,13 +113,13 @@ public class SettingController {
     @FXML
     void typeOfTimeAdd(ActionEvent event) {
 
-        new TypeOfTimeElement().showForm(null, new TypeOfTime());
+        new TypeOfTimeElement().showForm(null, stage, new TypeOfTime());
     }
 
     @FXML
     void typeOfTimeChange(ActionEvent event) {
 
-        new TypeOfTimeElement().showForm(null, typeOfTimeTable.getSelectionModel().getSelectedItem());
+        new TypeOfTimeElement().showForm(null, stage, typeOfTimeTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -136,13 +137,19 @@ public class SettingController {
     @FXML
     void dataOfTimeAdd(ActionEvent event) {
 
-        new DataOfTimeElement().showForm(null, new DataOfTime());
+        new DataOfTimeElement().showForm(null, stage, new DataOfTime());
+
+        TimeTracker.dataOfTimeObsListUpdate();
+        TimeTracker.dataOfTimeObsListAllUpdate();
     }
 
     @FXML
     void dataOfTimeChange(ActionEvent event) {
 
-        new DataOfTimeElement().showForm(null, dataOfTimeTable.getSelectionModel().getSelectedItem());
+        new DataOfTimeElement().showForm(null, stage, dataOfTimeTable.getSelectionModel().getSelectedItem());
+
+        TimeTracker.dataOfTimeObsListUpdate();
+        TimeTracker.dataOfTimeObsListAllUpdate();
     }
 
     @FXML
@@ -151,6 +158,7 @@ public class SettingController {
         ServiceFactory.getService(DataOfTime.class).remove(dataOfTimeTable.getSelectionModel().getSelectedItem());
 
         TimeTracker.dataOfTimeObsListUpdate();
+        TimeTracker.dataOfTimeObsListAllUpdate();
     }
 
     //---Обработчики выбора периода отображения диаграммы---
@@ -332,5 +340,20 @@ public class SettingController {
 
             dataOfTimeLineChart.getData().add(series);
         }
+    }
+
+    @Override
+    public void updateForm() {
+
+    }
+
+    @Override
+    public void updateElement() {
+
+    }
+
+    @Override
+    public void setMnemonic() {
+
     }
 }

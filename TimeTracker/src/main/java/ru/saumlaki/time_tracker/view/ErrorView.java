@@ -6,11 +6,11 @@ import ru.saumlaki.time_tracker.controllers.ErrorController;
 import ru.saumlaki.time_tracker.supporting.Error;
 
 public class ErrorView extends AbstractView{
-    public void showForm(Stage stage, Error element) {
+    public void showForm(Stage stage, Stage parentStage, Error element) {
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "ErrorView", "Ошибка выполнения программы", null, "Icon");
+        FXMLLoader fxmlLoader = super.showForm(stage, parentStage, element, "ErrorView", "Ошибка выполнения программы", null, "Icon");
         ((ErrorController) fxmlLoader.getController()).setElement(element);
         ((ErrorController) fxmlLoader.getController()).setStage(stage);
     }

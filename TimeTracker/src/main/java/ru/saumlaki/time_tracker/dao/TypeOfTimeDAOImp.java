@@ -2,8 +2,9 @@ package ru.saumlaki.time_tracker.dao;
 
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.dao.interfaces.TypeOfTimeDAO;
-import ru.saumlaki.time_tracker.supporting.Error;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
+import ru.saumlaki.time_tracker.supporting.Error;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

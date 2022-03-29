@@ -7,13 +7,13 @@ import ru.saumlaki.time_tracker.supporting.TimerWatch;
 
 public class Main extends AbstractView{
 
-    public void showForm(Stage stage, TimerWatch timerWatch) {
+    public void showForm(Stage stage, Stage parentStage, TimerWatch timerWatch) {
 
         stage = stage == null ? new Stage() : stage;
 
-        FXMLLoader fxmlLoader = super.showForm(stage, "MainView", "Учет времени", "chart.css", "Icon");
+        FXMLLoader fxmlLoader = super.showForm(stage, parentStage, timerWatch, "MainView", "Учет времени", "chart.css", "Icon");
         ((MainController)fxmlLoader.getController()).setElement(timerWatch);
-        ((MainController)fxmlLoader.getController()).setStage(stage);
+       ((MainController)fxmlLoader.getController()).setStage(stage);
 
         timerWatch.setMainController(fxmlLoader.getController());
     }

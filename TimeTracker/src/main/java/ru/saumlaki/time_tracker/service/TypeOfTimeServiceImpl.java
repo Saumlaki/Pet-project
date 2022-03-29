@@ -1,10 +1,7 @@
 package ru.saumlaki.time_tracker.service;
 
-import ru.saumlaki.time_tracker.dao.DataOfTimeDAOImpl;
 import ru.saumlaki.time_tracker.dao.TypeOfTimeDAOImp;
-import ru.saumlaki.time_tracker.dao.interfaces.DataOfTimeDAO;
 import ru.saumlaki.time_tracker.dao.interfaces.TypeOfTimeDAO;
-import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.factory.ServiceFactory;
@@ -31,11 +28,12 @@ public class TypeOfTimeServiceImpl implements TypeOfTimeService {
     @Override
     public void remove(TypeOfTime object) {
 
+        if(object!=null){
         //При удалении в начале удаляем все данные по типам времени, потом текущие данные
         //При удалении в начале удалим данные по временным затратам, потом переданные данные
         ServiceFactory.getService(Time.class).getAll().stream().filter(a->((Time)a).getTypeOfTime().equals(object)).forEach(a->ServiceFactory.getService(Time.class).remove(a));
         dao.remove(object);
-        dao.remove(object);
+        dao.remove(object);}
     }
 
     @Override

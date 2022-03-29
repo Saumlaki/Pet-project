@@ -3,7 +3,6 @@ package ru.saumlaki.time_tracker.service;
 import ru.saumlaki.time_tracker.dao.DataOfTimeDAOImpl;
 import ru.saumlaki.time_tracker.dao.interfaces.DataOfTimeDAO;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
-import ru.saumlaki.time_tracker.entity.TypeOfTime;
 import ru.saumlaki.time_tracker.service.interfaces.DataOfTimeService;
 
 import java.util.Comparator;
@@ -38,7 +37,8 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
 
     @Override
     public void remove(DataOfTime object) {
-        //Тут просто удаляем
+
+        if(object!=null)
         dao.remove(object);
     }
 
