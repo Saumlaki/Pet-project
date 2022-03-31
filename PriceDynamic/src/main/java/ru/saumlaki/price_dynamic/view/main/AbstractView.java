@@ -6,8 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.Getter;
 import ru.saumlaki.price_dynamic.Helper;
-import ru.saumlaki.price_dynamic.controllers.main.AbstractController;
+import ru.saumlaki.price_dynamic.controllers.Init;
 import ru.saumlaki.price_dynamic.view.AlertMessage;
 
 import java.io.IOException;
@@ -16,11 +17,25 @@ import java.net.URL;
 
 public abstract class AbstractView {
 
-    public FXMLLoader showForm(Stage currentStage, Stage parentStage, String viewNameProp, String title, String iconNameProp) {
+    private Stage currentStage;
+    private Stage parentStage;
 
-        currentStage = currentStage == null ? new Stage() : currentStage;
+    @Getter
+    private FXMLLoader fxmlLoader;
+    private Scene scene;
+    boolean isModal;
 
-        FXMLLoader fxmlLoader = null;
+
+    /**
+     * Метод инициализации формы
+     */
+    public void init(String viewNameProp) {
+        init(new Stage(), viewNameProp);
+    }
+
+    public void init(Stage currentStage, String viewNameProp) {
+
+        this.currentStage = currentStage==null?new Stage():currentStage;
 
         //Получаем путь до формы
         fxmlLoader = new FXMLLoader(Helper.getResourcesURLForPropertyName(viewNameProp));
@@ -33,33 +48,48 @@ public abstract class AbstractView {
             AlertMessage.showError("Ошибка загрузки окна " + viewNameProp, ex.getMessage());
         }
 
-        Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
-        currentStage.setTitle(title);
+        scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
         currentStage.setScene(scene);
+    }
 
-        if(iconNameProp!=null&&!iconNameProp.isEmpty()){
-            URL iconURL = Helper.getResourcesURLForPropertyName(iconNameProp);
-            try {
-                currentStage.getIcons().add(new Image(iconURL.openStream()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void setTitle(String title) {
+
+        currentStage.setTitle(title);
+    }
+
+    public void setIcon(String iconNameProp) {
+
+        URL iconURL = Helper.getResourcesURLForPropertyName(iconNameProp);
+        try {
+
+            currentStage.getIcons().add(new Image(iconURL.openStream()));
+        } catch (IOException e) {
+
+            e.printStackTrace();
         }
+    }
 
+    public void setParentStage(Stage parentStage, boolean isModal) {
 
-        //Установка stage
-     //   ((AbstractController)fxmlLoader.getController()).setStage(currentStage);
+        this.parentStage = parentStage;
+        this.isModal = isModal;
+    }
 
-        //Модальность окна, если нужно
-        if (parentStage != null) {
+    public void show() {
+
+        if (isModal) {
+
             currentStage.initOwner(parentStage);
             currentStage.initModality(Modality.WINDOW_MODAL);
             currentStage.showAndWait();
         } else {
+
             currentStage.show();
         }
+    }
 
-        return fxmlLoader;
+    public <T> T getController() {
+
+        return fxmlLoader.getController();
     }
 }
-

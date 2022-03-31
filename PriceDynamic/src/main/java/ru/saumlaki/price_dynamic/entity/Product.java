@@ -2,7 +2,7 @@ package ru.saumlaki.price_dynamic.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "product")
 public class Product {
 
     @Id

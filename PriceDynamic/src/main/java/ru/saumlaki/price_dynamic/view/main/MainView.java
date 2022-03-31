@@ -1,13 +1,16 @@
 package ru.saumlaki.price_dynamic.view.main;
 
 
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import ru.saumlaki.price_dynamic.controllers.main.AbstractController;
+import ru.saumlaki.price_dynamic.controllers.main.MainController;
 
 public class MainView extends AbstractView {
 
-    public FXMLLoader showForm(Stage currentStage) {
-        return super.showForm(currentStage, null, "MainView", "Динамика цен", "Icon");
+    public void showForm() {
+        init("MainView");
+        setTitle("Динамика цен");
+        setIcon("Icon");
+        show();
+
+        ((MainController)getController()).init();
     }
 }

@@ -1,7 +1,6 @@
 package ru.saumlaki.price_dynamic;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
@@ -9,13 +8,13 @@ public class Helper {
 
     public static Helper instance;
 
-    public static Helper getInstance() {
-        if(instance==null) instance = new Helper();
-        return instance;
-    }
-
     private Helper() {
 
+    }
+
+    public static Helper getInstance() {
+        if (instance == null) instance = new Helper();
+        return instance;
     }
 
     private final static String PROPERTY_NAME = "settings.properties";
@@ -42,11 +41,10 @@ public class Helper {
         return properties.getProperty(propertyName);
     }
 
+    /**Метод получения ресурса по имени*/
     public static URL getResourcesURLForPropertyName(String propertyName) {
 
         String property = getPropertyForName(propertyName);
-        return  getInstance().getClass().getClassLoader().getResource(property);
+        return getInstance().getClass().getClassLoader().getResource(property);
     }
-
-
 }

@@ -3,7 +3,7 @@ package ru.saumlaki.price_dynamic.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "price")
 public class Price {
 
     @Id
