@@ -1,6 +1,7 @@
 package ru.saumlaki.price_dynamic.entity;
 
 import lombok.NoArgsConstructor;
+import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 
 import javax.persistence.*;
 

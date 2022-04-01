@@ -4,14 +4,18 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--    Включает возможность автосвязывания-->
     <context:annotation-config/>
+
+    <!--    Указывает пакет для поиска бинов-->
+    <context:component-scan base-package="ru.saumlaki.price_dynamic"/>
+    <!--    <bean id="test" class="ru.saumlaki.price_dynamic.test"/>-->
 
     <!--    Включает автоматические транзакции-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -19,11 +23,6 @@
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
-    <!--    Указывает пакет для поиска бинов-->
-    <!--        <context:component-scan base-package="ru.saumlaki.price_dynamic.dao"/>-->
-
-    <bean id="shopDAOImpl" class="ru.saumlaki.price_dynamic.dao.ShopDAOImpl"/>
 
     <!--    Данный бин определяет LocalSessionFactoryBean для работы с ORM-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -35,7 +34,6 @@
                 <value>ru.saumlaki.price_dynamic.entity.Price</value>
             </list>
         </property>
-
     </bean>
 
     <!--    Данный бин определяет Spring источник данных-->

@@ -15,7 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox spacing="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.main.MainController">
+<!--        fx:controller="ru.saumlaki.price_dynamic.controllers.main.MainController"-->
+
+<HBox spacing="5.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.main.MainController">
    <children>
 <VBox maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/17">
    <children>
@@ -23,30 +25,30 @@
         <menus>
           <Menu fx:id="setting" mnemonicParsing="false" text="Настройки">
             <items>
-              <MenuItem fx:id="shopList" mnemonicParsing="false" text="Магазины" />
-                  <MenuItem fx:id="productList" mnemonicParsing="false" text="Товары" />
-                  <MenuItem fx:id="priceList" mnemonicParsing="false" text="Цены" />
+              <MenuItem fx:id="shopList" mnemonicParsing="false" onAction="#shopListOnAction" text="Магазины" />
+                  <MenuItem fx:id="productList" mnemonicParsing="false" onAction="#productListOnAction" text="Товары" />
+                  <MenuItem fx:id="priceList" mnemonicParsing="false" onAction="#priceListOnAction" text="Цены" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="about" mnemonicParsing="false" text="О программе..." />
+                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#aboutOnAction" text="О программе..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Выход" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitOnAction" text="Выход" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-            <Button fx:id="shopAdd" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#shopOpenList" text="Магазин">
+            <Button fx:id="shopAdd" mnemonicParsing="false" onAction="#shopAddOnAction" text="Магазин">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Button>
-            <Button fx:id="productAdd" mnemonicParsing="false" text="Товар">
+            <Button fx:id="productAdd" mnemonicParsing="false" onAction="#productAddOnAction" text="Товар">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Button>
-            <Button fx:id="priceAdd" mnemonicParsing="false" text="Цена">
+            <Button fx:id="priceAdd" mnemonicParsing="false" onAction="#priceAddOnAction" text="Цена">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
