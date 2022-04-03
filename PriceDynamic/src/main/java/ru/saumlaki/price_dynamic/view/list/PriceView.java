@@ -18,6 +18,8 @@ public class PriceView extends AbstractView {
     public void showForm(Stage parentStage) {
         initialize("PriceView");
 
+        //TODO:SPRING
+        abstractController = new PriceListController();
         abstractController.setCurrentStage(getCurrentStage());
 
         setParentStage(parentStage);

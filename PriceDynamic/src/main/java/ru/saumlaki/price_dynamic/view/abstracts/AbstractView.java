@@ -47,7 +47,6 @@ public abstract class AbstractView {
         //Получаем путь до формы
         fxmlLoader = new FXMLLoader(Helper.getResourcesURLForPropertyName(viewNameProp));
 
-
         //fxmlLoader.setController(this.controller);
 
         //Инициализи
@@ -56,7 +55,8 @@ public abstract class AbstractView {
             hBox = fxmlLoader.load();
         } catch (IOException ex) {
             System.out.println("Критическая ошибка загрузки формы:" + ex.getMessage());
-            AlertMessage.showError("Ошибка загрузки окна " + viewNameProp, ex.getMessage());
+            AlertMessage.showError("Ошибка загрузки окна: " + viewNameProp, ex.getMessage());
+            return;
         }
 
         scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
