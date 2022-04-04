@@ -1,17 +1,14 @@
-package ru.saumlaki.price_dynamic.view.list;
+package ru.saumlaki.price_dynamic.view.main;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.controllers.list.ShopListController;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
-import ru.saumlaki.price_dynamic.view.abstracts.AbstractView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,32 +17,30 @@ import java.net.URL;
  */
 
 /**
- * Класс инициализации формы списка магазинов
+ * Класс инициализации главной формы
  */
-@Component("shopList")
-public class ShopList {
+@Component("mainViewStarter")
+public class MainViewStarter {
 
     @Autowired
     FxWeaver fxWeaver;
 
-    public void showForm(Stage parentStage) {
+    public void showForm() {
 
-        HBox hBox = fxWeaver.loadView(ShopListController.class);
+        HBox hBox = fxWeaver.loadView(MainController.class);
         Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
 
         Stage currentStage = new Stage();
-        currentStage.setTitle("Список магазинов");
+        currentStage.setTitle("Динамика цен");
         currentStage.setScene(scene);
 
-        URL iconURL = Helper.getResourcesURLForPropertyName("ListIcon");
+        URL iconURL = Helper.getResourcesURLForPropertyName("Icon");
         try {
             currentStage.getIcons().add(new Image(iconURL.openStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        currentStage.initOwner(parentStage);
-        currentStage.initModality(Modality.WINDOW_MODAL);
-        currentStage.showAndWait();
+        currentStage.show();
     }
 }

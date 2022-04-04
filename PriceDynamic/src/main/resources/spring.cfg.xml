@@ -15,7 +15,7 @@
 
     <!--    Указывает пакет для поиска бинов-->
     <context:component-scan base-package="ru.saumlaki.price_dynamic"/>
-    <!--    <bean id="test" class="ru.saumlaki.price_dynamic.test"/>-->
+    <!--    <bean id="test" class="ru.saumlaki.price_dynamic.Test"/>-->
 
     <!--    Включает автоматические транзакции-->
     <tx:annotation-driven transaction-manager="transactionManager"/>

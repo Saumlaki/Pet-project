@@ -1,6 +1,7 @@
 package ru.saumlaki.price_dynamic.view.abstracts;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -8,8 +9,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import net.rgielen.fxweaver.core.FxWeaver;
+import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
+import ru.saumlaki.price_dynamic.controllers.main.MainController;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
@@ -19,9 +23,6 @@ import java.net.URL;
 
 /**Класс реализует базовый загрузчик формы*/
 public abstract class AbstractView {
-
-    Object controller;
-
 
     @Getter
     @Setter
@@ -39,31 +40,18 @@ public abstract class AbstractView {
     boolean isModal;
 
 
-    public void initialize(String viewNameProp) {
+    public void initialize(String ww) {
 
         currentStage = new Stage();
 
-        //Получаем путь до формы
-        fxmlLoader = new FXMLLoader(Helper.getResourcesURLForPropertyName(viewNameProp));
-
-        //Устанавливаем контроллер
-        controller = fxmlLoader.getController();
+        FxWeaver fxWeaver = Main.applicationContext.getBean(FxWeaver.class);
 
         //Инициализация
-        HBox hBox = null;
-        try {
-            hBox = fxmlLoader.load();
-        } catch (IOException ex) {
-            System.out.println("Критическая ошибка загрузки формы:" + ex.getMessage());
-            AlertMessage.showError("Ошибка загрузки окна: " + viewNameProp, ex.getMessage());
-            return;
-        }
+        HBox hBox = fxWeaver.loadView(MainController.class);
+
 
         scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
         currentStage.setScene(scene);
-
-        if(controller instanceof AbstractListController)
-            ((AbstractListController) controller).setCurrentStage(currentStage);
     }
 
     public void setTitle(String title) {

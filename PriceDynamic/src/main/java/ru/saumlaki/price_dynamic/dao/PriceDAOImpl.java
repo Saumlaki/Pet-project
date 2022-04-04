@@ -17,7 +17,7 @@ public class PriceDAOImpl implements PriceDAO {
     private SessionFactory sessionFactory;
 
     //Автоматическое внедрение sessionFactory
-    @Autowired
+    //@Autowired
     public PriceDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

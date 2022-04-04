@@ -16,11 +16,11 @@ import java.util.List;
 @Transactional
 public class ShopDAOImpl implements ShopDAO {
 
-    @Autowired
+    //@Autowired
     private SessionFactory sessionFactory;
 
     //Автоматическое внедрение sessionFactory
-    @Autowired
+    //@Autowired
     public ShopDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

@@ -34,7 +34,7 @@
                   </VBox>
                   <VBox spacing="5.0">
                      <children>
-                        <TextField />
+                        <TextField fx:id="description" />
                      </children>
                   </VBox>
                </children>

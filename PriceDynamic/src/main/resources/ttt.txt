@@ -1,0 +1,14 @@
+//Helper.applicationContext = new ClassPathXmlApplicationContext("spring.cfg.xml");
+//  Helper.applicationContext = new AnnotationConfigApplicationContext("ru/saumlaki/price_dynamic");
+
+
+//        ShopDAO shopDAO = context.getBean("shopDAOImpl", ShopDAO.class);
+//      shopDAO.add(new Shop("Шестерочка"));
+
+
+//    @Bean
+//    public HibernateTransactionManager transactionManager() {
+//        HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+//        hibernateTransactionManager.setSessionFactory(sessionFactory().);
+//        return hibernateTransactionManager;
+//    }
