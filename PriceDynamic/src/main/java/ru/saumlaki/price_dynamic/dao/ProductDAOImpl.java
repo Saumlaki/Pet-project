@@ -1,4 +1,4 @@
-package ru.saumlaki.price_dynamic.dao.wwww;
+package ru.saumlaki.price_dynamic.dao;
 
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;

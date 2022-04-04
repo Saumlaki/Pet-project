@@ -30,4 +30,9 @@ public class Price {
     @TableViewColumn(name = "Дата", order = 1)
     @Column
     private Date date;
+
+    @Override
+    public String toString() {
+        return shop + " - " + product;
+    }
 }

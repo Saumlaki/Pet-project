@@ -9,9 +9,9 @@ import javafx.scene.image.ImageView;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
-import ru.saumlaki.price_dynamic.view.list.PriceView;
-import ru.saumlaki.price_dynamic.view.list.ProductView;
-import ru.saumlaki.price_dynamic.view.list.ShopView;
+import ru.saumlaki.price_dynamic.view.list.PriceList;
+import ru.saumlaki.price_dynamic.view.list.ProductList;
+import ru.saumlaki.price_dynamic.view.list.ShopList;
 
 
 @Component("mainController")
@@ -68,7 +68,7 @@ public class MainController extends AbstractController {
 
     @FXML
     void shopListOnAction(ActionEvent event) {
-        new ShopView().showForm(currentStage);
+        new ShopList().showForm(currentStage);
     }
 
     @FXML
@@ -78,7 +78,7 @@ public class MainController extends AbstractController {
 
     @FXML
     void productListOnAction(ActionEvent event) {
-        new ProductView().showForm(currentStage);
+        new ProductList().showForm(currentStage);
     }
 
     @FXML
@@ -88,7 +88,7 @@ public class MainController extends AbstractController {
 
     @FXML
     void priceListOnAction(ActionEvent event) {
-        new PriceView().showForm(currentStage);
+        new PriceList().showForm(currentStage);
     }
 
     @FXML

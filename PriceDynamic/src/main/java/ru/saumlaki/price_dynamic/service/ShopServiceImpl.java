@@ -13,21 +13,21 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void add(Shop object) {
-
+        dao.add(object);
     }
 
     @Override
     public void remove(Shop object) {
-
+        dao.remove(object);
     }
 
     @Override
     public Shop getByID(int id) {
-        return null;
+        return (Shop) dao.getByID(id);
     }
 
     @Override
     public List<Shop> getAll() {
-        return null;
+        return dao.getAll();
     }
 }

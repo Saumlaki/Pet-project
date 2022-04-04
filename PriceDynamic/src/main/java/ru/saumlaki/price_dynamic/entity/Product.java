@@ -15,4 +15,9 @@ public class Product {
     @TableViewColumn(name = "Наименование")
     @Column
     private String description;
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }

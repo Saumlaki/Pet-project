@@ -8,6 +8,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
+import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
@@ -19,6 +21,7 @@ import java.net.URL;
 public abstract class AbstractView {
 
     Object controller;
+
 
     @Getter
     @Setter
@@ -37,19 +40,16 @@ public abstract class AbstractView {
 
 
     public void initialize(String viewNameProp) {
-        initialize(new Stage(), viewNameProp);
-    }
 
-    public void initialize(Stage currentStage, String viewNameProp) {
-
-        this.currentStage = currentStage==null?new Stage():currentStage;
+        currentStage = new Stage();
 
         //Получаем путь до формы
         fxmlLoader = new FXMLLoader(Helper.getResourcesURLForPropertyName(viewNameProp));
 
-        //fxmlLoader.setController(this.controller);
+        //Устанавливаем контроллер
+        controller = fxmlLoader.getController();
 
-        //Инициализи
+        //Инициализация
         HBox hBox = null;
         try {
             hBox = fxmlLoader.load();
@@ -61,6 +61,9 @@ public abstract class AbstractView {
 
         scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
         currentStage.setScene(scene);
+
+        if(controller instanceof AbstractListController)
+            ((AbstractListController) controller).setCurrentStage(currentStage);
     }
 
     public void setTitle(String title) {
@@ -97,10 +100,5 @@ public abstract class AbstractView {
 
             currentStage.show();
         }
-    }
-
-    public <T> T getController() {
-
-        return fxmlLoader.getController();
     }
 }

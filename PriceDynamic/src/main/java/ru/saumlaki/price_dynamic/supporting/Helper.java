@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+/***Вспомогательный класс в который вынесен весь вспомогательный функционал*/
 public class Helper {
 
     public static Helper instance;
+
     public static ApplicationContext applicationContext;
 
     private Helper() {
@@ -43,7 +45,9 @@ public class Helper {
         return properties.getProperty(propertyName);
     }
 
-    /**Метод получения ресурса по имени*/
+    /**
+     * Метод получения ресурса по имени
+     */
     public static URL getResourcesURLForPropertyName(String propertyName) {
 
         String property = getPropertyForName(propertyName);

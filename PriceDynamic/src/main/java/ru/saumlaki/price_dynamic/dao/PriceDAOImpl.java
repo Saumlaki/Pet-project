@@ -1,27 +1,24 @@
-package ru.saumlaki.price_dynamic.dao.wwww;
+package ru.saumlaki.price_dynamic.dao;
 
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.saumlaki.price_dynamic.dao.interfaces.ShopDAO;
-import ru.saumlaki.price_dynamic.entity.Shop;
+import ru.saumlaki.price_dynamic.dao.interfaces.PriceDAO;
+import ru.saumlaki.price_dynamic.entity.Price;
 
 import java.util.List;
 
 @NoArgsConstructor
 @Repository
-@Transactional
-public class ShopDAOImpl implements ShopDAO {
+public class PriceDAOImpl implements PriceDAO {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     //Автоматическое внедрение sessionFactory
     @Autowired
-    public ShopDAOImpl(SessionFactory sessionFactory) {
+    public PriceDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -30,28 +27,27 @@ public class ShopDAOImpl implements ShopDAO {
     }
 
     @Override
-    public void add(Shop object) {
+    public void add(Price object) {
         currentSession().save(object);
     }
 
     @Override
-    public void update(Shop object) {
+    public void update(Price object) {
         currentSession().update(object);
     }
 
     @Override
-    public void remove(Shop object) {
+    public void remove(Price object) {
         currentSession().remove(object);
     }
 
     @Override
-    public Shop getByID(int id) {
-        return currentSession().get(Shop.class, id);
+    public Price getByID(int id) {
+        return currentSession().get(Price.class, id);
     }
 
     @Override
-    public List<Shop> getAll() {
-        return currentSession().createQuery("SELECT a FROM shop a", Shop.class).getResultList();
+    public List<Price> getAll() {
+        return currentSession().createQuery("SELECT a FROM price a", Price.class).getResultList();
     }
-
 }

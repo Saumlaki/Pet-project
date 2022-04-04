@@ -13,21 +13,21 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public void add(Price object) {
-
+        dao.add(object);
     }
 
     @Override
     public void remove(Price object) {
-
+        dao.remove(object);
     }
 
     @Override
     public Price getByID(int id) {
-        return null;
+        return (Price) dao.getByID(id);
     }
 
     @Override
     public List<Price> getAll() {
-        return null;
+        return dao.getAll();
     }
 }
