@@ -1,16 +1,22 @@
 package ru.saumlaki.price_dynamic.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "price")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Price {
 
     @TableViewColumn(name = "Код",  order = 0)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private int id;
 
     @TableViewColumn(name = "Магазин",  order = 2)
@@ -34,5 +40,10 @@ public class Price {
     @Override
     public String toString() {
         return shop + " - " + product;
+    }
+
+
+    public String getDescription() {
+        return shop + " " + product + " " + price;
     }
 }

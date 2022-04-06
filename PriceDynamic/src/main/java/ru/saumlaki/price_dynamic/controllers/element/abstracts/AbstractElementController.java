@@ -3,6 +3,8 @@ package ru.saumlaki.price_dynamic.controllers.element.abstracts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import lombok.Getter;
+import lombok.Setter;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
@@ -11,7 +13,7 @@ import java.lang.reflect.Field;
 
 public abstract class AbstractElementController <T> extends AbstractController {
 
-    protected T object;
+    public T object;
 
     @FXML
     private Button cancel;
@@ -104,5 +106,8 @@ public abstract class AbstractElementController <T> extends AbstractController {
      */
     public abstract void updateElement();
 
-
+    public void setObject(T object) {
+        this.object = object;
+        updateForm();
+    }
 }

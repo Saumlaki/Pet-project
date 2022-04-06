@@ -7,18 +7,44 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
+import ru.saumlaki.price_dynamic.entity.Price;
+import ru.saumlaki.price_dynamic.entity.Product;
+import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.supporting.Helper;
+import ru.saumlaki.price_dynamic.view.element.PriceElementStarter;
+import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
+import ru.saumlaki.price_dynamic.view.element.ShopElementStarter;
 import ru.saumlaki.price_dynamic.view.list.PriceListStarter;
 import ru.saumlaki.price_dynamic.view.list.ProductListStarter;
 import ru.saumlaki.price_dynamic.view.list.ShopListStarter;
 
 
-@Component("mainController")
+@Component
 @FxmlView("MainView.fxml")
 public class MainController extends AbstractController {
+
+    @Autowired
+    ShopListStarter shopListStarter;
+
+    @Autowired
+    ProductListStarter productListStarter;
+
+    @Autowired
+    PriceListStarter priceListStarter;
+
+    @Autowired
+    ShopElementStarter shopElementStarter;
+
+    @Autowired
+    ProductElementStarter productElementStarter;
+
+    @Autowired
+    PriceElementStarter priceElementStarter;
+
 
     @FXML
     private Button shopAdd;
@@ -66,32 +92,32 @@ public class MainController extends AbstractController {
 
     @FXML
     void shopAddOnAction(ActionEvent event) {
-        System.out.println("");
+        shopElementStarter.showForm(currentStage, new Shop());
     }
 
     @FXML
     void shopListOnAction(ActionEvent event) {
-       Main.applicationContext.getBean("shopListStarter", ShopListStarter.class).showForm(currentStage);
+        shopListStarter.showForm(currentStage);
     }
 
     @FXML
     void productAddOnAction(ActionEvent event) {
-
+        productElementStarter.showForm(currentStage, new Product());
     }
 
     @FXML
     void productListOnAction(ActionEvent event) {
-        Main.applicationContext.getBean("productListStarter", ProductListStarter.class).showForm(currentStage);
+        productListStarter.showForm(currentStage);
     }
 
     @FXML
     void priceAddOnAction(ActionEvent event) {
-
+        priceElementStarter.showForm(currentStage, new Price());
     }
 
     @FXML
     void priceListOnAction(ActionEvent event) {
-        Main.applicationContext.getBean("priceListStarter", PriceListStarter.class).showForm(currentStage);
+        priceListStarter.showForm(currentStage);
     }
 
     @FXML

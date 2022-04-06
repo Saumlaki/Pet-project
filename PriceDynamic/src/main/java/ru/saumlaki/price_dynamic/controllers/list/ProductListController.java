@@ -7,12 +7,14 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
-import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
-import ru.saumlaki.price_dynamic.view.element.ShopElement;
+import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
 
-@Component("productListController")
+@Component
 @FxmlView("ProductList.fxml")
 public class ProductListController extends AbstractListController<Product> {
+
+    @Autowired
+    ProductElementStarter elementStarter;
 
     @Autowired
     ProductServiceImpl service;
@@ -24,25 +26,22 @@ public class ProductListController extends AbstractListController<Product> {
 
     @Override
     public void updateForm() {
-
         list.getItems().clear();
         list.setItems(FXCollections.observableList(service.getAll()));
     }
 
     @Override
     public void addObject() {
-        System.out.println("addObject");
+        elementStarter.showForm(currentStage, new Product());
     }
 
     @Override
     public void changeObject(Product object) {
-        //new ShopElement().showForm(currentStage, getCurrentObject());
+        elementStarter.showForm(currentStage, object);
     }
 
     @Override
     public void removeObject(Product object) {
         service.remove(getCurrentObject());
     }
-
-
 }

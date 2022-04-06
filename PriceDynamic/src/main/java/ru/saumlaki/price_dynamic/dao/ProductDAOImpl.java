@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.saumlaki.price_dynamic.dao.interfaces.ProductDAO;
 import ru.saumlaki.price_dynamic.entity.Product;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Repository
+@Transactional
 public class ProductDAOImpl implements ProductDAO {
 
     private SessionFactory sessionFactory;

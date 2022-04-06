@@ -1,23 +1,26 @@
 package ru.saumlaki.price_dynamic.controllers.list;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
 import ru.saumlaki.price_dynamic.entity.Price;
+import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
-import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
-import ru.saumlaki.price_dynamic.view.element.ShopElement;
 
-@Component("priceListController")
+import ru.saumlaki.price_dynamic.view.element.PriceElementStarter;
+import ru.saumlaki.price_dynamic.view.element.ShopElementStarter;
+
+@Component
 @FxmlView("PriceList.fxml")
 public class PriceListController extends AbstractListController<Price> {
 
     @Autowired
-    PriceServiceImpl service;
+    PriceElementStarter elementStarter;
 
+    @Autowired
+    PriceServiceImpl service;
 
     @Override
     public void createTableColumn() {
@@ -33,12 +36,12 @@ public class PriceListController extends AbstractListController<Price> {
 
     @Override
     public void addObject() {
-        System.out.println("addObject");
+        elementStarter.showForm(currentStage, new Price());
     }
 
     @Override
     public void changeObject(Price object) {
-        //new ShopElement().showForm(currentStage, getCurrentObject());
+        elementStarter.showForm(currentStage, getCurrentObject());
     }
 
     @Override

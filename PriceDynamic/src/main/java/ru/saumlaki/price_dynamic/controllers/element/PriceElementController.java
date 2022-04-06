@@ -6,11 +6,12 @@ import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
+import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Shop;
 
 @Component
-@FxmlView("ShopElement.fxml")
-public class ShopElementController extends AbstractElementController<Shop> {
+@FxmlView("PriceElement.fxml")
+public class PriceElementController extends AbstractElementController<Price> {
 
     @FXML
     private TextField description;
@@ -27,6 +28,6 @@ public class ShopElementController extends AbstractElementController<Shop> {
 
     @Override
     public void updateElement() {
-        object.setDescription(description.getText());
+
     }
 }
