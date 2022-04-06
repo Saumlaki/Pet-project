@@ -1,15 +1,18 @@
-package ru.saumlaki.price_dynamic.view.main;
+package ru.saumlaki.price_dynamic.view.list;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.controllers.list.ShopListController;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
+
 import java.io.IOException;
 import java.net.URL;
 /**
@@ -17,31 +20,34 @@ import java.net.URL;
  */
 
 /**
- * Класс инициализации главной формы
+ * Класс инициализации формы списка магазинов
  */
-@Component("mainViewStarter")
-public class MainViewStarter {
+@Component("shopListStarter")
+public class ShopListStarter {
 
     @Autowired
     FxWeaver fxWeaver;
 
-    public void showForm() {
+    public void showForm(Stage parentStage) {
 
-        HBox hBox = fxWeaver.loadView(MainController.class);
+        HBox hBox = fxWeaver.loadView(ShopListController.class);
         Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
 
         Stage currentStage = new Stage();
-        currentStage.setTitle("Динамика цен");
+        currentStage.setTitle("Список магазинов");
         currentStage.setScene(scene);
 
-        URL iconURL = Helper.getResourcesURLForPropertyName("Icon");
+        URL iconURL = Helper.getResourcesURLForPropertyName("ListIcon");
         try {
             currentStage.getIcons().add(new Image(iconURL.openStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Main.applicationContext.getBean("mainController", MainController.class).setCurrentStage(currentStage);
-        currentStage.show();
+        Main.applicationContext.getBean("shopListController", ShopListController.class).setCurrentStage(currentStage);
+
+        currentStage.initOwner(parentStage);
+        currentStage.initModality(Modality.WINDOW_MODAL);
+        currentStage.showAndWait();
     }
 }

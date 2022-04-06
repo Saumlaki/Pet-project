@@ -1,12 +1,15 @@
 package ru.saumlaki.price_dynamic.service;
 
+import org.springframework.stereotype.Service;
 import ru.saumlaki.price_dynamic.dao.factory.DAOFactory;
 import ru.saumlaki.price_dynamic.dao.interfaces.DAO;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.service.interfaces.PriceService;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PriceServiceImpl implements PriceService {
 
     DAO dao = DAOFactory.getDAO(Price.class);
@@ -28,6 +31,9 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public List<Price> getAll() {
-        return dao.getAll();
+
+        List<Price> list = new ArrayList<>();
+        return list;
+        // return dao.getAll();
     }
 }

@@ -8,8 +8,9 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.controllers.list.ProductListController;
 import ru.saumlaki.price_dynamic.controllers.list.ShopListController;
-import ru.saumlaki.price_dynamic.controllers.main.MainController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 import ru.saumlaki.price_dynamic.view.abstracts.AbstractView;
 
@@ -20,10 +21,10 @@ import java.net.URL;
  */
 
 /**
- * Класс инициализации формы списка магазинов
+ * Класс инициализации формы списка продуктов
  */
-@Component("shopList")
-public class ShopList {
+@Component
+public class ProductListStarter extends AbstractView {
 
     @Autowired
     FxWeaver fxWeaver;
@@ -34,7 +35,7 @@ public class ShopList {
         Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
 
         Stage currentStage = new Stage();
-        currentStage.setTitle("Список магазинов");
+        currentStage.setTitle("Список товаров");
         currentStage.setScene(scene);
 
         URL iconURL = Helper.getResourcesURLForPropertyName("ListIcon");
@@ -43,6 +44,8 @@ public class ShopList {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Main.applicationContext.getBean("productListController", ProductListController.class).setCurrentStage(currentStage);
 
         currentStage.initOwner(parentStage);
         currentStage.initModality(Modality.WINDOW_MODAL);

@@ -1,5 +1,6 @@
 package ru.saumlaki.price_dynamic.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,11 +10,13 @@ import javax.persistence.*;
 
 @Entity(name = "shop")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Shop {
 
     @TableViewColumn(name = "Код")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private int id;
 
     @TableViewColumn(name = "Наименование")
@@ -21,10 +24,6 @@ public class Shop {
     @Getter
     @Setter
     private String description;
-
-    public Shop(String description) {
-        this.description = description;
-    }
 
     @Override
     public String toString() {

@@ -1,10 +1,14 @@
 package ru.saumlaki.price_dynamic.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 
 import javax.persistence.*;
 
 @Entity(name = "product")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
     @TableViewColumn(name = "Код")
