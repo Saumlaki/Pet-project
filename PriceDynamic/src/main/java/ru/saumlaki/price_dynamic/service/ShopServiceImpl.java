@@ -2,13 +2,12 @@ package ru.saumlaki.price_dynamic.service;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.saumlaki.price_dynamic.dao.factory.DAOFactory;
-import ru.saumlaki.price_dynamic.dao.interfaces.DAO;
+import ru.saumlaki.price_dynamic.dao.ShopDAOImpl;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ShopServiceImpl implements ShopService {
 
-    DAO dao = DAOFactory.getDAO(Shop.class);
+    @Autowired
+    ShopDAOImpl dao;
 
     @Override
     public void add(Shop object) {
@@ -30,19 +30,11 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Shop getByID(int id) {
-        return (Shop) dao.getByID(id);
+        return  dao.getByID(id);
     }
 
     @Override
     public List<Shop> getAll() {
-
-        List<Shop> list = new ArrayList<>();
-        list.add(new Shop(1,"Пятерочка"));
-        list.add(new Shop(2,"Перекресток"));
-        list.add(new Shop(3,"Дикси"));
-        list.add(new Shop(4, "Магнит"));
-
-        return list;
-        //return dao.getAll();
+        return dao.getAll();
     }
 }

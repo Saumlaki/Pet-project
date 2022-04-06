@@ -3,10 +3,7 @@ package ru.saumlaki.price_dynamic.service;
 import org.springframework.stereotype.Service;
 import ru.saumlaki.price_dynamic.dao.factory.DAOFactory;
 import ru.saumlaki.price_dynamic.dao.interfaces.DAO;
-import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
-import ru.saumlaki.price_dynamic.entity.Shop;
-import ru.saumlaki.price_dynamic.service.interfaces.PriceService;
 import ru.saumlaki.price_dynamic.service.interfaces.ProductService;
 
 import java.util.ArrayList;

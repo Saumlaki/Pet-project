@@ -7,7 +7,6 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
-import ru.saumlaki.price_dynamic.entity.Shop;
 
 @Component
 @FxmlView("PriceElement.fxml")

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
+
 import java.io.IOException;
 import java.net.URL;
 /**

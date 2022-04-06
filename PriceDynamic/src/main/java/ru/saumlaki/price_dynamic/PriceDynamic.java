@@ -5,7 +5,6 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
 import ru.saumlaki.price_dynamic.service.ShopServiceImpl;

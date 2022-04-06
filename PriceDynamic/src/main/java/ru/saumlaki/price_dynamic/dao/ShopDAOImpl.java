@@ -16,14 +16,8 @@ import java.util.List;
 @Transactional
 public class ShopDAOImpl implements ShopDAO {
 
-    //@Autowired
+    @Autowired
     private SessionFactory sessionFactory;
-
-    //Автоматическое внедрение sessionFactory
-    //@Autowired
-    public ShopDAOImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     private Session currentSession() {
         return sessionFactory.getCurrentSession();
@@ -51,7 +45,7 @@ public class ShopDAOImpl implements ShopDAO {
 
     @Override
     public List<Shop> getAll() {
-        return currentSession().createQuery("SELECT a FROM shop a", Shop.class).getResultList();
+        return currentSession().createQuery("FROM shop ", Shop.class).getResultList();
     }
 
 }

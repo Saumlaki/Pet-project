@@ -1,7 +1,6 @@
 package ru.saumlaki.price_dynamic.view.abstracts;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -11,10 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.rgielen.fxweaver.core.FxWeaver;
 import ru.saumlaki.price_dynamic.Main;
-import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
-import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
-import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
 import java.io.IOException;
