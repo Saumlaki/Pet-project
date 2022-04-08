@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
 
+import java.sql.SQLDataException;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface Service<T> {
     /**
      * Метод добавления объекта
      */
-    void add(T object);
+    void add(T object) throws SQLDataException;
 
     /**
      * Метод удаления объекта

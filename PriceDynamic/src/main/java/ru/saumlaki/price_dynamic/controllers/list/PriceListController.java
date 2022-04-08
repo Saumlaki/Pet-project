@@ -31,10 +31,12 @@ public class PriceListController extends AbstractListController<Price> {
     @Override
     public void updateForm() {
 
-        if (list != null) {
-            list.getItems().clear();
-            list.setItems(prices);
-        }
+
+//        if (list != null) {
+//            list.ob
+//            list.getItems().clear();
+//            list.setItems(prices);
+//        }
     }
 
     @Override

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
-import ru.saumlaki.price_dynamic.service.interfaces.Service;
+
+import java.sql.SQLDataException;
 
 @Component
 @FxmlView("ShopElement.fxml")
@@ -21,13 +22,15 @@ public class ShopElementController extends AbstractElementController<Shop> {
     ShopServiceImpl service;
 
     @Override
-    public void saveObject()  {
-        if (save("description")){
-
-                obsList.clear();
-                obsList.addAll(service.getAll());
-
-        closeForm();}
+    public void saveObject() {
+        try {
+            save("description");
+            closeForm();
+        } catch (SQLDataException ex) {
+            System.out.println("-----------------------------------------------------------");
+            System.out.println("Ошибка сохранения элемента");
+            ex.printStackTrace();
+        }
     }
 
     @Override

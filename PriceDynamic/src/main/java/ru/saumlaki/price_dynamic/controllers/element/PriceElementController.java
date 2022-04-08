@@ -6,13 +6,19 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
 
+import java.sql.SQLDataException;
+
 @Component
 @FxmlView("PriceElement.fxml")
 public class PriceElementController extends AbstractElementController<Price> {
 
     @Override
     public void saveObject() {
-        save("description");
+        try {
+            save("description");
+        } catch (SQLDataException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

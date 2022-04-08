@@ -1,6 +1,5 @@
 package ru.saumlaki.price_dynamic.controllers.list;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +25,11 @@ public class ShopListController extends AbstractListController<Shop> {
     @Override
     public void createTableColumn() {
         createTableColumnForClass(Shop.class);
+        list.setItems(prices);
     }
 
     @Override
     public void updateForm() {
-        if (list != null) {
-            list.getItems().clear();
-            list.setItems(prices);
-        }
     }
 
     @Override

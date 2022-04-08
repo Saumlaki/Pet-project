@@ -1,12 +1,10 @@
 package ru.saumlaki.price_dynamic.controllers.list;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
-import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
 import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
