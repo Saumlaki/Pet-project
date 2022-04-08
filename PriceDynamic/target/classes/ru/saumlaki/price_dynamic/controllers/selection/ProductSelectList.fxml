@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.selection.ProductSelectController">
+   <children>
+      <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox spacing="5.0">
+               <children>
+                  <Button fx:id="selectButton" mnemonicParsing="false" onAction="#selectOnAction" text="Выбрать" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addOnAction" text="Добавить" />
+                  <Button fx:id="changeButton" mnemonicParsing="false" onAction="#changeOnAction" text="Изменить" />
+                  <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeOnAction" text="Удалить" />
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <TableView fx:id="list" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="selectButtonCM" mnemonicParsing="false" onAction="#selectOnActionCM" text="Выбрать" />
+                        <MenuItem fx:id="addButtonCM" mnemonicParsing="false" onAction="#addOnActionCM" text="Добавить" />
+                      <MenuItem fx:id="changeButtonCM" mnemonicParsing="false" onAction="#changeOnActionCM" text="Изменить" />
+                        <MenuItem fx:id="removeButtonCM" mnemonicParsing="false" onAction="#removeOnActionCM" text="Удалить" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </VBox>
+   </children>
+</HBox>

@@ -184,7 +184,8 @@ public abstract class AbstractListController<T> extends AbstractController {
                     Object valueTemp = StringCellDataFeatures.getValue().getClass().getDeclaredMethod(methodName).invoke(StringCellDataFeatures.getValue());
 
                     if (valueTemp instanceof Integer) value = String.valueOf(valueTemp);
-                    else value = (String) valueTemp;
+                    if(valueTemp instanceof String) value = (String)valueTemp;
+                    else value =  valueTemp.toString();
 
                 } catch (Exception e) {
                     AlertMessage.showError("Ошибка установки значения колонки", e.getMessage());
@@ -207,5 +208,9 @@ public abstract class AbstractListController<T> extends AbstractController {
             if (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() == 2)
                 changeObject(getCurrentObject());
         });
+    }
+
+    protected void closeForm() {
+        currentStage.close();
     }
 }

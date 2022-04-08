@@ -40,23 +40,23 @@
                      <children>
                         <HBox spacing="5.0">
                            <children>
-                              <DatePicker />
+                              <DatePicker fx:id="data" />
                               <TextField fx:id="id" maxWidth="30.0" />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <TextField />
-                              <Button mnemonicParsing="false" text="..." />
+                              <TextField fx:id="shop" />
+                              <Button mnemonicParsing="false" onAction="#shopSelect" text="..." />
                            </children>
                         </HBox>
                         <HBox>
                            <children>
-                              <TextField />
-                              <Button mnemonicParsing="false" text="..." />
+                              <TextField fx:id="product" />
+                              <Button mnemonicParsing="false" onAction="#productSelect" text="..." />
                            </children>
                         </HBox>
-                        <TextField />
+                        <TextField fx:id="value" />
                      </children>
                   </VBox>
                </children>
