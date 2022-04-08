@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.rgielen.fxweaver.core.FxWeaver;
 import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.PriceDynamic;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 

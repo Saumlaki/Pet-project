@@ -1,5 +1,8 @@
 package ru.saumlaki.price_dynamic.service.interfaces;
 
+import javafx.collections.ObservableList;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
 
 import java.util.List;
@@ -33,8 +36,12 @@ public interface Service<T> {
      */
     List<T> getAll();
 
+    void updateList();
+
     default Service<T> getDAO(Class objectClass) {
 
         return ServiceFactory.getService(objectClass);
     }
+
+
 }

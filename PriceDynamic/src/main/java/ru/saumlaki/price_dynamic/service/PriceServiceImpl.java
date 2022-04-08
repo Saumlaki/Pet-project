@@ -1,8 +1,9 @@
 package ru.saumlaki.price_dynamic.service;
 
+import javafx.collections.ObservableList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.saumlaki.price_dynamic.dao.factory.DAOFactory;
-import ru.saumlaki.price_dynamic.dao.interfaces.DAO;
+import ru.saumlaki.price_dynamic.dao.PriceDAOImpl;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.service.interfaces.PriceService;
 
@@ -12,11 +13,16 @@ import java.util.List;
 @Service
 public class PriceServiceImpl implements PriceService {
 
-    DAO dao = DAOFactory.getDAO(Price.class);
+    @Autowired
+    PriceDAOImpl dao;
+
+    @Autowired
+    ObservableList<Price> list;
 
     @Override
     public void add(Price object) {
-        dao.add(object);
+        if (object.getId() == 0) dao.add(object);
+        else dao.update(object);
     }
 
     @Override
@@ -26,14 +32,17 @@ public class PriceServiceImpl implements PriceService {
 
     @Override
     public Price getByID(int id) {
-        return (Price) dao.getByID(id);
+        return dao.getByID(id);
     }
 
     @Override
     public List<Price> getAll() {
+        return dao.getAll();
+    }
 
-        List<Price> list = new ArrayList<>();
-        return list;
-        // return dao.getAll();
+    @Override
+    public void updateList() {
+        list.clear();
+        list.addAll(getAll());
     }
 }

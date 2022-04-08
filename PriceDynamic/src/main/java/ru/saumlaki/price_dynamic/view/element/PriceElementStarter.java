@@ -9,6 +9,7 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.PriceDynamic;
 import ru.saumlaki.price_dynamic.controllers.element.PriceElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.supporting.Helper;

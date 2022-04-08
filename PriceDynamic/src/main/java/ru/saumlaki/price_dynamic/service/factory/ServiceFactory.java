@@ -1,5 +1,7 @@
 package ru.saumlaki.price_dynamic.service.factory;
 
+import ru.saumlaki.price_dynamic.Main;
+import ru.saumlaki.price_dynamic.PriceDynamic;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
@@ -28,9 +30,9 @@ public class ServiceFactory {
     public static Service getService(Class tempClass) {
 
         Map<Class, Service> map = new HashMap<>();
-        map.put(Shop.class, new ShopServiceImpl());
-        map.put(Price.class, new PriceServiceImpl());
-        map.put(Product.class, new ProductServiceImpl());
+        map.put(Shop.class, Main.applicationContext.getBean("shopServiceImpl", ShopServiceImpl.class));
+        map.put(Price.class, Main.applicationContext.getBean("priceServiceImpl", PriceServiceImpl.class));
+        map.put(Product.class, Main.applicationContext.getBean("productServiceImpl", ProductServiceImpl.class));
 
         return map.get(tempClass);
     }

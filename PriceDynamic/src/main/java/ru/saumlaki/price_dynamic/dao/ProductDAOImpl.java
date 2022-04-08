@@ -1,8 +1,8 @@
 package ru.saumlaki.price_dynamic.dao;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.saumlaki.price_dynamic.dao.interfaces.ProductDAO;
@@ -10,18 +10,12 @@ import ru.saumlaki.price_dynamic.entity.Product;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Repository
 @Transactional
 public class ProductDAOImpl implements ProductDAO {
 
+    @Autowired
     private SessionFactory sessionFactory;
-
-    //Автоматическое внедрение sessionFactory
-   // @Autowired
-    public ProductDAOImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     private Session currentSession() {
         return sessionFactory.getCurrentSession();

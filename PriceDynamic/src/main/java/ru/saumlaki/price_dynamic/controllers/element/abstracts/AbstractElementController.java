@@ -1,11 +1,17 @@
 package ru.saumlaki.price_dynamic.controllers.element.abstracts;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
+import ru.saumlaki.price_dynamic.service.interfaces.Service;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
+import ru.saumlaki.price_dynamic.view.element.ShopElementStarter;
 
 import java.lang.reflect.Field;
 
@@ -13,20 +19,32 @@ public abstract class AbstractElementController <T> extends AbstractController {
 
     public T object;
 
-    @FXML
-    private Button cancel;
+    @Autowired
+    public ObservableList<T> obsList;
+
+    public Service service;
 
     @FXML
-    private Button save;
+    protected TextField description;
+
+    @FXML
+    protected Button cancel;
+
+    @FXML
+    protected Button save;
 
     @FXML
     void cancelOnAction(ActionEvent event) {
-        currentStage.close();
+       closeForm();
     }
 
     @FXML
     void saveOnAction(ActionEvent event) {
-        saveObject();
+        try {
+            saveObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -89,6 +107,8 @@ public abstract class AbstractElementController <T> extends AbstractController {
         } else
             result = false;
 
+
+
         return result;
     }
 
@@ -107,5 +127,15 @@ public abstract class AbstractElementController <T> extends AbstractController {
     public void setObject(T object) {
         this.object = object;
         updateForm();
+    }
+
+    @FXML
+    public void initialize() {
+
+
+    }
+
+    public void closeForm() {
+        currentStage.close();
     }
 }

@@ -30,7 +30,6 @@ import java.util.List;
  */
 public abstract class AbstractListController<T> extends AbstractController {
 
-    protected Service service;
     @Autowired
     private ObservableList<T> obsList;
 

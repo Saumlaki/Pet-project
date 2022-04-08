@@ -1,6 +1,5 @@
 package ru.saumlaki.price_dynamic.dao;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import ru.saumlaki.price_dynamic.entity.Shop;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Repository
 @Transactional
 public class ShopDAOImpl implements ShopDAO {

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,7 +24,7 @@ public class Main {
     private static ObservableList<Price> priceObsList =  FXCollections.observableArrayList();
 
     public static void main(String[] args) {
-
+        Main.applicationContext = new SpringApplicationBuilder().sources(Main.class).run("");
         Application.launch(PriceDynamic.class, args);
     }
 
