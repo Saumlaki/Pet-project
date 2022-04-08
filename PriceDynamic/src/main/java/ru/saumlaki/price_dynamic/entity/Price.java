@@ -37,6 +37,22 @@ public class Price {
     @Column
     private Date date;
 
+    public String getShop() {
+        return shop.toString();
+    }
+
+    public String getProduct() {
+        return product.toString();
+    }
+
+    public String getPrice() {
+        return String.valueOf(price);
+    }
+
+    public String getDate() {
+        return "date";
+    }
+
     @Override
     public String toString() {
         return shop + " - " + product;

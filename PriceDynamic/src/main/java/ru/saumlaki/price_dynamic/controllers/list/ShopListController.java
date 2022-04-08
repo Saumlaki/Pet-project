@@ -20,16 +20,16 @@ public class ShopListController extends AbstractListController<Shop> {
     ShopServiceImpl service;
 
     @Autowired
-    ObservableList<Shop> prices;
+    ObservableList<Shop> obsList;
 
     @Override
     public void createTableColumn() {
         createTableColumnForClass(Shop.class);
-        list.setItems(prices);
     }
 
     @Override
     public void updateForm() {
+        list.setItems(obsList);
     }
 
     @Override

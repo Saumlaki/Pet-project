@@ -20,7 +20,7 @@ public class ProductListController extends AbstractListController<Product> {
     ProductServiceImpl service;
 
     @Autowired
-    ObservableList<Product> prices;
+    ObservableList<Product> obsList;
 
     @Override
     public void createTableColumn() {
@@ -29,10 +29,7 @@ public class ProductListController extends AbstractListController<Product> {
 
     @Override
     public void updateForm() {
-        if (list != null) {
-            list.getItems().clear();
-            list.setItems(prices);
-        }
+        list.setItems(obsList);
     }
 
     @Override

@@ -9,14 +9,12 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
-import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
 
 import java.sql.SQLDataException;
 
 @Component
 @FxmlView("ProductElement.fxml")
 public class ProductElementController extends AbstractElementController<Product> {
-
     @FXML
     private TextField id;
 
@@ -38,6 +36,7 @@ public class ProductElementController extends AbstractElementController<Product>
     @Override
     public void updateForm() {
         description.setText(object.getDescription());
+        id.setText(String.valueOf(object.getId()));
     }
 
     @Override

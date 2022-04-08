@@ -1,6 +1,5 @@
 package ru.saumlaki.price_dynamic.controllers.list;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class PriceListController extends AbstractListController<Price> {
     PriceServiceImpl service;
 
     @Autowired
-    ObservableList<Price> prices;
+    ObservableList<Price> obsList;
 
     @Override
     public void createTableColumn() {
@@ -30,13 +29,7 @@ public class PriceListController extends AbstractListController<Price> {
 
     @Override
     public void updateForm() {
-
-
-//        if (list != null) {
-//            list.ob
-//            list.getItems().clear();
-//            list.setItems(prices);
-//        }
+        list.setItems(obsList);
     }
 
     @Override
@@ -53,6 +46,4 @@ public class PriceListController extends AbstractListController<Price> {
     public void removeObject(Price object) {
         service.remove(getCurrentObject());
     }
-
-
 }

@@ -72,7 +72,6 @@ public abstract class AbstractListController<T> extends AbstractController {
         setOnMouseClicked();
 
         updateForm();
-        obsList.addListener((ListChangeListener<? super T>) change -> updateForm());
     }
 
     //*****

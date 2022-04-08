@@ -39,21 +39,13 @@ public class PriceDynamic extends Application {
     PriceService priceService = Main.applicationContext.getBean("priceServiceImpl", PriceServiceImpl.class);
 
     ObservableList<Shop> shops = Main.applicationContext.getBean("shopObsList", ObservableList.class);
-    ObservableList<Product> products = Main.applicationContext.getBean("priceObsList", ObservableList.class);
+    ObservableList<Product> products = Main.applicationContext.getBean("productObsList", ObservableList.class);
     ObservableList<Price> prices = Main.applicationContext.getBean("priceObsList", ObservableList.class);
-
-    ShopListController shopListController = Main.applicationContext.getBean("shopListController", ShopListController.class);
-    ProductListController productListController = Main.applicationContext.getBean("productListController", ProductListController.class);
-    PriceListController priceListController = Main.applicationContext.getBean("priceListController", PriceListController.class);
 
     MainViewStarter mainViewStarter = Main.applicationContext.getBean("mainViewStarter", MainViewStarter.class);
 
     @Override
     public void init() {
-
-        shops.addListener((ListChangeListener) a -> shopListController.updateForm());
-        products.addListener((ListChangeListener) a -> productListController.updateForm());
-        prices.addListener((ListChangeListener) a -> priceListController.updateForm());
 
         shops.addAll(shopService.getAll());
         products.addAll(productService.getAll());
