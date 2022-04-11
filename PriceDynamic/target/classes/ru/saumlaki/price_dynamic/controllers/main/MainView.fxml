@@ -11,11 +11,11 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox spacing="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.main.MainController">
+<HBox spacing="5.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.main.MainController">
    <children>
 <VBox maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/17">
    <children>
@@ -64,7 +64,7 @@
       </HBox>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView prefWidth="600.0" HBox.hgrow="ALWAYS" />
+                  <TreeTableView fx:id="priceData" prefWidth="600.0" />
             <VBox spacing="5.0">
                <children>
                   <HBox spacing="5.0">

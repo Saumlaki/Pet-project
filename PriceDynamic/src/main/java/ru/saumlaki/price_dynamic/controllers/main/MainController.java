@@ -2,10 +2,10 @@ package ru.saumlaki.price_dynamic.controllers.main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import lombok.Getter;
+import lombok.Setter;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +49,9 @@ public class MainController extends AbstractController {
     AboutStarter aboutStarter;
 
     @FXML
+    private TreeTableView<PriceDataElement> priceData;
+
+    @FXML
     private Button shopAdd;
 
     @FXML
@@ -88,6 +91,31 @@ public class MainController extends AbstractController {
         shopList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
         productList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
         priceList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
+
+
+        PriceDataElement priceDataElement = new PriceDataElement();
+        priceDataElement.setProduct(new Product(1,"wewew"));
+
+
+
+
+
+        TreeTableColumn columnShop = new TreeTableColumn("Магазин");
+        TreeTableColumn columnProduct = new TreeTableColumn("Товар");
+
+        TreeTableColumn columnPrice = new TreeTableColumn("Цена");
+        TreeTableColumn columnPrice1= new TreeTableColumn("Начало года");
+        TreeTableColumn columnPrice2 = new TreeTableColumn("Предыдущий месяц");
+        TreeTableColumn columnPrice3 = new TreeTableColumn("Текущая");
+        columnPrice.getColumns().addAll(columnPrice1,columnPrice2,columnPrice3);
+
+        TreeTableColumn columnDynamic = new TreeTableColumn("Динамика");
+        TreeTableColumn columnDynamic1 = new TreeTableColumn("С начала года");
+        TreeTableColumn columnDynamic2 = new TreeTableColumn("С прошлого месяца");
+        columnDynamic.getColumns().addAll(columnDynamic1, columnDynamic2);
+
+        priceData.getColumns().addAll(columnShop, columnProduct, columnPrice, columnDynamic);
+
     }
 
     //*****
@@ -129,6 +157,14 @@ public class MainController extends AbstractController {
 
     @FXML
     void exitOnAction(ActionEvent event) {
+currentStage.close();
+    }
+
+
+    class PriceDataElement{
+    @Getter
+            @Setter
+        Product product;
 
     }
 }
