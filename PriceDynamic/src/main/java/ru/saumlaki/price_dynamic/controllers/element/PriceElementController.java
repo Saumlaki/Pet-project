@@ -66,10 +66,14 @@ public class PriceElementController extends AbstractElementController<Price> {
     @Override
     public void updateForm() {
 
+
+
+
+
         id.setText(String.valueOf(object.getId()));
-        shop.setText(object.getShop().toString());
-        product.setText(object.getProduct().toString());
-        value.setText(object.getPrice().toString());
+        shop.setText(getView(object.getShop()));
+        product.setText(getView(object.getProduct()));
+        value.setText(getView(object.getPrice()));
      //   data.setValue(LocalDate.of(object.get));
     }
 
@@ -92,5 +96,11 @@ public class PriceElementController extends AbstractElementController<Price> {
 
     @Override
     public void updateElement() {
+    }
+
+    public String getView(Object object) {
+        if(object==null)return "";
+        else return object.toString();
+
     }
 }

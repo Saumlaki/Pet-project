@@ -40,7 +40,7 @@ public class ShopElementStarter extends AbstractView {
 
     public void showForm(Stage parentStage, Shop object) {
 
-        HBox hBox = fxWeaver.loadView(ShopElementController.class);
+        HBox hBox = fxWeaver.loadView(classControllerType);
         Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
 
         Stage currentStage = new Stage();
