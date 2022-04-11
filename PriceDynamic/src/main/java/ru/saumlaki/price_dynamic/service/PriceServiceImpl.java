@@ -28,6 +28,7 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public void remove(Price object) {
         dao.remove(object);
+        updateList();
     }
 
     @Override

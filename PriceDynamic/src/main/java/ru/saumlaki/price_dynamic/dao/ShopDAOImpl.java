@@ -45,5 +45,4 @@ public class ShopDAOImpl implements ShopDAO {
     public List<Shop> getAll() {
         return currentSession().createQuery("FROM shop ", Shop.class).getResultList();
     }
-
 }

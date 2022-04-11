@@ -19,6 +19,9 @@ public class ShopServiceImpl implements ShopService {
     ShopDAOImpl dao;
 
     @Autowired
+    PriceServiceImpl priceService;
+
+    @Autowired
     ObservableList<Shop> list;
 
     @Override
@@ -50,7 +53,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void remove(Shop object) {
+        priceService.getAll().stream().filter(a->a.getShop().equals(object)).forEach(a->priceService.remove(a));
         dao.remove(object);
+        updateList();
+        priceService.updateList();
     }
 
     @Override

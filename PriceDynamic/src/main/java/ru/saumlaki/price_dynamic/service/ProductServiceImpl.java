@@ -16,6 +16,9 @@ public class ProductServiceImpl implements ProductService {
     ProductDAOImpl dao;
 
     @Autowired
+    PriceServiceImpl priceService;
+
+    @Autowired
     ObservableList<Product> list;
 
     @Override
@@ -26,7 +29,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void remove(Product object) {
+        priceService.getAll().stream().filter(a->a.getProduct().equals(object)).forEach(a->priceService.remove(a));
         dao.remove(object);
+        updateList();
+        priceService.updateList();
     }
 
     @Override

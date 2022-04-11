@@ -7,6 +7,7 @@ import lombok.Setter;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "shop")
 @NoArgsConstructor
@@ -28,5 +29,18 @@ public class Shop {
     @Override
     public String toString() {
         return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shop shop = (Shop) o;
+        return id == shop.id && Objects.equals(description, shop.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 }
