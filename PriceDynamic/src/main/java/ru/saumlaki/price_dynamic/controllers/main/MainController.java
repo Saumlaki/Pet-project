@@ -14,6 +14,7 @@ import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.supporting.Helper;
+import ru.saumlaki.price_dynamic.view.about.AboutStarter;
 import ru.saumlaki.price_dynamic.view.element.PriceElementStarter;
 import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
 import ru.saumlaki.price_dynamic.view.element.ShopElementStarter;
@@ -44,6 +45,8 @@ public class MainController extends AbstractController {
     @Autowired
     PriceElementStarter priceElementStarter;
 
+    @Autowired
+    AboutStarter aboutStarter;
 
     @FXML
     private Button shopAdd;
@@ -121,7 +124,7 @@ public class MainController extends AbstractController {
 
     @FXML
     void aboutOnAction(ActionEvent event) {
-
+        aboutStarter.showForm(currentStage);
     }
 
     @FXML

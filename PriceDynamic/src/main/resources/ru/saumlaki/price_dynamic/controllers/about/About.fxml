@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="50.0" prefWidth="50.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../icon/AboutLogo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Separator orientation="VERTICAL" />
+      <VBox>
+         <children>
+            <Label text="Price Dynamic">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Separator />
+            <TextArea editable="false" prefHeight="100.0" prefWidth="250.0" text="Отслеживание динамики изменения цен&#10;на повседневные товары&#10;" />
+            <Hyperlink fx:id="gitLink" text="https://github.com/Saumlaki/Pet-project.git" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
