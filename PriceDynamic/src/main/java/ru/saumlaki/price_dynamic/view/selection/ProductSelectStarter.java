@@ -2,6 +2,7 @@ package ru.saumlaki.price_dynamic.view.selection;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -48,6 +49,8 @@ public class ProductSelectStarter extends AbstractView {
             e.printStackTrace();
         }
 
+        setOnKeyPressAction(scene, currentStage);
+
         productSelectController.setCurrentStage(currentStage);
         productSelectController.setResultAction(resultAction);
 
@@ -55,4 +58,10 @@ public class ProductSelectStarter extends AbstractView {
         currentStage.initModality(Modality.WINDOW_MODAL);
         currentStage.showAndWait();
     }
+
+    void setOnKeyPressAction(Scene scene, Stage stage) {
+
+        scene.setOnKeyPressed(e -> {
+            if(e.getCode().equals(KeyCode.ESCAPE)) stage.close();
+        });}
 }

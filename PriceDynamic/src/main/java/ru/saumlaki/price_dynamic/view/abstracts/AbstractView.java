@@ -37,6 +37,7 @@ public abstract class AbstractView {
     boolean isModal;
 
 
+
     public void initialize(String ww) {
 
         currentStage = new Stage();
