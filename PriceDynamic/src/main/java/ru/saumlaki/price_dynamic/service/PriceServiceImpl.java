@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.saumlaki.price_dynamic.dao.PriceDAOImpl;
 import ru.saumlaki.price_dynamic.entity.Price;
+import ru.saumlaki.price_dynamic.entity.Product;
+import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.interfaces.PriceService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +42,12 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public List<Price> getAll() {
         return dao.getAll();
+    }
+
+    public double getPriceForDate(Shop shop, Product product, Date date) {
+
+        return dao.getPriceForDate(shop, product, date);
+
     }
 
     @Override

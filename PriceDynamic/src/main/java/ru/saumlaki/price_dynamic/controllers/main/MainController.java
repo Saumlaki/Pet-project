@@ -1,5 +1,7 @@
 package ru.saumlaki.price_dynamic.controllers.main;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,7 +15,11 @@ import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
+import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
+import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
+import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
 import ru.saumlaki.price_dynamic.supporting.Helper;
+import ru.saumlaki.price_dynamic.supporting.SimpleCalendar;
 import ru.saumlaki.price_dynamic.view.about.AboutStarter;
 import ru.saumlaki.price_dynamic.view.element.PriceElementStarter;
 import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
@@ -21,6 +27,10 @@ import ru.saumlaki.price_dynamic.view.element.ShopElementStarter;
 import ru.saumlaki.price_dynamic.view.list.PriceListStarter;
 import ru.saumlaki.price_dynamic.view.list.ProductListStarter;
 import ru.saumlaki.price_dynamic.view.list.ShopListStarter;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 @Component
@@ -47,6 +57,16 @@ public class MainController extends AbstractController {
 
     @Autowired
     AboutStarter aboutStarter;
+
+    @Autowired
+    ShopServiceImpl shopService;
+
+    @Autowired
+    ProductServiceImpl productService;
+
+    @Autowired
+    PriceServiceImpl priceService;
+
 
     @FXML
     private TreeTableView<PriceDataElement> priceData;
@@ -93,30 +113,60 @@ public class MainController extends AbstractController {
         priceList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
 
 
-        PriceDataElement priceDataElement = new PriceDataElement();
-        priceDataElement.setProduct(new Product(1,"wewew"));
 
 
+        TreeTableColumn<PriceDataElement, String> columnShop = new TreeTableColumn("Магазин/Товар");
 
+        TreeTableColumn<PriceDataElement, Number> columnPrice = new TreeTableColumn("Цена");
+        TreeTableColumn<PriceDataElement, Number> columnPrice1 = new TreeTableColumn("Начало года");
+        TreeTableColumn<PriceDataElement, Number> columnPrice2 = new TreeTableColumn("Предыдущий месяц");
+        TreeTableColumn<PriceDataElement, Number> columnPrice3 = new TreeTableColumn("Текущая");
+        columnPrice.getColumns().addAll(columnPrice1, columnPrice2, columnPrice3);
 
-
-        TreeTableColumn columnShop = new TreeTableColumn("Магазин");
-        TreeTableColumn columnProduct = new TreeTableColumn("Товар");
-
-        TreeTableColumn columnPrice = new TreeTableColumn("Цена");
-        TreeTableColumn columnPrice1= new TreeTableColumn("Начало года");
-        TreeTableColumn columnPrice2 = new TreeTableColumn("Предыдущий месяц");
-        TreeTableColumn columnPrice3 = new TreeTableColumn("Текущая");
-        columnPrice.getColumns().addAll(columnPrice1,columnPrice2,columnPrice3);
-
-        TreeTableColumn columnDynamic = new TreeTableColumn("Динамика");
-        TreeTableColumn columnDynamic1 = new TreeTableColumn("С начала года");
-        TreeTableColumn columnDynamic2 = new TreeTableColumn("С прошлого месяца");
+        TreeTableColumn<PriceDataElement, Number> columnDynamic = new TreeTableColumn("Динамика");
+        TreeTableColumn<PriceDataElement, Number> columnDynamic1 = new TreeTableColumn("С начала года");
+        TreeTableColumn<PriceDataElement, Number> columnDynamic2 = new TreeTableColumn("С прошлого месяца");
         columnDynamic.getColumns().addAll(columnDynamic1, columnDynamic2);
 
-        priceData.getColumns().addAll(columnShop, columnProduct, columnPrice, columnDynamic);
+        priceData.getColumns().addAll(columnShop, columnPrice, columnDynamic);
+
+
+        columnShop.setCellValueFactory(a -> a.getValue().getValue().getDescription());
+        columnPrice1.setCellValueFactory(a -> a.getValue().getValue().getDeviationToBeginYear());
+        columnPrice2.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginMonth());
+        columnPrice3.setCellValueFactory(a -> a.getValue().getValue().getPriceActual());
+        columnDynamic1.setCellValueFactory(a -> a.getValue().getValue().getDeviationToBeginYear());
+        columnDynamic2.setCellValueFactory(a -> a.getValue().getValue().getDeviationToLastMonth());
+
+        createItems();
 
     }
+
+
+    public void createItems() {
+        TreeItem<PriceDataElement> rootItem = new TreeItem<>(new PriceDataElement());
+        priceData.setRoot(rootItem);
+
+        for (Shop shop : shopService.getAll()) {
+
+            TreeItem<PriceDataElement> shopItem = new TreeItem<>(new PriceDataElement(shop));
+            for (Product product : productService.getAll()) {
+
+
+                shopItem.getChildren().add(new TreeItem<>(new PriceDataElement(shop, product)));
+            }
+
+            rootItem.getChildren().add(shopItem);
+        }
+    }
+
+
+
+
+
+
+
+
 
     //*****
 
@@ -157,14 +207,81 @@ public class MainController extends AbstractController {
 
     @FXML
     void exitOnAction(ActionEvent event) {
-currentStage.close();
+        currentStage.close();
     }
 
 
-    class PriceDataElement{
-    @Getter
-            @Setter
+    class PriceDataElement {
+
+        @Getter
+        @Setter
+        SimpleStringProperty description;
+
+        @Getter
+        @Setter
         Product product;
+
+        @Getter
+        @Setter
+        Shop shop;
+
+        @Getter
+        SimpleDoubleProperty priceToBeginYear;
+
+        @Getter
+        SimpleDoubleProperty priceToBeginMonth;
+
+        @Getter
+        SimpleDoubleProperty priceActual;
+
+        @Getter
+        SimpleDoubleProperty deviationToBeginYear;
+
+        @Getter
+        SimpleDoubleProperty deviationToLastMonth;
+
+        public PriceDataElement() {
+            this.description = new SimpleStringProperty("Список товаров");
+        }
+
+        public PriceDataElement(Shop shop) {
+            this.shop = shop;
+            this.description =  new SimpleStringProperty(shop.getDescription());
+        }
+
+        public PriceDataElement(Shop shop, Product product) {
+            this.product = product;
+            this.shop = shop;
+            this.description =  new SimpleStringProperty(product.getDescription());
+
+            fillPriceToBeginYear();
+            fillPriceToBeginMonth();
+            fillPriceActual();
+            fillDeviationToBeginYear();
+            fillDeviationToLastMonth();
+        }
+
+        protected void fillPriceToBeginYear() {
+            Calendar calendar = SimpleCalendar.getBeginningCurrentYear();
+            priceToBeginYear = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, calendar.getTime()));
+        }
+
+        protected void fillPriceToBeginMonth() {
+            Calendar calendar = SimpleCalendar.getBeginningCurrentMonth();
+            priceToBeginMonth = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, calendar.getTime()));
+        }
+        protected void fillPriceActual() {
+            Calendar calendar = SimpleCalendar.getBeginningCurrentDay();
+            priceActual = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, calendar.getTime()));
+        }
+        protected void fillDeviationToBeginYear() {
+
+
+        }
+        protected void fillDeviationToLastMonth() {
+
+
+        }
 
     }
 }

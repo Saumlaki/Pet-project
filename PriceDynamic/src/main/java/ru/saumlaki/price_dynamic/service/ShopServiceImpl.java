@@ -4,11 +4,13 @@ import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.saumlaki.price_dynamic.dao.ShopDAOImpl;
+import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 
 import java.sql.SQLDataException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
