@@ -21,8 +21,10 @@ import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -184,7 +186,11 @@ public abstract class AbstractListController<T> extends AbstractController {
                     Object valueTemp = StringCellDataFeatures.getValue().getClass().getDeclaredMethod(methodName).invoke(StringCellDataFeatures.getValue());
 
                     if (valueTemp instanceof Integer) value = String.valueOf(valueTemp);
-                    if(valueTemp instanceof String) value = (String)valueTemp;
+                    else if(valueTemp instanceof String) value = (String)valueTemp;
+                    else if(valueTemp instanceof Date){
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+                        value = simpleDateFormat.format(valueTemp);
+                    }
                     else value =  valueTemp.toString();
 
                 } catch (Exception e) {

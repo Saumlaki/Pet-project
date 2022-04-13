@@ -11,6 +11,7 @@ import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
 
 import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class PriceDAOImpl implements PriceDAO {
     }
 
     @Override
-    public Double getPriceForDate(Shop shop, Product product, Date data) {
+    public Double getPriceForDate(Shop shop, Product product, LocalDate data) {
         String query = "SELECT price, product_id, shop_id FROM price " +
                 "WHERE (shop_id, product_id, date) = (SELECT shop_id, product_id, max(date) FROM price " +
                 "WHERE" +
@@ -63,7 +64,7 @@ public class PriceDAOImpl implements PriceDAO {
         List result = currentSession().createSQLQuery(query)
                 .setParameter("productID", product.getId())
                 .setParameter("shopId", shop.getId())
-                .setParameter("date", data.getTime()).list();
+                .setParameter("date", data).list();
 
         if (result.size() > 0) {
 

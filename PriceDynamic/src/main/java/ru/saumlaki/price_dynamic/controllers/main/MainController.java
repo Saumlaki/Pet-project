@@ -28,6 +28,7 @@ import ru.saumlaki.price_dynamic.view.list.PriceListStarter;
 import ru.saumlaki.price_dynamic.view.list.ProductListStarter;
 import ru.saumlaki.price_dynamic.view.list.ShopListStarter;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -132,7 +133,7 @@ public class MainController extends AbstractController {
 
 
         columnShop.setCellValueFactory(a -> a.getValue().getValue().getDescription());
-        columnPrice1.setCellValueFactory(a -> a.getValue().getValue().getDeviationToBeginYear());
+        columnPrice1.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginYear());
         columnPrice2.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginMonth());
         columnPrice3.setCellValueFactory(a -> a.getValue().getValue().getPriceActual());
         columnDynamic1.setCellValueFactory(a -> a.getValue().getValue().getDeviationToBeginYear());
@@ -263,16 +264,20 @@ public class MainController extends AbstractController {
 
         protected void fillPriceToBeginYear() {
             Calendar calendar = SimpleCalendar.getBeginningCurrentYear();
-            priceToBeginYear = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, calendar.getTime()));
+
+            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1, 1);
+            priceToBeginYear = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, localDate));
         }
 
         protected void fillPriceToBeginMonth() {
             Calendar calendar = SimpleCalendar.getBeginningCurrentMonth();
-            priceToBeginMonth = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, calendar.getTime()));
+            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), 1);
+            priceToBeginMonth = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, localDate));
         }
         protected void fillPriceActual() {
-            Calendar calendar = SimpleCalendar.getBeginningCurrentDay();
-            priceActual = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, calendar.getTime()));
+            Calendar calendar = SimpleCalendar.getBeginningCurrentMonth();
+            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1, 1);
+            priceActual = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product,localDate));
         }
         protected void fillDeviationToBeginYear() {
 

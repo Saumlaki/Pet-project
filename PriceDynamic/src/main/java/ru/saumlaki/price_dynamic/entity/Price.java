@@ -7,6 +7,7 @@ import lombok.Setter;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -45,15 +46,16 @@ public class Price {
     @Column
     @Setter
     @Getter
-    private Date date;
+    private LocalDate date;
 
     @Override
     public String toString() {
         return shop + " - " + product;
     }
 
-
     public String getDescription() {
         return shop + " " + product + " " + price;
     }
+
+
 }

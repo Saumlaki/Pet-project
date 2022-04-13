@@ -25,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
     public void add(Product object) {
         if (object.getId() == 0) dao.add(object);
         else dao.update(object);
+        updateList();
     }
 
     @Override
