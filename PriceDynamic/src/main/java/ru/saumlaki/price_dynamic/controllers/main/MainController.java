@@ -36,83 +36,70 @@ import java.util.Calendar;
 @FxmlView("MainView.fxml")
 public class MainController extends AbstractController {
 
+    //НЕОБХОДИМЫЕ ДЛЯ РАБОТЫ БИНЫ
     @Autowired
     ShopListStarter shopListStarter;
-
     @Autowired
     ProductListStarter productListStarter;
-
     @Autowired
     PriceListStarter priceListStarter;
-
     @Autowired
     ShopElementStarter shopElementStarter;
-
     @Autowired
     ProductElementStarter productElementStarter;
-
     @Autowired
     PriceElementStarter priceElementStarter;
-
     @Autowired
     AboutStarter aboutStarter;
-
     @Autowired
     ShopServiceImpl shopService;
-
     @Autowired
     ProductServiceImpl productService;
-
     @Autowired
     PriceServiceImpl priceService;
 
-
+    //ЭЛЕМЕНТЫ ФОРМЫ
     @FXML
     private TreeTableView<PriceDataElement> priceData;
 
     @FXML
     private Button shopAdd;
-
     @FXML
     private Button productAdd;
-
     @FXML
     private Button priceAdd;
 
-    //*****
-
     @FXML
     private Menu setting;
-
     @FXML
     private MenuItem shopList;
-
     @FXML
     private MenuItem productList;
-
     @FXML
     private MenuItem priceList;
-
     @FXML
     private MenuItem about;
 
-    //*****
-
+    //****ИНИЦИАЛИЗАЦИЯ ФОРМЫ
     @FXML
     public void initialize() {
+        setIcons();
+        createTable();
+    }
 
+    protected void setIcons() {
         shopAdd.setGraphic(new ImageView(Helper.getPropertyForName("AddElementIcon")));
         priceAdd.setGraphic(new ImageView(Helper.getPropertyForName("AddElementIcon")));
         productAdd.setGraphic(new ImageView(Helper.getPropertyForName("AddElementIcon")));
-        setting.setGraphic(new ImageView(Helper.getPropertyForName("SettingIcon")));
-        about.setGraphic(new ImageView(Helper.getPropertyForName("AboutIcon")));
 
         shopList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
         productList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
         priceList.setGraphic(new ImageView(Helper.getPropertyForName("ListIcon")));
+        setting.setGraphic(new ImageView(Helper.getPropertyForName("SettingIcon")));
+        about.setGraphic(new ImageView(Helper.getPropertyForName("AboutIcon")));
+    }
 
-
-
+    protected void createTable() {
 
         TreeTableColumn<PriceDataElement, String> columnShop = new TreeTableColumn("Магазин/Товар");
 
@@ -129,7 +116,6 @@ public class MainController extends AbstractController {
 
         priceData.getColumns().addAll(columnShop, columnPrice, columnDynamic);
 
-
         columnShop.setCellValueFactory(a -> a.getValue().getValue().getDescription());
         columnPrice1.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginYear());
         columnPrice2.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginMonth());
@@ -138,45 +124,28 @@ public class MainController extends AbstractController {
         columnDynamic2.setCellValueFactory(a -> a.getValue().getValue().getDeviationToLastMonth());
 
         createItems();
-
     }
 
-
-    public void createItems() {
+    protected void createItems() {
         TreeItem<PriceDataElement> rootItem = new TreeItem<>(new PriceDataElement());
         priceData.setRoot(rootItem);
 
-        for (Shop shop : shopService.getAll()) {
+        for (Product product : productService.getAll()) {
 
-            TreeItem<PriceDataElement> shopItem = new TreeItem<>(new PriceDataElement(shop));
-            for (Product product : productService.getAll()) {
+            TreeItem<PriceDataElement> productItem = new TreeItem<>(new PriceDataElement(product));
 
-
-                shopItem.getChildren().add(new TreeItem<>(new PriceDataElement(shop, product)));
+            for (Shop shop : shopService.getAll()) {
+                productItem.getChildren().add(new TreeItem<>(new PriceDataElement(shop, product)));
             }
 
-            rootItem.getChildren().add(shopItem);
+            rootItem.getChildren().add(productItem);
         }
     }
 
-
-
-
-
-
-
-
-
-    //*****
-
+    //****БЫСТРЫЕ КНОПКИ ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ
     @FXML
     void shopAddOnAction(ActionEvent event) {
         shopElementStarter.showForm(currentStage, new Shop());
-    }
-
-    @FXML
-    void shopListOnAction(ActionEvent event) {
-        shopListStarter.showForm(currentStage);
     }
 
     @FXML
@@ -185,13 +154,19 @@ public class MainController extends AbstractController {
     }
 
     @FXML
-    void productListOnAction(ActionEvent event) {
-        productListStarter.showForm(currentStage);
+    void priceAddOnAction(ActionEvent event) {
+        priceElementStarter.showForm(currentStage, new Price());
+    }
+
+    //****КНОПКИ ОТКРЫТИЯ СПИСКОВ
+    @FXML
+    void shopListOnAction(ActionEvent event) {
+        shopListStarter.showForm(currentStage);
     }
 
     @FXML
-    void priceAddOnAction(ActionEvent event) {
-        priceElementStarter.showForm(currentStage, new Price());
+    void productListOnAction(ActionEvent event) {
+        productListStarter.showForm(currentStage);
     }
 
     @FXML
@@ -199,17 +174,20 @@ public class MainController extends AbstractController {
         priceListStarter.showForm(currentStage);
     }
 
+    //****КНОПКА "О ПРОГРАММЕ"
     @FXML
     void aboutOnAction(ActionEvent event) {
         aboutStarter.showForm(currentStage);
     }
 
+    //****КНОПКА ВЫХОДА
     @FXML
     void exitOnAction(ActionEvent event) {
         currentStage.close();
     }
 
 
+    /**Вспомогательный класс для заполнения главной таблицы*/
     class PriceDataElement {
 
         @Getter
@@ -248,10 +226,15 @@ public class MainController extends AbstractController {
             this.description =  new SimpleStringProperty(shop.getDescription());
         }
 
+        public PriceDataElement(Product product) {
+            this.product = product;
+            this.description =  new SimpleStringProperty(product.getDescription());
+        }
+
         public PriceDataElement(Shop shop, Product product) {
             this.product = product;
             this.shop = shop;
-            this.description =  new SimpleStringProperty(product.getDescription());
+            this.description =  new SimpleStringProperty(shop.getDescription());
 
             fillPriceToBeginYear();
             fillPriceToBeginMonth();

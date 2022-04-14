@@ -19,11 +19,11 @@ import java.util.Map;
 @Component
 public class ServiceFactory {
     @Autowired
-    static ShopServiceImpl shopService;
+    ShopServiceImpl shopService;
     @Autowired
-    static ProductServiceImpl productService;
+    ProductServiceImpl productService;
     @Autowired
-    static PriceServiceImpl priceService;
+    PriceServiceImpl priceService;
 
     /**
      * Метод возвращает объект <code>ServiceImpl</code> для заданного типа класса
@@ -34,7 +34,7 @@ public class ServiceFactory {
      * @see Product
      * @see Service
      */
-    public static Service getService(Class tempClass) {
+    public Service getService(Class tempClass) {
         Map<Class, Service> map = new HashMap<>();
         map.put(Shop.class, shopService);
         map.put(Product.class, productService);

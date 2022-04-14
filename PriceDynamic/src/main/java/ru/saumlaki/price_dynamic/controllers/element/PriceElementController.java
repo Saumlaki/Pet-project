@@ -73,8 +73,7 @@ public class PriceElementController extends AbstractElementController<Price> {
 
     @Override
     public void updateElement() {
-        protoObject.setValue("description", description.getText());
-        protoObject.setValue("price", value.getText());
+        protoObject.setValue("price", Integer.parseInt(value.getText()));
         protoObject.setValue("date", data.getValue());
     }
 }

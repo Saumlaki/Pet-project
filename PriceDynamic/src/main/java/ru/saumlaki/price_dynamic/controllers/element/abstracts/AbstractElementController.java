@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.Mnemonic;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
 import ru.saumlaki.price_dynamic.supporting.Helper;
@@ -21,6 +22,9 @@ public abstract class AbstractElementController<T> extends AbstractController {
 
     /**Протообъект - проекция данных объекта на специальный объект формы*/
     public SimpleObject<T> protoObject;
+
+    @Autowired
+    public ServiceFactory serviceFactory;
 
     //***БАЗОВЫЕ ПОЛЯ И КНОПКИ КОТРЫЕ ДОЛЖНЫ БЫТЬ НА ЛЮБОЙ ФОРМЕ
 
@@ -49,9 +53,8 @@ public abstract class AbstractElementController<T> extends AbstractController {
     void saveOnAction(ActionEvent event) throws SQLDataException {
         updateElement();
         if (protoObject.isCorrectly()) {
-
             //Сохраняем дубликат объекта для того что бы в случае ошибки транзакции не было рассогласованных данных между формой и БД
-            ServiceFactory.getService(protoObject.getObject().getClass()).add(protoObject.getObjectCopy());
+            serviceFactory.getService(protoObject.getObject().getClass()).add(protoObject.getObjectCopy());
             currentStage.close();
         }
     }

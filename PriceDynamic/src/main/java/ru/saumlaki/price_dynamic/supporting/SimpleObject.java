@@ -21,7 +21,6 @@ public class SimpleObject<T> {
         this.object = object;
         this.innerFields = new ArrayList();
         parsingObject();
-        getObjectCopy();
     }
 
     protected void parsingObject() {
