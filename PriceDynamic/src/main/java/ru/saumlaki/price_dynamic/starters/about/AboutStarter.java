@@ -1,65 +1,25 @@
 package ru.saumlaki.price_dynamic.starters.about;
 
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.about.AboutController;
-import ru.saumlaki.price_dynamic.supporting.Helper;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
-
-import java.io.IOException;
-import java.net.URL;
-
-/**
- * 2022.04.04
- */
+import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
 
 /**
  * Класс инициализации формы элемента
  */
 @Component
-public class AboutStarter extends AbstractView {
+public class AboutStarter extends AbstractViewProto<AboutController> {
+    @Autowired
+    AboutController controller;
 
-        @Autowired
-        FxWeaver fxWeaver;
+    //***ИНДИВИДУАЛЬНЫЕ НАСТРОЙКИ ФОРМЫ
+    public void showForm(Stage parentStage) {
+        title = "О программе...";
+        iconProp = "AboutIcon";
 
-        String title = "О программе";
-        String iconProp = "Icon";
-        String beanName ="aboutController";
-        Class<AboutController> classControllerType = AboutController.class;
-
-        public void showForm(Stage parentStage)  {
-
-            HBox hBox = fxWeaver.loadView(classControllerType);
-            Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
-
-            Stage currentStage = new Stage();
-            currentStage.setTitle(title);
-            currentStage.setScene(scene);
-
-            URL iconURL = Helper.getResourcesURLForPropertyName(iconProp);
-            try {
-                currentStage.getIcons().add(new Image(iconURL.openStream()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            setOnKeyPressAction(scene, currentStage);
-
-            currentStage.initOwner(parentStage);
-            currentStage.initModality(Modality.WINDOW_MODAL);
-            currentStage.showAndWait();
-        }
-
-    void setOnKeyPressAction(Scene scene, Stage stage) {
-
-        scene.setOnKeyPressed(e -> {
-            if(e.getCode().equals(KeyCode.ESCAPE)) stage.close();
-        });}
+        initialize(controller);
+        show(parentStage);
+    }
 }

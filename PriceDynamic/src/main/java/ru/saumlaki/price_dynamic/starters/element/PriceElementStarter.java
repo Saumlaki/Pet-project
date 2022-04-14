@@ -1,29 +1,11 @@
 package ru.saumlaki.price_dynamic.starters.element;
 
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.controllers.element.PriceElementController;
-import ru.saumlaki.price_dynamic.controllers.element.ShopElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
-import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
-import ru.saumlaki.price_dynamic.supporting.Helper;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
-
-import java.io.IOException;
-import java.net.URL;
-
-/**
- * 2022.04.04
- */
 
 /**
  * Класс инициализации формы элемента
@@ -35,7 +17,6 @@ public class PriceElementStarter extends AbstractViewProto<PriceElementControlle
 
     //***ИНДИВИДУАЛЬНЫЕ НАСТРОЙКИ ФОРМЫ
     public void showForm(Stage parentStage, Price object) {
-
         title = "Цена";
         iconProp = "StringIcon";
 

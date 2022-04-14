@@ -17,7 +17,6 @@ public class ShopElementStarter extends AbstractViewProto<ShopElementController>
 
     //***ИНДИВИДУАЛЬНЫЕ НАСТРОЙКИ ФОРМЫ
     public void showForm(Stage parentStage, Shop object) {
-
         title = "Магазин";
         iconProp = "StringIcon";
 

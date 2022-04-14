@@ -1,63 +1,26 @@
 package ru.saumlaki.price_dynamic.starters.list;
 
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.controllers.list.PriceListController;
-import ru.saumlaki.price_dynamic.supporting.Helper;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
-
-import java.io.IOException;
-import java.net.URL;
-/**
- * 2022.04.04
- */
+import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
 
 /**
  * Класс инициализации формы списка цен
  */
 @Component
-public class PriceListStarter extends AbstractView {
-
+public class PriceListStarter extends AbstractViewProto<PriceListController> {
     @Autowired
-    FxWeaver fxWeaver;
+    PriceListController controller;;
 
+    //***ИНДИВИДУАЛЬНЫЕ НАСТРОЙКИ ФОРМЫ
     public void showForm(Stage parentStage) {
+        title = "Список цен";
+        iconProp = "ListIcon";
 
-        HBox hBox = fxWeaver.loadView(PriceListController.class);
-        Scene scene = new Scene(hBox, hBox.getPrefWidth(), hBox.getPrefHeight());
-
-        Stage currentStage = new Stage();
-        currentStage.setTitle("Список цен");
-        currentStage.setScene(scene);
-
-        URL iconURL = Helper.getResourcesURLForPropertyName("ListIcon");
-        try {
-            currentStage.getIcons().add(new Image(iconURL.openStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        setOnKeyPressAction(scene, currentStage);
-
-        Main.applicationContext.getBean("priceListController", PriceListController.class).setCurrentStage(currentStage);
-
-        currentStage.initOwner(parentStage);
-        currentStage.initModality(Modality.WINDOW_MODAL);
-        currentStage.showAndWait();
-    }
-
-    void setOnKeyPressAction(Scene scene, Stage stage) {
-
-        scene.setOnKeyPressed(e -> {
-            if(e.getCode().equals(KeyCode.ESCAPE)) stage.close();
-        });
+        initialize(controller);
+        controller.setCurrentStage(currentStage);
+        show(parentStage);
     }
 }

@@ -41,7 +41,7 @@
                         <HBox spacing="5.0">
                            <children>
                               <DatePicker fx:id="data" />
-                              <TextField fx:id="id" maxWidth="30.0" />
+                              <TextField fx:id="id" editable="false" maxWidth="30.0" />
                            </children>
                         </HBox>
                         <HBox>

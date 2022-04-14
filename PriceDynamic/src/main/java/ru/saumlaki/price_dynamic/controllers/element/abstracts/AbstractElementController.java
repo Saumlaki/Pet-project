@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.Mnemonic;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
 import ru.saumlaki.price_dynamic.supporting.Helper;
@@ -34,7 +38,8 @@ public abstract class AbstractElementController<T> extends AbstractController {
 
     //***НИЦИАЛИЗАЦИЯ
     @FXML
-    public void initialize() {
+    public void initialize()
+    {
         save.setGraphic(new ImageView(Helper.getPropertyForName("SaveIcon")));
     }
 
