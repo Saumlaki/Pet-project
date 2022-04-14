@@ -18,6 +18,7 @@ import ru.saumlaki.price_dynamic.starters.main.MainViewStarter;
 
 public class PriceDynamic extends Application {
 
+    //Начальное заполнение списков
     ShopService shopService = Main.applicationContext.getBean("shopServiceImpl", ShopServiceImpl.class);
     ProductService productService = Main.applicationContext.getBean("productServiceImpl", ProductServiceImpl.class);
     PriceService priceService = Main.applicationContext.getBean("priceServiceImpl", PriceServiceImpl.class);
@@ -26,6 +27,7 @@ public class PriceDynamic extends Application {
     ObservableList<Product> products = Main.applicationContext.getBean("productObsList", ObservableList.class);
     ObservableList<Price> prices = Main.applicationContext.getBean("priceObsList", ObservableList.class);
 
+    //Основное окно программы
     MainViewStarter mainViewStarter = Main.applicationContext.getBean("mainViewStarter", MainViewStarter.class);
 
     @Override

@@ -37,12 +37,8 @@ public interface Service<T> {
      */
     List<T> getAll();
 
+    /**
+     * Метод обновления связанных списков
+     */
     void updateList();
-
-    default Service<T> getDAO(Class objectClass) {
-
-        return ServiceFactory.getService(objectClass);
-    }
-
-
 }

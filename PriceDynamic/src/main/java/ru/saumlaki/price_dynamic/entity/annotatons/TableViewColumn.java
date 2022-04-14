@@ -8,7 +8,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Аннотация указывает что данное поле должно быть включено в качестве колонки в списке объектов по умолчанию
+ * Маркерная аннотация. Указывает что данное поле должно быть включено в качестве колонки в списке объектов по умолчанию.
  */
 @Target(FIELD)
 @Retention(RUNTIME)

@@ -10,22 +10,16 @@ import java.util.Properties;
 public class Helper {
 
     public static Helper instance;
-
-    public static ApplicationContext applicationContext;
+    private static Properties properties;
+    private final static String PROPERTY_NAME = "settings.properties";
 
     private Helper() {
-
     }
 
     public static Helper getInstance() {
         if (instance == null) instance = new Helper();
         return instance;
     }
-
-    private final static String PROPERTY_NAME = "settings.properties";
-
-
-    private static Properties properties;
 
     /**
      * Метод получения настройки по имени
@@ -37,11 +31,10 @@ public class Helper {
             try {
                 properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(PROPERTY_NAME));
             } catch (IOException ex) {
-                System.out.println("err.Ошибка загрузки файла настроек.");
+                System.out.println("Ошибка загрузки файла настроек.");
                 System.out.println("--" + ex.getMessage());
             }
         }
-
         return properties.getProperty(propertyName);
     }
 
@@ -49,7 +42,6 @@ public class Helper {
      * Метод получения ресурса по имени
      */
     public static URL getResourcesURLForPropertyName(String propertyName) {
-
         String property = getPropertyForName(propertyName);
         return getInstance().getClass().getClassLoader().getResource(property);
     }

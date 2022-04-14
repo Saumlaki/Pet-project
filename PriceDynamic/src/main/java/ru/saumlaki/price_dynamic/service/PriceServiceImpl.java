@@ -47,7 +47,6 @@ public class PriceServiceImpl implements PriceService {
     }
 
     public double getPriceForDate(Shop shop, Product product, LocalDate date) {
-
         return dao.getPriceForDate(shop, product, date);
 
     }

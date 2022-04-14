@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.about.AboutController">
    <children>
       <VBox prefHeight="50.0" prefWidth="50.0">
          <children>
@@ -31,7 +31,7 @@
             </Label>
             <Separator />
             <TextArea editable="false" prefHeight="100.0" prefWidth="250.0" text="Отслеживание динамики изменения цен&#10;на повседневные товары&#10;" />
-            <Hyperlink fx:id="gitLink" text="https://github.com/Saumlaki/Pet-project.git" />
+            <Hyperlink fx:id="gitLink" onAction="#onAction" text="https://github.com/Saumlaki/Pet-project.git" />
          </children>
       </VBox>
    </children>

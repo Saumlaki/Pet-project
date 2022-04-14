@@ -18,28 +18,17 @@ import java.util.Properties;
 
 @SpringBootApplication
 public class Main {
-
-    public static ConfigurableApplicationContext applicationContext;
-    private static ObservableList<Shop> shopObsList =  FXCollections.observableArrayList();
-    private static ObservableList<Product> productObsList =  FXCollections.observableArrayList();
-    private static ObservableList<Price> priceObsList =  FXCollections.observableArrayList();
-
     public static void main(String[] args) {
-
-        //Тест работы с сампл обжект
-        SimpleObject<Shop> shopSimpleObject = new SimpleObject<>(new Shop(1, "My Shop"));
-
-
-
-
-
-
-
         Main.applicationContext = new SpringApplicationBuilder().sources(Main.class).run("");
         Application.launch(PriceDynamic.class, args);
     }
 
-    //****HIBERNATE AND SQL***
+    public static ConfigurableApplicationContext applicationContext;
+
+    //***СПИСКИ ДАННЫЕ КОТОРЫХ ОТОБРАЖАЕМ НА ФОРМЕ
+    private static ObservableList<Shop> shopObsList =  FXCollections.observableArrayList();
+    private static ObservableList<Product> productObsList =  FXCollections.observableArrayList();
+    private static ObservableList<Price> priceObsList =  FXCollections.observableArrayList();
 
     @Bean
     public ObservableList<Shop> shopObsList() {
@@ -55,6 +44,8 @@ public class Main {
     public ObservableList<Price> priceObsList() {
         return priceObsList;
     }
+
+    //****HIBERNATE AND SQL***
 
     @Bean
     public DriverManagerDataSource dataSource() {

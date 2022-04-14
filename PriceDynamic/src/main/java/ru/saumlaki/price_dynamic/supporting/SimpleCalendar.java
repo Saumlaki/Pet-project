@@ -40,9 +40,6 @@ public class SimpleCalendar {
         return calendar;
     }
 
-
-
-
     /**
      * Возвращает начало текущего дня
      *
@@ -74,7 +71,6 @@ public class SimpleCalendar {
 
         return calendar;
     }
-
 
     /**
      * Конвертирует <Code>Date</Code> в <Code>Calendar</Code>
@@ -110,7 +106,6 @@ public class SimpleCalendar {
      * @return String
      */
     private static String addSymbols(String str, String added, int length) {
-
         while (str.length() < length) str = added + str;
         return str;
     }

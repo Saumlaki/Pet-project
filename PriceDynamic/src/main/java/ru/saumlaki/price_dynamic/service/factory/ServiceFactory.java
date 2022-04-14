@@ -1,7 +1,7 @@
 package ru.saumlaki.price_dynamic.service.factory;
 
-import ru.saumlaki.price_dynamic.Main;
-import ru.saumlaki.price_dynamic.PriceDynamic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
@@ -16,7 +16,14 @@ import java.util.Map;
 /**
  * Класс реализует фабрику для получения сервисов по работе с БД
  */
+@Component
 public class ServiceFactory {
+    @Autowired
+    static ShopServiceImpl shopService;
+    @Autowired
+    static ProductServiceImpl productService;
+    @Autowired
+    static PriceServiceImpl priceService;
 
     /**
      * Метод возвращает объект <code>ServiceImpl</code> для заданного типа класса
@@ -28,11 +35,10 @@ public class ServiceFactory {
      * @see Service
      */
     public static Service getService(Class tempClass) {
-
         Map<Class, Service> map = new HashMap<>();
-        map.put(Shop.class, Main.applicationContext.getBean("shopServiceImpl", ShopServiceImpl.class));
-        map.put(Price.class, Main.applicationContext.getBean("priceServiceImpl", PriceServiceImpl.class));
-        map.put(Product.class, Main.applicationContext.getBean("productServiceImpl", ProductServiceImpl.class));
+        map.put(Shop.class, shopService);
+        map.put(Product.class, productService);
+        map.put(Price.class, priceService);
 
         return map.get(tempClass);
     }
