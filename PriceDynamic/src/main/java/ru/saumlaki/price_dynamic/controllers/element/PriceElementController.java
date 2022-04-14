@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
-import ru.saumlaki.price_dynamic.view.selection.ProductSelectStarter;
-import ru.saumlaki.price_dynamic.view.selection.ShopSelectStarter;
+import ru.saumlaki.price_dynamic.starters.selection.ProductSelectStarter;
+import ru.saumlaki.price_dynamic.starters.selection.ShopSelectStarter;
 
 import java.time.LocalDate;
 

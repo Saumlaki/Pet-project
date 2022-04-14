@@ -8,4 +8,8 @@ public abstract class AbstractController {
 
     @Setter
     protected  Stage currentStage;
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
-import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
+import ru.saumlaki.price_dynamic.starters.element.ProductElementStarter;
 
 @Component
 @FxmlView("ProductList.fxml")

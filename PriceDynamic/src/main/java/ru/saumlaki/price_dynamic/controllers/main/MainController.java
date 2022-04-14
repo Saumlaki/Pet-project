@@ -20,18 +20,16 @@ import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
 import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 import ru.saumlaki.price_dynamic.supporting.SimpleCalendar;
-import ru.saumlaki.price_dynamic.view.about.AboutStarter;
-import ru.saumlaki.price_dynamic.view.element.PriceElementStarter;
-import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
-import ru.saumlaki.price_dynamic.view.element.ShopElementStarter;
-import ru.saumlaki.price_dynamic.view.list.PriceListStarter;
-import ru.saumlaki.price_dynamic.view.list.ProductListStarter;
-import ru.saumlaki.price_dynamic.view.list.ShopListStarter;
+import ru.saumlaki.price_dynamic.starters.about.AboutStarter;
+import ru.saumlaki.price_dynamic.starters.element.PriceElementStarter;
+import ru.saumlaki.price_dynamic.starters.element.ProductElementStarter;
+import ru.saumlaki.price_dynamic.starters.element.ShopElementStarter;
+import ru.saumlaki.price_dynamic.starters.list.PriceListStarter;
+import ru.saumlaki.price_dynamic.starters.list.ProductListStarter;
+import ru.saumlaki.price_dynamic.starters.list.ShopListStarter;
 
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 
 @Component

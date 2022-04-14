@@ -4,11 +4,10 @@ import javafx.collections.ObservableList;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
 import ru.saumlaki.price_dynamic.controllers.selection.abstracts.AbstractSelectListController;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
-import ru.saumlaki.price_dynamic.view.element.ProductElementStarter;
+import ru.saumlaki.price_dynamic.starters.element.ProductElementStarter;
 
 @Component
 @FxmlView("ProductSelectList.fxml")
