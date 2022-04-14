@@ -9,25 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
-import ru.saumlaki.price_dynamic.entity.Product;
-import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
 import ru.saumlaki.price_dynamic.view.selection.ProductSelectStarter;
 import ru.saumlaki.price_dynamic.view.selection.ShopSelectStarter;
 
-import java.sql.SQLDataException;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Component
 @FxmlView("PriceElement.fxml")
 public class PriceElementController extends AbstractElementController<Price> {
 
-    @FXML
-    private TextField id;
-
+    //***ПОЛЯ ФОРМЫ
     @FXML
     private TextField shop;
 
@@ -40,6 +32,7 @@ public class PriceElementController extends AbstractElementController<Price> {
     @FXML
     private DatePicker data;
 
+    //***БИНЫ
     @Autowired
     ProductSelectStarter productSelectStarter;
 
@@ -49,40 +42,12 @@ public class PriceElementController extends AbstractElementController<Price> {
     @Autowired
     PriceServiceImpl service;
 
-
-    @Override
-    public void saveObject() {
-        try {
-            save("shop, product, date, price");
-            closeForm();
-        } catch (SQLDataException ex) {
-            System.out.println("-----------------------------------------------------------");
-            System.out.println("Ошибка сохранения элемента");
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void updateForm() {
-        id.setText(String.valueOf(object.getId()));
-        shop.setText(getView(object.getShop()));
-        product.setText(getView(object.getProduct()));
-        value.setText(getView(object.getPrice()));
-
-        data.setValue(object.getDate());
-    }
-
-    @Override
-    public void updateElement() {
-        object.setPrice(Integer.parseInt(value.getText()));
-        object.setDate(data.getValue());
-    }
-
+    //***КНОПКИ ОТКРЫТИЯ ФОРМ ВЫБОРА
     @FXML
     void productSelect(ActionEvent event) {
         productSelectStarter.showForm(currentStage, selectObject -> {
             product.setText(selectObject.toString());
-            object.setProduct((Product) selectObject);
+            protoObject.setValue("product", selectObject);
         });
     }
 
@@ -91,13 +56,25 @@ public class PriceElementController extends AbstractElementController<Price> {
         shopSelectStarter.showForm(currentStage, selectObject ->
         {
             shop.setText(selectObject.toString());
-            object.setShop((Shop) selectObject);
+            protoObject.setValue("shop", selectObject);
         });
     }
 
-    public String getView(Object object) {
-        if(object==null)return "";
-        else return object.toString();
 
+    //***МЕТОДЫ РАБОТЫ ОБЪЕКТ - ФОРМА
+    @Override
+    public void updateForm() {
+        id.setText(String.valueOf(protoObject.getValue("id").toString()));
+        shop.setText(protoObject.getValue("shop").toString());
+        product.setText(protoObject.getValue("product").toString());
+        value.setText(protoObject.getValue("price").toString());
+        data.setValue((LocalDate) protoObject.getValue("date"));
+    }
+
+    @Override
+    public void updateElement() {
+        protoObject.setValue("description", description.getText());
+        protoObject.setValue("price", value.getText());
+        protoObject.setValue("date", data.getValue());
     }
 }

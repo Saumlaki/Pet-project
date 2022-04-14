@@ -1,27 +1,27 @@
 package ru.saumlaki.price_dynamic.controllers.element.abstracts;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import org.springframework.beans.factory.annotation.Autowired;
+import javafx.scene.image.ImageView;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.service.factory.ServiceFactory;
-import ru.saumlaki.price_dynamic.service.interfaces.Service;
-import ru.saumlaki.price_dynamic.supporting.AlertMessage;
-
-import java.lang.reflect.Field;
+import ru.saumlaki.price_dynamic.supporting.Helper;
+import ru.saumlaki.price_dynamic.supporting.SimpleObject;
 import java.sql.SQLDataException;
 
-public abstract class AbstractElementController <T> extends AbstractController {
+public abstract class AbstractElementController<T> extends AbstractController {
 
-    public T object;
+    //***ОБЪЕКТЫ С КОТОРЫМИ РАБОТАЕТ ФОРМА
 
-    @Autowired
-    public ObservableList<T> obsList;
+    /**Протообъект - проекция данных объекта на специальный объект формы*/
+    public SimpleObject<T> protoObject;
 
-    public Service service;
+    //***БАЗОВЫЕ ПОЛЯ И КНОПКИ КОТРЫЕ ДОЛЖНЫ БЫТЬ НА ЛЮБОЙ ФОРМЕ
+
+    @FXML
+    protected TextField id;
 
     @FXML
     protected TextField description;
@@ -32,93 +32,46 @@ public abstract class AbstractElementController <T> extends AbstractController {
     @FXML
     protected Button save;
 
+    //***НИЦИАЛИЗАЦИЯ
+    @FXML
+    public void initialize() {
+        save.setGraphic(new ImageView(Helper.getPropertyForName("SaveIcon")));
+    }
+
+    //***ДЕЙСТВИЯ БАЗОВЫХ КНОПОК
+
+    @FXML
+    void saveOnAction(ActionEvent event) throws SQLDataException {
+        updateElement();
+        if (protoObject.isCorrectly()) {
+
+            //Сохраняем дубликат объекта для того что бы в случае ошибки транзакции не было рассогласованных данных между формой и БД
+            ServiceFactory.getService(protoObject.getObject().getClass()).add(protoObject.getObjectCopy());
+            currentStage.close();
+        }
+    }
+
     @FXML
     void cancelOnAction(ActionEvent event) {
-        closeForm();
-    }
-
-    @FXML
-    void saveOnAction(ActionEvent event) {
-        try {
-            saveObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Метод проверки корректно заполнения реквизитов. Доступ к реквизитам осуществляется с помощью рефликсии. Простые реквизиты(String, int и пр.) проверяються на пустые значения
-     * сложные проверяються на <code>null</code>
-     *
-     * @param details список реквизтов строкой которые проверяем("реквизит1, реквизит2, реквизит 3")
-     * @return boolean
-     */
-    protected void checkTheDetails(String details) throws SQLDataException {
-
-        String[] detailsArr = details.split(",");
-        for (String currentDetail : detailsArr) {
-
-            try {
-                Field field = object.getClass().getDeclaredField(currentDetail.trim());
-                field.setAccessible(true);
-                Object fieldObject = field.get(object);
-
-                if (fieldObject == null) {
-                    AlertMessage.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
-                    throw new SQLDataException();
-                } else if (fieldObject instanceof String) {
-                    if (((String) fieldObject).isEmpty()) {
-                        AlertMessage.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
-                        throw new SQLDataException();
-                    }
-                } else if (fieldObject instanceof Integer) {
-                    if ((Integer) fieldObject == 0) {
-                        AlertMessage.showError("Не заполнено свойство", "Заполните реквизит \"" + currentDetail + "\"");
-                        throw new SQLDataException();
-                    }
-                }
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (SQLDataException e) {
-                throw e;
-            }
-        }
-    }
-
-    //****
-
-    protected void save(String details) throws SQLDataException {
-
-        //Обновляем основной элемент формы
-        updateElement();
-
-        //Проверка корректного заполнения реквизитов, если все ок то сохраняем и закрываем форму
-        try {
-            checkTheDetails(String.valueOf(details));
-            ServiceFactory.getService(object.getClass()).add(object);
-        } catch (SQLDataException ex) {
-            throw ex;
-        }
-    }
-
-    public void closeForm() {
         currentStage.close();
     }
 
+    //***ПРОЧИЕ МЕТОДЫ
+
     public void setObject(T object) {
-        this.object = object;
+        this.protoObject = new SimpleObject<T>(object);
         updateForm();
     }
 
-    //****
+    //***АБСТРАКТНЫЕ МЕТОДЫ
 
-    public abstract void saveObject();
-
+    /**
+     * Метод служит для обновления значений элементов формы данными протообъекта
+     */
     public abstract void updateForm();
 
+    /**
+     * Метод служит для обновления значений полей протообъекта
+     */
     public abstract void updateElement();
 }
-
-

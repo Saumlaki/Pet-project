@@ -33,6 +33,7 @@ public class ShopElementStarter extends AbstractView {
     @Autowired
     ShopElementController controller;
 
+    //***ИНДИВИДУАЛЬНЫЕ НАСТРОЙКИ ФОРМЫ
     String title = "Магазин";
     String iconProp = "StringIcon";
     String beanName = "shopElementController";

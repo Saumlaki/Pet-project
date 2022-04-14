@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import net.rgielen.fxweaver.core.FxWeaver;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.saumlaki.price_dynamic.Main;
 import ru.saumlaki.price_dynamic.PriceDynamic;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
@@ -20,6 +21,8 @@ import java.net.URL;
 
 /**Класс реализует базовый загрузчик формы*/
 public abstract class AbstractView {
+
+
 
     @Getter
     @Setter

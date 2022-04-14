@@ -178,6 +178,7 @@ public abstract class AbstractListController<T> extends AbstractController {
 
             TableColumn<T, String> column = new TableColumn<>(a.description);
 
+            ;
             column.setCellValueFactory(StringCellDataFeatures -> {
                 String value = null;
                 try {

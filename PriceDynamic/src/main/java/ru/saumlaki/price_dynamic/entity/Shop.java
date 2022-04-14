@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.saumlaki.price_dynamic.entity.annotatons.NotEmpty;
+import ru.saumlaki.price_dynamic.entity.annotatons.NotNull;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 
 import javax.persistence.*;
@@ -22,6 +24,8 @@ public class Shop {
 
     @TableViewColumn(name = "Наименование")
     @Column
+    @NotEmpty
+    @NotNull
     @Getter
     @Setter
     private String description;

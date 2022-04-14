@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
+import ru.saumlaki.price_dynamic.supporting.SimpleObject;
 
 import java.util.Properties;
 
@@ -24,6 +25,16 @@ public class Main {
     private static ObservableList<Price> priceObsList =  FXCollections.observableArrayList();
 
     public static void main(String[] args) {
+
+        //Тест работы с сампл обжект
+        SimpleObject<Shop> shopSimpleObject = new SimpleObject<>(new Shop(1, "My Shop"));
+
+
+
+
+
+
+
         Main.applicationContext = new SpringApplicationBuilder().sources(Main.class).run("");
         Application.launch(PriceDynamic.class, args);
     }
