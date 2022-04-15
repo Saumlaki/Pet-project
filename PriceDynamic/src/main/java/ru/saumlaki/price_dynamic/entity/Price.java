@@ -36,11 +36,21 @@ public class Price {
     @Getter
     private Product product;
 
-    @TableViewColumn(name = "Цена",  order = 4)
     @Column
     @Setter
     @Getter
-    private Integer price;
+    private Double price;
+
+    @Column
+    @Setter
+    @Getter
+    private Double coefficient;
+
+    @TableViewColumn(name = "Цена за единицу",  order = 4)
+    @Column
+    @Setter
+    @Getter
+    private Double unitPrice;
 
     @TableViewColumn(name = "Дата", order = 1)
     @Column

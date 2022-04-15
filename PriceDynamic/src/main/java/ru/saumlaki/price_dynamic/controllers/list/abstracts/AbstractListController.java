@@ -186,7 +186,9 @@ public abstract class AbstractListController<T> extends AbstractController {
 
                     Object valueTemp = StringCellDataFeatures.getValue().getClass().getDeclaredMethod(methodName).invoke(StringCellDataFeatures.getValue());
 
-                    if (valueTemp instanceof Integer) value = String.valueOf(valueTemp);
+                    if(valueTemp==null) value = "-";
+                    else if (valueTemp instanceof Double) value = String.valueOf(valueTemp);
+                    else if (valueTemp instanceof Integer) value = String.valueOf(valueTemp);
                     else if(valueTemp instanceof String) value = (String)valueTemp;
                     else if(valueTemp instanceof Date){
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
