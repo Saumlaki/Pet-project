@@ -1,11 +1,9 @@
 package ru.saumlaki.price_dynamic.controllers.element;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,8 +13,6 @@ import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
 import ru.saumlaki.price_dynamic.starters.selection.ProductSelectStarter;
 import ru.saumlaki.price_dynamic.starters.selection.ShopSelectStarter;
-import ru.saumlaki.price_dynamic.supporting.Helper;
-import ru.saumlaki.price_dynamic.supporting.JFXTextField;
 
 import java.time.LocalDate;
 
@@ -69,16 +65,6 @@ public class PriceElementController extends AbstractElementController<Price> {
             shop.setText(selectObject.toString());
             protoObject.setValue("shop", selectObject);
         });
-    }
-
-    @FXML
-    public void initialize() {
-        super.initialize();
-
-        //Установка форматирования элементов ввода
-        price.textProperty().addListener(new JFXTextField(price));
-       // coefficient.textProperty().addListener(new JFXTextField(coefficient));
-        unitPrice.textProperty().addListener(new JFXTextField(unitPrice));
     }
 
     //***ОБРАБОТЧИКИ ПОЛЕЙ ФОРМЫ

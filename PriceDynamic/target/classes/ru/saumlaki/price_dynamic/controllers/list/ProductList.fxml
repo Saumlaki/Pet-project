@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.list.ProductListController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.list.ProductListController">
    <children>
       <VBox spacing="5.0" HBox.hgrow="ALWAYS">
          <children>
             <HBox spacing="5.0">
                <children>
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addOnAction" text="Добавить" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addOnAction" text="Добавить элемент" />
+                  <Button fx:id="addGroup" mnemonicParsing="false" onAction="#addGroupOnAction" text="Добавить группу" />
                   <Button fx:id="changeButton" mnemonicParsing="false" onAction="#changeOnAction" text="Изменить" />
                   <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeOnAction" text="Удалить" />
                </children>
@@ -29,7 +30,8 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                        <MenuItem fx:id="addButtonCM" mnemonicParsing="false" onAction="#addOnActionCM" text="Добавить" />
+                        <MenuItem fx:id="addButtonCM" mnemonicParsing="false" onAction="#addOnActionCM" text="Добавить элемент" />
+                       <MenuItem fx:id="addGroupButtonCM" mnemonicParsing="false" onAction="#addGroupOnActionCM" text="Добавить группу" />
                       <MenuItem fx:id="changeButtonCM" mnemonicParsing="false" onAction="#changeOnActionCM" text="Изменить" />
                         <MenuItem fx:id="removeButtonCM" mnemonicParsing="false" onAction="#removeOnActionCM" text="Удалить" />
                     </items>

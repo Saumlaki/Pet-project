@@ -20,6 +20,17 @@ public class Product {
     @Getter
     private int id;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    @Getter
+    @Setter
+    private Product parent;
+
+    @Column
+    @Getter
+    @Setter
+    private boolean isGroup;
+
     @TableViewColumn(name = "Наименование")
     @Column
     @Getter
