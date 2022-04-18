@@ -60,14 +60,14 @@
                         </HBox>
                         <HBox spacing="5.0">
                            <children>
-                              <TextField fx:id="price" alignment="CENTER_RIGHT" onAction="#priceOnAction" prefHeight="25.0" prefWidth="100.0" />
+                              <MaskField fx:id="price" alignment="CENTER_RIGHT" onAction="#priceOnAction" prefHeight="25.0" prefWidth="100.0" />
                               <Label prefHeight="25.0" prefWidth="20.0" text="за" />
                               <MaskField mask="DDD.DD" fx:id="coefficient" alignment="CENTER_RIGHT" onAction="#coefficientOnAction" prefHeight="25.0" prefWidth="80.0" />
                            </children>
                         </HBox>
                         <HBox spacing="5.0">
                            <children>
-                              <TextField fx:id="unitPrice" alignment="CENTER_RIGHT" editable="false" prefWidth="100.0" />
+                              <MaskField fx:id="unitPrice" alignment="CENTER_RIGHT" editable="false" prefWidth="100.0" />
                               <Label prefHeight="25.0" text="за единицу веса" />
                            </children>
                         </HBox>
