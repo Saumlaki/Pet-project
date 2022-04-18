@@ -3,7 +3,7 @@ package ru.saumlaki.price_dynamic.starters.list;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.controllers.list.ProductListController;
+import ru.saumlaki.price_dynamic.controllers.treeList.ProductListController;
 import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
 
 /**

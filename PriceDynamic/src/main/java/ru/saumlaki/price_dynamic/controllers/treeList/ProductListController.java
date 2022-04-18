@@ -1,11 +1,14 @@
-package ru.saumlaki.price_dynamic.controllers.list;
+package ru.saumlaki.price_dynamic.controllers.treeList;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.list.abstracts.AbstractListController;
+import ru.saumlaki.price_dynamic.controllers.treeList.abstracts.AbstractTreeListController;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
 import ru.saumlaki.price_dynamic.starters.element.ProductElementStarter;
@@ -13,7 +16,7 @@ import ru.saumlaki.price_dynamic.starters.element.ProductGroupStarter;
 
 @Component
 @FxmlView("ProductList.fxml")
-public class ProductListController extends AbstractListController<Product> {
+public class ProductListController extends AbstractTreeListController<Product> {
 
     @Autowired
     ProductElementStarter elementStarter;
@@ -27,6 +30,9 @@ public class ProductListController extends AbstractListController<Product> {
     @Autowired
     ObservableList<Product> obsList;
 
+    @FXML
+    TreeTableView<Product> list;
+
     @Override
     public void createTableColumn() {
         createTableColumnForClass(Product.class);
@@ -34,7 +40,26 @@ public class ProductListController extends AbstractListController<Product> {
 
     @Override
     public void updateForm() {
-        list.setItems(obsList);
+
+        TreeItem<Product> root = new TreeItem<Product>();
+        list.setRoot(root);
+
+        obsList.stream().filter(a->a.getParent()==null).forEach(a->{
+
+            TreeItem<Product> elementGroup = new TreeItem<>(a);
+            createItems(elementGroup, a);
+            root.getChildren().add(elementGroup);
+
+        });
+    }
+
+    protected void createItems(TreeItem root, Product group) {
+        obsList.stream().filter(a->a.getParent().equals(group)).forEach(a->{
+
+            TreeItem<Product> elementGroup = new TreeItem<>(a);
+            createItems(elementGroup, a);
+            root.getChildren().add(elementGroup);
+        });
     }
 
     @Override
