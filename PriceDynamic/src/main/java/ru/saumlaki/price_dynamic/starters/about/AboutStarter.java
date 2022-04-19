@@ -4,13 +4,13 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.about.AboutController;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
+import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
 
 /**
  * Класс инициализации формы элемента
  */
 @Component
-public class AboutStarter extends AbstractViewProto<AboutController> {
+public class AboutStarter extends AbstractView<AboutController> {
     @Autowired
     AboutController controller;
 

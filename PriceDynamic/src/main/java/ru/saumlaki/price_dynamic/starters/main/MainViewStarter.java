@@ -3,13 +3,13 @@ package ru.saumlaki.price_dynamic.starters.main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.main.MainController;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
+import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
 
 /**
  * Класс инициализации главной формы
  */
 @Component
-public class MainViewStarter extends AbstractViewProto<MainController> {
+public class MainViewStarter extends AbstractView<MainController> {
     @Autowired
     MainController controller;
 

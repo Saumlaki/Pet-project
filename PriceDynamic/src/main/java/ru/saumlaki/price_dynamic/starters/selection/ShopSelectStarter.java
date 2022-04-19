@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.selection.ShopSelectController;
 import ru.saumlaki.price_dynamic.controllers.selection.interfaces.Selectable;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
+import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
 
 /**
  * Класс инициализации формы списка магазинов
  */
 @Component
-public class ShopSelectStarter extends AbstractViewProto<ShopSelectController> {
+public class ShopSelectStarter extends AbstractView<ShopSelectController> {
     @Autowired
     ShopSelectController controller;
 

@@ -1,5 +1,6 @@
 package ru.saumlaki.price_dynamic.entity;
 
+import javafx.scene.image.ImageView;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-
-    @TableViewColumn(name = "Код")
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter

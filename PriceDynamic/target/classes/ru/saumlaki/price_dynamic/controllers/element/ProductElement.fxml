@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.element.ProductElementController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.element.ProductElementController">
    <children>
       <VBox>
          <children>
@@ -29,11 +29,18 @@
                <children>
                   <VBox spacing="5.0" HBox.hgrow="NEVER">
                      <children>
+                        <Label prefHeight="25.0" text="Группа" />
                         <Label prefHeight="25.0" text="Наименование:" />
                      </children>
                   </VBox>
                   <VBox spacing="5.0">
                      <children>
+                        <HBox spacing="5.0">
+                           <children>
+                              <TextField fx:id="group" />
+                              <Button mnemonicParsing="false" onAction="#groupSelect" text="..." />
+                           </children>
+                        </HBox>
                         <HBox spacing="5.0">
                            <children>
                               <TextField fx:id="description" />

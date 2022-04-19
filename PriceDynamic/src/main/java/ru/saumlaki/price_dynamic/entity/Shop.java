@@ -16,7 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Shop {
 
-    @TableViewColumn(name = "Код")
+    //@TableViewColumn(name = "Код")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter

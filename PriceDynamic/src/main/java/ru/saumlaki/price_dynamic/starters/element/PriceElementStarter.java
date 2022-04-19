@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.element.PriceElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
-import ru.saumlaki.price_dynamic.starters.abstracts.AbstractViewProto;
+import ru.saumlaki.price_dynamic.starters.abstracts.AbstractView;
 
 /**
  * Класс инициализации формы элемента
  */
 @Component
-public class PriceElementStarter extends AbstractViewProto<PriceElementController> {
+public class PriceElementStarter extends AbstractView<PriceElementController> {
     @Autowired
     PriceElementController controller;
 

@@ -16,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Price {
 
-    @TableViewColumn(name = "Код",  order = 0)
+    //@TableViewColumn(name = "Код",  order = 0)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
