@@ -1,12 +1,15 @@
 package ru.saumlaki.price_dynamic.controllers.listGroup.abstracts;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.util.Callback;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,9 +187,11 @@ public abstract class AbstractTreeListController<T> extends AbstractController {
         /**Добавляем колонки к таблице и устанавливаем для них источник данных*/
         for (IndexedColumn a : columnList) {
 
+
+
             TreeTableColumn<T, String> column = new TreeTableColumn<>(a.description);
 
-            ;
+
             column.setCellValueFactory(StringCellDataFeatures -> {
                 String value = null;
                 try {
@@ -207,7 +212,7 @@ public abstract class AbstractTreeListController<T> extends AbstractController {
                     } else value = valueTemp.toString();
 
                 } catch (Exception e) {
-                    AlertMessage.showError("Ошибка установки значения колонки", e.getMessage());
+                    AlertMessage.show("Ошибка установки значения колонки", e.getMessage());
                 }
 
                 SimpleStringProperty simpleStringProperty = new SimpleStringProperty(value);

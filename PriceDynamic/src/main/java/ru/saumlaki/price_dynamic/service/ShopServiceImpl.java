@@ -4,13 +4,11 @@ import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.saumlaki.price_dynamic.dao.ShopDAOImpl;
-import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 
 import java.sql.SQLDataException;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,13 +35,13 @@ public class ShopServiceImpl implements ShopService {
                 updateList();
             } else {
                 updateList();
-                AlertMessage.showError("Ошибка сохранения", "Элемент с таким наименованием уже есть в базе");
+                AlertMessage.show("Ошибка сохранения", "Элемент с таким наименованием уже есть в базе");
                 throw new SQLDataException("Элемент с таким наименованием уже есть в базе");
             }
         } else {
             if (listTemp.stream().filter(a->a.getId()!=object.getId()).count()!=0) {
                 updateList();
-                AlertMessage.showError("Ошибка сохранения", "Элемент с таким наименованием, но другим ID уже есть в базе");
+                AlertMessage.show("Ошибка сохранения", "Элемент с таким наименованием, но другим ID уже есть в базе");
                 throw new SQLDataException("Элемент с таким наименованием уже есть в базе");
             } else {
                 updateList();

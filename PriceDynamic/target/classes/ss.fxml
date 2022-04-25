@@ -8,7 +8,7 @@
 
 <?import ru.vas7n.va.widgets.MaskField?>
 
-<?import ru.saumlaki.price_dynamic.MaskField?>
+<?import ru.saumlaki.price_dynamic.supporting.MaskField?>
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.vas7n.Controller">
     <children>
         <Label text="Phone" />

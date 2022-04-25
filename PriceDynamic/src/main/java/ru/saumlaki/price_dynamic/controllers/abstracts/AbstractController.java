@@ -6,10 +6,15 @@ import lombok.Setter;
 /**Реализует общую функциональность для всех контроллеров*/
 public abstract class AbstractController {
 
+    /**
+     * Текущий stage
+     */
     @Setter
-    protected  Stage currentStage;
+    protected Stage currentStage;
 
-    public void setCurrentStage(Stage currentStage) {
-        this.currentStage = currentStage;
+    /**
+     * Метод содержит операции которые необходимо выполнить при закрытии формы
+     */
+    public void close() {
     }
 }

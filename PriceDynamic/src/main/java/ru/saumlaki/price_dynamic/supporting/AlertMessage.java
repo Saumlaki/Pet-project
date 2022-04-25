@@ -7,9 +7,7 @@ import javafx.scene.control.ButtonType;
  * Класс реализует окно сообщений об ошибке
  */
 public class AlertMessage {
-
-    public static void showError(String error, String errorComplete) {
-
+    public static void show(String error, String errorComplete) {
         Alert alert = new Alert(Alert.AlertType.ERROR, errorComplete, ButtonType.OK);
         alert.setTitle("Ошибка");
         alert.setHeaderText(error);

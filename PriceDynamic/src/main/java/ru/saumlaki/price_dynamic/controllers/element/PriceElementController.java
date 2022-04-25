@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.saumlaki.price_dynamic.MaskField;
+import ru.saumlaki.price_dynamic.supporting.MaskField;
 import ru.saumlaki.price_dynamic.controllers.element.abstracts.AbstractElementController;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;

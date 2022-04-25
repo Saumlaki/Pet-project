@@ -69,7 +69,7 @@ public class SimpleObject<T> {
 
         if (errorMessage.isEmpty()) return true;
         else
-            AlertMessage.showError("Ошибка заполнения", errorMessage);
+            AlertMessage.show("Ошибка заполнения", errorMessage);
         return false;
     }
 

@@ -1,7 +1,6 @@
 package ru.saumlaki.price_dynamic.controllers.list.abstracts;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,6 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
-import ru.saumlaki.price_dynamic.service.interfaces.Service;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
@@ -176,34 +175,48 @@ public abstract class AbstractListController<T> extends AbstractController {
         /**Добавляем колонки к таблице и устанавливаем для них источник данных*/
         for (IndexedColumn a : columnList) {
 
-            TableColumn<T, String> column = new TableColumn<>(a.description);
 
-            ;
-            column.setCellValueFactory(StringCellDataFeatures -> {
-                String value = null;
-                try {
-                    String methodName = "get" + a.name.substring(0, 1).toUpperCase() + a.name.substring(1);
+            if (a.name.equals("image")) {
+                TableColumn<T, ImageView> column = new TableColumn<>(a.description);
+                column.setCellValueFactory(new PropertyValueFactory<>("image"));
+                list.getColumns().add(column);
+            } else {
+                TableColumn<T, String> column = new TableColumn<>(a.description);
+                column.setCellValueFactory(StringCellDataFeatures -> {
+                    String value = null;
+                    try {
+                        String methodName = "get" + a.name.substring(0, 1).toUpperCase() + a.name.substring(1);
 
-                    Object valueTemp = StringCellDataFeatures.getValue().getClass().getDeclaredMethod(methodName).invoke(StringCellDataFeatures.getValue());
+                        Object valueTemp = StringCellDataFeatures.getValue().getClass().getDeclaredMethod(methodName).invoke(StringCellDataFeatures.getValue());
 
-                    if(valueTemp==null) value = "-";
-                    else if (valueTemp instanceof Double) value = String.valueOf(valueTemp);
-                    else if (valueTemp instanceof Integer) value = String.valueOf(valueTemp);
-                    else if(valueTemp instanceof String) value = (String)valueTemp;
-                    else if(valueTemp instanceof Date){
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-                        value = simpleDateFormat.format(valueTemp);
+                        if(valueTemp==null) value = "-";
+                        else if (valueTemp instanceof Double) value = String.valueOf(valueTemp);
+                        else if (valueTemp instanceof Integer) value = String.valueOf(valueTemp);
+                        else if(valueTemp instanceof String) value = (String)valueTemp;
+                        else if(valueTemp instanceof Date){
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+                            value = simpleDateFormat.format(valueTemp);
+                        }
+                        else value =  valueTemp.toString();
+
+                    } catch (Exception e) {
+                        AlertMessage.show("Ошибка установки значения колонки", e.getMessage());
                     }
-                    else value =  valueTemp.toString();
 
-                } catch (Exception e) {
-                    AlertMessage.showError("Ошибка установки значения колонки", e.getMessage());
-                }
+                    SimpleStringProperty simpleStringProperty = new SimpleStringProperty(value);
+                    return simpleStringProperty;
+                });
+                list.getColumns().add(column);
+            }
 
-                SimpleStringProperty simpleStringProperty = new SimpleStringProperty(value);
-                return simpleStringProperty;
-            });
-            list.getColumns().add(column);
+
+
+
+
+
+
+
+
         }
     }
 

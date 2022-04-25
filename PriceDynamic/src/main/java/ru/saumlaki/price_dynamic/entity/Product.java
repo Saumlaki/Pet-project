@@ -1,13 +1,17 @@
 package ru.saumlaki.price_dynamic.entity;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
+import ru.saumlaki.price_dynamic.supporting.Helper;
 
 import javax.persistence.*;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 @Entity(name = "product")
@@ -36,6 +40,36 @@ public class Product {
     @Getter
     @Setter
     private String description;
+
+    @TableViewColumn(name = "", order = 0)
+    @Transient
+    private Image image;
+
+
+    public Product(int id, Product parent, boolean isGroup, String description) {
+        this.id = id;
+        this.parent = parent;
+        this.isGroup = isGroup;
+        this.description = description;
+    }
+
+    public ImageView getImage() {
+        URL iconURL = null;
+
+        if (isGroup())
+            iconURL = Helper.getResourcesURLForPropertyName("GroupIcon");
+        else
+            iconURL = Helper.getResourcesURLForPropertyName("StringIcon");
+
+        try {
+            image = new Image(iconURL.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ImageView imageView = new ImageView(image);
+        return imageView;
+    }
 
     @Override
     public String toString() {

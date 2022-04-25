@@ -2,6 +2,7 @@ package ru.saumlaki.price_dynamic.controllers.main;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -18,6 +19,7 @@ import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.service.PriceServiceImpl;
 import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
 import ru.saumlaki.price_dynamic.service.ShopServiceImpl;
+import ru.saumlaki.price_dynamic.supporting.CLoseProgramMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 import ru.saumlaki.price_dynamic.supporting.SimpleCalendar;
 import ru.saumlaki.price_dynamic.starters.about.AboutStarter;
@@ -57,6 +59,9 @@ public class MainController extends AbstractController {
     ProductServiceImpl productService;
     @Autowired
     PriceServiceImpl priceService;
+
+    @Autowired
+    ObservableList<Product> productObsList;
 
     //ЭЛЕМЕНТЫ ФОРМЫ
     @FXML
@@ -123,23 +128,28 @@ public class MainController extends AbstractController {
         columnDynamic1.setCellValueFactory(a -> a.getValue().getValue().getDeviationToBeginYear());
         columnDynamic2.setCellValueFactory(a -> a.getValue().getValue().getDeviationToLastMonth());
 
-        createItems();
+
+        //Cоздание корня таблицы
+   updateTable();
     }
 
-    protected void createItems() {
-        TreeItem<PriceDataElement> rootItem = new TreeItem<>(new PriceDataElement());
-        priceData.setRoot(rootItem);
-
-        for (Product product : productService.getAll()) {
-
-            TreeItem<PriceDataElement> productItem = new TreeItem<>(new PriceDataElement(product));
-
-            for (Shop shop : shopService.getAll()) {
-                productItem.getChildren().add(new TreeItem<>(new PriceDataElement(shop, product)));
+    protected void createItems(TreeItem root, Product group) {
+        productObsList.stream().filter(a -> a.getParent() != null && a.getParent().equals(group)).forEach(b -> {
+            TreeItem<PriceDataElement> elementGroup = new TreeItem<>(new PriceDataElement(b));
+            if (b.isGroup()) {
+                createItems(elementGroup, b);
+            } else {
+                createItemsShop(elementGroup, b);
             }
 
-            rootItem.getChildren().add(productItem);
-        }
+            root.getChildren().add(elementGroup);
+        });
+    }
+
+    protected void createItemsShop(TreeItem root, Product group) {
+        shopService.getAll().stream().forEach(a ->{
+            root.getChildren().add(new TreeItem<>(new PriceDataElement(a, group)));
+        });
     }
 
     //****БЫСТРЫЕ КНОПКИ ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ
@@ -183,11 +193,41 @@ public class MainController extends AbstractController {
     //****КНОПКА ВЫХОДА
     @FXML
     void exitOnAction(ActionEvent event) {
-        currentStage.close();
+        close();
     }
 
 
-    /**Вспомогательный класс для заполнения главной таблицы*/
+    @FXML
+    void updateOnAction(ActionEvent event) {
+        updateTable();
+    }
+
+    @FXML
+    void updateOnActionCM(ActionEvent event) {
+        updateTable();
+    }
+
+
+    protected void updateTable() {
+
+        TreeItem<PriceDataElement> root = new TreeItem<PriceDataElement>(new PriceDataElement(new Product(-1, null, true, "Все товары")));
+        priceData.setRoot(root);
+
+        productObsList.stream().filter(a -> a.getParent() == null).forEach(b -> {
+            TreeItem<PriceDataElement> elementGroup = new TreeItem<>(new PriceDataElement(b));
+            if (b.isGroup()) {
+                createItems(elementGroup, b);
+            } else {
+                createItemsShop(elementGroup, b);
+            }
+            root.getChildren().add(elementGroup);
+        });
+
+    }
+
+    /**
+     * Вспомогательный класс для заполнения главной таблицы
+     */
     class PriceDataElement {
 
         @Getter
@@ -223,18 +263,18 @@ public class MainController extends AbstractController {
 
         public PriceDataElement(Shop shop) {
             this.shop = shop;
-            this.description =  new SimpleStringProperty(shop.getDescription());
+            this.description = new SimpleStringProperty(shop.getDescription());
         }
 
         public PriceDataElement(Product product) {
             this.product = product;
-            this.description =  new SimpleStringProperty(product.getDescription());
+            this.description = new SimpleStringProperty(product.getDescription());
         }
 
         public PriceDataElement(Shop shop, Product product) {
             this.product = product;
             this.shop = shop;
-            this.description =  new SimpleStringProperty(shop.getDescription());
+            this.description = new SimpleStringProperty(shop.getDescription());
 
             fillPriceToBeginYear();
             fillPriceToBeginMonth();
@@ -246,28 +286,46 @@ public class MainController extends AbstractController {
         protected void fillPriceToBeginYear() {
             Calendar calendar = SimpleCalendar.getBeginningCurrentYear();
 
-            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1, 1);
+            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, 1);
             priceToBeginYear = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, localDate));
         }
 
         protected void fillPriceToBeginMonth() {
             Calendar calendar = SimpleCalendar.getBeginningCurrentMonth();
-            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), 1);
+            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
             priceToBeginMonth = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, localDate));
         }
+
         protected void fillPriceActual() {
             Calendar calendar = SimpleCalendar.getBeginningCurrentMonth();
-            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH)+1, 1);
-            priceActual = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product,localDate));
+            LocalDate localDate = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, 1);
+            priceActual = new SimpleDoubleProperty(priceService.getPriceForDate(shop, product, localDate));
         }
+
         protected void fillDeviationToBeginYear() {
 
 
         }
+
         protected void fillDeviationToLastMonth() {
 
 
         }
 
+    }
+
+
+
+    @Override
+    public void close() {
+
+       if(CLoseProgramMessage.show()){
+
+
+
+
+
+
+        currentStage.close();}
     }
 }

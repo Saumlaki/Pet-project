@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import ru.saumlaki.price_dynamic.MaskField?>
+<?import ru.saumlaki.price_dynamic.supporting.MaskField?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.element.PriceElementController">
    <children>
       <VBox>

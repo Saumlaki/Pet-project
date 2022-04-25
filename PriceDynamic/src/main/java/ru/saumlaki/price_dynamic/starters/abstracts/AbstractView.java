@@ -8,6 +8,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public abstract class AbstractView<T> {
             e.printStackTrace();
         }
 
-        setOnKeyPressAction(scene, currentStage);
+        setOnKeyPressAction(scene, currentStage, controller);
     }
 
     public void show() {
@@ -55,10 +56,12 @@ public abstract class AbstractView<T> {
         currentStage.showAndWait();
     }
 
-    void setOnKeyPressAction(Scene scene, Stage stage) {
+    void setOnKeyPressAction(Scene scene, Stage stage, T controller) {
 
-        scene.setOnKeyPressed(e -> {
-            if (e.getCode().equals(KeyCode.ESCAPE)) stage.close();
-        });
+        if (controller instanceof AbstractController) {
+            scene.setOnKeyPressed(e -> {
+                if (e.getCode().equals(KeyCode.ESCAPE)) ((AbstractController) controller).close();
+            });
+        }
     }
 }
