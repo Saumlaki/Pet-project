@@ -1,4 +1,4 @@
-package ru.saumlaki.price_dynamic.controllers.list.abstracts;
+package abstracts;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;

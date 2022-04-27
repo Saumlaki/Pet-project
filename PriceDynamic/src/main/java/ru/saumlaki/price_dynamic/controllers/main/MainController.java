@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import lombok.Getter;
 import lombok.Setter;
 import net.rgielen.fxweaver.core.FxmlView;
@@ -65,7 +66,7 @@ public class MainController extends AbstractController {
 
     //ЭЛЕМЕНТЫ ФОРМЫ
     @FXML
-    private TreeTableView<PriceDataElement> priceData;
+    private TreeTableView<PriceDataElement> list;
 
     @FXML
     private Button shopAdd;
@@ -90,6 +91,7 @@ public class MainController extends AbstractController {
     public void initialize() {
         setIcons();
         createTable();
+        setOnMouseClicked();
     }
 
     protected void setIcons() {
@@ -119,7 +121,7 @@ public class MainController extends AbstractController {
         TreeTableColumn<PriceDataElement, Number> columnDynamic2 = new TreeTableColumn("С прошлого месяца");
         columnDynamic.getColumns().addAll(columnDynamic1, columnDynamic2);
 
-        priceData.getColumns().addAll(columnShop, columnPrice, columnDynamic);
+        list.getColumns().addAll(columnShop, columnPrice, columnDynamic);
 
         columnShop.setCellValueFactory(a -> a.getValue().getValue().getDescription());
         columnPrice1.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginYear());
@@ -130,7 +132,7 @@ public class MainController extends AbstractController {
 
 
         //Cоздание корня таблицы
-   updateTable();
+        update();
     }
 
     protected void createItems(TreeItem root, Product group) {
@@ -147,71 +149,163 @@ public class MainController extends AbstractController {
     }
 
     protected void createItemsShop(TreeItem root, Product group) {
-        shopService.getAll().stream().forEach(a ->{
+        shopService.getAll().stream().forEach(a -> {
             root.getChildren().add(new TreeItem<>(new PriceDataElement(a, group)));
         });
     }
 
-    //****БЫСТРЫЕ КНОПКИ ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ
+    @Override
+    public void close() {
+
+        if (CLoseProgramMessage.show()) {
+            currentStage.close();
+        }
+    }
+
+    protected void setOnMouseClicked() {
+        list.setOnMouseClicked(e -> {
+            if (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() == 2) {
+                changeElement();
+            }
+        });
+    }
+
+    //**** КОМАНДЫ ТАБЛИЧНОЙ ЧАСТИ
+
     @FXML
     void shopAddOnAction(ActionEvent event) {
-        shopElementStarter.showForm(currentStage, new Shop());
+        shopAdd();
     }
 
     @FXML
     void productAddOnAction(ActionEvent event) {
-        productElementStarter.showForm(currentStage, new Product());
+        productAdd();
     }
 
     @FXML
     void priceAddOnAction(ActionEvent event) {
-        priceElementStarter.showForm(currentStage, new Price());
+        priceAdd();
     }
 
-    //****КНОПКИ ОТКРЫТИЯ СПИСКОВ
+    @FXML
+    void updateOnAction(ActionEvent event) {
+        update();
+    }
+
+    //**** КОМАНДЫ ГЛАВНОГО МЕНЮ ФОРМЫ
+
     @FXML
     void shopListOnAction(ActionEvent event) {
-        shopListStarter.showForm(currentStage);
+        shopListOpen();
     }
 
     @FXML
     void productListOnAction(ActionEvent event) {
-        productListStarter.showForm(currentStage);
+        productListOpen();
     }
 
     @FXML
     void priceListOnAction(ActionEvent event) {
-        priceListStarter.showForm(currentStage);
+        priceListOpen();
     }
 
-    //****КНОПКА "О ПРОГРАММЕ"
     @FXML
     void aboutOnAction(ActionEvent event) {
         aboutStarter.showForm(currentStage);
     }
 
-    //****КНОПКА ВЫХОДА
     @FXML
     void exitOnAction(ActionEvent event) {
         close();
     }
 
-
-    @FXML
-    void updateOnAction(ActionEvent event) {
-        updateTable();
-    }
+    //**** КОМАНДЫ КОНТЕКСТНОГО МЕНЮ
 
     @FXML
     void updateOnActionCM(ActionEvent event) {
-        updateTable();
+        update();
     }
 
+    @FXML
+    void shopAddOnActionCM(ActionEvent event) {
+        shopAdd();
+    }
 
-    protected void updateTable() {
+    @FXML
+    void productAddOnActionCM(ActionEvent event) {
+        productAdd();
+    }
+
+    @FXML
+    void priceAddOnActionCM(ActionEvent event) {
+        priceAdd();
+    }
+
+    @FXML
+    void changeOnActionCM(ActionEvent event) {
+        changeElement();
+    }
+
+    //**** МЕТОДЫ ДОБАВЛЕНИЯ ЭЛЕМЕНТОВ
+
+    private void shopAdd() {
+        shopElementStarter.showForm(currentStage, new Shop());
+    }
+
+    private void productAdd() {
+        productElementStarter.showForm(currentStage, new Product());
+    }
+
+    private void priceAdd() {
+        priceElementStarter.showForm(currentStage, new Price());
+    }
+
+    //**** МЕТОДЫ ИЗМЕНЕНИЯ ЭЛЕМЕНТОВ
+
+    private void changeElement() {
+        PriceDataElement priceDataElement = getCurrentObject();
+
+        if(priceDataElement.getProduct()!=null&&priceDataElement.getProduct().getId()==-1)return;
+
+        if (priceDataElement.getProduct() != null && priceDataElement.getShop() != null) {
+            shopChange(priceDataElement.getShop());
+        } else if (priceDataElement.getProduct() != null) {
+            productChange(priceDataElement.getProduct());
+        }
+    }
+
+    private void shopChange(Shop element) {
+        shopElementStarter.showForm(currentStage, element);
+    }
+
+    private void productChange(Product element) {
+        productElementStarter.showForm(currentStage, element);
+    }
+
+    private void priceChange(Price element) {
+        priceElementStarter.showForm(currentStage, element);
+    }
+
+    //**** МЕТОДЫ ОТКРЫТИЯ СПИСКОВ ЭЛЕМЕНТОВ
+
+    private void shopListOpen() {
+        shopListStarter.showForm(currentStage);
+    }
+
+    private void productListOpen() {
+        productListStarter.showForm(currentStage);
+    }
+
+    private void priceListOpen() {
+        priceListStarter.showForm(currentStage);
+    }
+
+    //**** МЕТОДЫ ОБНОВЛЕНИЯ ФОРМЫ
+
+    protected void update() {
 
         TreeItem<PriceDataElement> root = new TreeItem<PriceDataElement>(new PriceDataElement(new Product(-1, null, true, "Все товары")));
-        priceData.setRoot(root);
+        list.setRoot(root);
 
         productObsList.stream().filter(a -> a.getParent() == null).forEach(b -> {
             TreeItem<PriceDataElement> elementGroup = new TreeItem<>(new PriceDataElement(b));
@@ -222,8 +316,22 @@ public class MainController extends AbstractController {
             }
             root.getChildren().add(elementGroup);
         });
-
     }
+
+    //**** МЕТОДЫ ОБНОВЛЕНИЯ ГРАФИКА
+
+//    protected void updateGraphik
+
+    //**** ПРОЧИЕ МЕТОДЫ
+
+    /**
+     * Метод возвращает значение текущего элемента списка
+     */
+    protected PriceDataElement getCurrentObject() {
+        return list.getSelectionModel().getSelectedItem().getValue();
+    }
+
+    //**** СПОМОГАТЕЛЬНЫЕ КЛАССЫ
 
     /**
      * Вспомогательный класс для заполнения главной таблицы
@@ -314,18 +422,4 @@ public class MainController extends AbstractController {
 
     }
 
-
-
-    @Override
-    public void close() {
-
-       if(CLoseProgramMessage.show()){
-
-
-
-
-
-
-        currentStage.close();}
-    }
 }

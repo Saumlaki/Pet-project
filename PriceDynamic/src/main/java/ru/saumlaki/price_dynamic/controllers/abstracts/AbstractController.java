@@ -1,5 +1,6 @@
 package ru.saumlaki.price_dynamic.controllers.abstracts;
 
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import lombok.Setter;
 
@@ -17,4 +18,6 @@ public abstract class AbstractController {
      */
     public void close() {
     }
+
+
 }

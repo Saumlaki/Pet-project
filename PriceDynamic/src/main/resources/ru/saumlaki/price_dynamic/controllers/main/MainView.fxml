@@ -18,112 +18,121 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox spacing="5.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.saumlaki.price_dynamic.controllers.main.MainController">
-   <children>
-<VBox maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/17">
-   <children>
-      <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
-        <menus>
-          <Menu fx:id="setting" mnemonicParsing="false" text="Настройки">
-            <items>
-              <MenuItem fx:id="shopList" mnemonicParsing="false" onAction="#shopListOnAction" text="Магазины" />
-                  <MenuItem fx:id="productList" mnemonicParsing="false" onAction="#productListOnAction" text="Товары" />
-                  <MenuItem fx:id="priceList" mnemonicParsing="false" onAction="#priceListOnAction" text="Цены" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="about" mnemonicParsing="false" onAction="#aboutOnAction" text="О программе..." />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitOnAction" text="Выход" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="NEVER">
-         <children>
-            <Button fx:id="shopAdd" mnemonicParsing="false" onAction="#shopAddOnAction" text="Магазин">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="productAdd" mnemonicParsing="false" onAction="#productAddOnAction" text="Товар">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="priceAdd" mnemonicParsing="false" onAction="#priceAddOnAction" text="Цена">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Button>
-                  <Separator orientation="VERTICAL" />
-                  <Button mnemonicParsing="false" onAction="#updateOnAction" text="Обновить" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-      </HBox>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS">
-         <children>
-                  <TreeTableView fx:id="priceData" prefWidth="600.0">
-                     <contextMenu>
-                        <ContextMenu>
-                          <items>
-                            <MenuItem mnemonicParsing="false" onAction="#updateOnActionCM" text="Обновить" />
-                          </items>
-                        </ContextMenu>
-                     </contextMenu></TreeTableView>
-            <VBox spacing="5.0">
-               <children>
-                  <HBox spacing="5.0">
-                     <children>
-                        <Label prefHeight="25.0" text="Период с">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <DatePicker>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </DatePicker>
-                        <Label prefHeight="25.0" text="по">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <DatePicker>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </DatePicker>
-                     </children>
-                     <VBox.margin>
+    <children>
+        <VBox maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/17">
+            <children>
+                <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+                    <menus>
+                        <Menu fx:id="setting" mnemonicParsing="false" text="Настройки">
+                            <items>
+                                <MenuItem fx:id="shopList" mnemonicParsing="false" onAction="#shopListOnAction" text="Магазины" />
+                                <MenuItem fx:id="productList" mnemonicParsing="false" onAction="#productListOnAction" text="Товары" />
+                                <MenuItem fx:id="priceList" mnemonicParsing="false" onAction="#priceListOnAction" text="Цены" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem fx:id="about" mnemonicParsing="false" onAction="#aboutOnAction" text="О программе..." />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitOnAction" text="Выход" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="NEVER">
+                    <children>
+                        <Button fx:id="shopAdd" mnemonicParsing="false" onAction="#shopAddOnAction" text="Магазин">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="productAdd" mnemonicParsing="false" onAction="#productAddOnAction" text="Товар">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="priceAdd" mnemonicParsing="false" onAction="#priceAddOnAction" text="Цена">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </Button>
+                        <Separator orientation="VERTICAL" />
+                        <Button mnemonicParsing="false" onAction="#updateOnAction" text="Обновить" />
+                    </children>
+                    <opaqueInsets>
                         <Insets />
-                     </VBox.margin>
-                  </HBox>
-                  <LineChart VBox.vgrow="ALWAYS">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </LineChart>
-               </children>
-            </VBox>
-         </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" />
-               </padding>
-      </HBox>
-   </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-</VBox>
-   </children>
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
+                </HBox>
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS">
+                    <children>
+                        <TreeTableView fx:id="list" prefWidth="600.0">
+                            <contextMenu>
+                                <ContextMenu>
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" onAction="#updateOnActionCM" text="Обновить" />
+                                        <MenuItem mnemonicParsing="false" onAction="#changeOnActionCM" text="Изменить" />
+                                        <Menu mnemonicParsing="false" text="Добавить">
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#shopAddOnActionCM" text="Магазин" />
+                                                <MenuItem mnemonicParsing="false" onAction="#productAddOnActionCM" text="Товар" />
+                                                <MenuItem mnemonicParsing="false" onAction="#priceAddOnActionCM" text="Цена" />
+                                            </items>
+                                        </Menu>
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TreeTableView>
+                        <VBox spacing="5.0">
+                            <children>
+                                <HBox spacing="5.0">
+                                    <children>
+                                        <Label prefHeight="25.0" text="Период с">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </Label>
+                                        <DatePicker>
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </DatePicker>
+                                        <Label prefHeight="25.0" text="по">
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </Label>
+                                        <DatePicker>
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
+                                        </DatePicker>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </HBox>
+                                <LineChart VBox.vgrow="ALWAYS">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </LineChart>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                    </padding>
+                </HBox>
+            </children>
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </VBox>
+    </children>
 </HBox>
