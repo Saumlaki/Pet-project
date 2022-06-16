@@ -26,4 +26,7 @@ public interface Service<T> {
      * @return объект типа List
      */
     List<T> getAll();
+
+    /** Метод создает таблицу в случае ее отсутствия*/
+    void createTable();
 }

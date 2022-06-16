@@ -2,7 +2,6 @@ package ru.saumlaki.time_tracker.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import ru.saumlaki.time_tracker.controllers.TypeOfTimeController;
 import ru.saumlaki.time_tracker.entity.TypeOfTime;
 
 public class TypeOfTimeElement extends AbstractView{

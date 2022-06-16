@@ -12,8 +12,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
-import lombok.Setter;
 import ru.saumlaki.time_tracker.TimeTracker;
 import ru.saumlaki.time_tracker.entity.DataOfTime;
 import ru.saumlaki.time_tracker.entity.Time;

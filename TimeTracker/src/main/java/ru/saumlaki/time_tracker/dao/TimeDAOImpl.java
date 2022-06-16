@@ -121,4 +121,19 @@ public class TimeDAOImpl implements TimeDAO {
 
         return id;
     }
+
+    @Override
+    public void createTable() {
+
+        //1. Создаем таблицу если она отсутствует
+        String sqlQuery = "CREATE TABLE IF NOT EXISTS time(id int PRIMARY KEY, description varchar(150), type_of_time_id int, CONSTRAINT type_of_time_id FOREIGN KEY (type_of_time_id) REFERENCES type_of_time(id))";
+
+        try (Statement stmt = TimeTracker.connection.createStatement()) {
+            stmt.execute(sqlQuery);
+
+        } catch (SQLException ex) {
+            System.out.println("err.Ошибка создания таблицы таблицы Time");
+            System.out.println("--" + ex.getMessage());
+        }
+    }
 }

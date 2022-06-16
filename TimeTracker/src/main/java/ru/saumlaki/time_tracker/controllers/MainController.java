@@ -1,5 +1,6 @@
 package ru.saumlaki.time_tracker.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,10 +42,10 @@ public class MainController extends AbstractElementController<TimerWatch> {
     private ComboBox<Time> timeList;
 
     @FXML
-    private PieChart pieChart;
+    private ComboBox<TypeTimeDiagram> typeTimeDiagram;
 
     @FXML
-    private ComboBox<TypeTimeDiagram> typeTimeDiagram;
+    private PieChart pieChart;
 
     @FXML
     private Button startButton;
@@ -56,36 +57,30 @@ public class MainController extends AbstractElementController<TimerWatch> {
     private Button settingButton;
 
     Time currentTime;
+    Thread timerWatchThread;
 
-    //***БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ***
-
-    //***Инициализация формы***
-
+    /**
+     * БЛОК ОБЯЗАТЕЛЬНЫХ МЕТОДОВ
+     */
     @FXML
     void initialize() {
-
-        //Инициализация списка типов времени
+        //Обновление списка видов времени при изменении видов времени
         TimeTracker.timeObsList.addListener((ListChangeListener) change -> timeListUpdate());
 
-        //Инициализация списка временных затрат
+        //Обновление диаграммы времени при изменении данных по временным затратам
         TimeTracker.dataOfTimeObsList.addListener((ListChangeListener) change -> pieChartUpdate());
 
-        //Заполнение списка типов диаграмм
+        //Заполнение списка типов диаграмм(по виду времени, по типу времени)
         typeTimeDiagram.getItems().add(TypeTimeDiagram.Time);
         typeTimeDiagram.getItems().add(TypeTimeDiagram.TypeTime);
         typeTimeDiagram.setValue(TypeTimeDiagram.Time);
-
-
-
-
     }
 
     /**
-     * Метод устанавлиает горячие клавиши формы
+     * Метод устанавливает горячие клавиши формы
      */
     @Override
     public void setMnemonic() {
-
         //Установка всплывающих подсказок
         updateButton.setTooltip(new Tooltip("Обновляет круговую диаграмму(Alt+U)"));
         settingButton.setTooltip(new Tooltip("Открывает окно настроек(Alt+S)"));
@@ -94,8 +89,10 @@ public class MainController extends AbstractElementController<TimerWatch> {
         //Добавление быстрых кнопок
         scene.addMnemonic(new Mnemonic(updateButton, KeyCombination.keyCombination("Alt+'U'")));
         scene.addMnemonic(new Mnemonic(updateButton, KeyCombination.keyCombination("Alt+'Г'")));
+
         scene.addMnemonic(new Mnemonic(settingButton, KeyCombination.keyCombination("Alt+'S'")));
         scene.addMnemonic(new Mnemonic(settingButton, KeyCombination.keyCombination("Alt+'Ы'")));
+
         scene.addMnemonic(new Mnemonic(startButton, KeyCombination.keyCombination("Alt+'R'")));
         scene.addMnemonic(new Mnemonic(startButton, KeyCombination.keyCombination("Alt+'K'")));
     }
@@ -114,7 +111,6 @@ public class MainController extends AbstractElementController<TimerWatch> {
         //Устанавливаем начальные значения для списка выбора вида времени
         if (timeList.getItems().size() > 0)
             timeList.setValue(timeList.getItems().get(0));
-        ;
     }
 
     @Override
@@ -123,26 +119,36 @@ public class MainController extends AbstractElementController<TimerWatch> {
         //Заглушка
     }
 
-    //***ОБРАБОТЧИКИ КНОПОК И СОБЫТИЙ ЭЛЕМЕНТОВ ФОРМЫ***
+    /**ОБРАБОТЧИКИ КНОПОК И СОБЫТИЙ ЭЛЕМЕНТОВ ФОРМЫ
+     */
 
     /**
      * Обработчик кнопки запуска таймера
      */
     @FXML
     void startOnAction(ActionEvent event) {
-
         //Проверяем что тип времени выбран
         if (timeList.getValue() == null) {
 
-            Error.showError("Не указан вид времени", "Перед запускам таймеа необходимо выбрать вид времени.\n" +
+            Error.showError("Не указан вид времени", "Перед запускам таймера необходимо выбрать вид времени.\n" +
                     "Если список видов времени не заполнен, то его необходимо заполнить в настройках.");
             return;
         }
 
-        if (element.isRun()) {
+        if (timerWatchThread == null || timerWatchThread.isInterrupted()) {
 
-            //Останавливаем таймер и сохраняем значение
-            DataOfTime dataOfTime = new DataOfTime(0, SimpleCalendar.getBeginningCurrentDay(), timeList.getValue(), element.stopTimer());
+            element = new TimerWatch(this);
+            timerWatchThread = new Thread(element);
+
+            Platform.runLater(() -> timerWatchThread.start());
+
+            startButton.setText("Стоп");
+            timeList.setDisable(true);
+        } else {
+            int time = element.getValue();
+            timerWatchThread.interrupt();
+
+            DataOfTime dataOfTime = new DataOfTime(0, SimpleCalendar.getBeginningCurrentDay(), timeList.getValue(), time);
             ServiceFactory.getService(dataOfTime.getClass()).add(dataOfTime);
 
             //Устанавливаем текст кнопки
@@ -156,20 +162,14 @@ public class MainController extends AbstractElementController<TimerWatch> {
 
             //Ставим доступность выбора типа времени
             timeList.setDisable(false);
-        } else {
-            element.startTimer();
-            startButton.setText("Стоп");
-
-            //Убираем доступность выбора типа времени
-            timeList.setDisable(true);
         }
     }
 
-    //***Обработчики событий формы***
-
+    /**
+     * Обработчик выпадающего списка смены типа диаграммы
+     */
     @FXML
     void typeTimeDiagramOnAction(ActionEvent event) {
-
         pieChartUpdate();
     }
 
@@ -178,8 +178,6 @@ public class MainController extends AbstractElementController<TimerWatch> {
      */
     @FXML
     void updateOnAction(ActionEvent event) {
-
-        //Обновляем данные по временным затратам
         TimeTracker.dataOfTimeObsListUpdate();
     }
 
@@ -188,15 +186,10 @@ public class MainController extends AbstractElementController<TimerWatch> {
      */
     @FXML
     void settingOnAction(ActionEvent event) {
-
         new Setting().showForm(null, stage);
     }
 
-    //***ПРОЧИЕ МЕТОДЫ***
-
-    //---Установка начальных значений---
-
-    //---Обновление данных элементов формы---
+    /**ПРОЧИЕ МЕТОДЫ*/
 
     /**
      * Метод обновляет круговую диаграмму времени.
@@ -221,7 +214,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
                 dto.setTime(new Time(1, entry.getKey().toString(), new TypeOfTime()));
                 dto.setValues(entry.getValue());
 
-                pieChart.getData().add(new PieChart.Data(dto.toString() , dto.getValues()));
+                pieChart.getData().add(new PieChart.Data(dto.toString(), dto.getValues()));
             }
         }
     }
@@ -249,10 +242,9 @@ public class MainController extends AbstractElementController<TimerWatch> {
     //---Установка отображения времени---
 
     public void setTime(int seconds) {
-
         int locHours = seconds / 3600;
-        int locMinutes = (seconds - locHours * 60) / 60;
-        int locSeconds = seconds - locHours * 60 - locMinutes * 60;
+        int locMinutes = (seconds - locHours * 3600) / 60;
+        int locSeconds = seconds - locHours * 3600 - locMinutes * 60;
 
         setHourText(locHours);
         setMinText(locMinutes);
@@ -260,24 +252,20 @@ public class MainController extends AbstractElementController<TimerWatch> {
     }
 
     private void setHourText(int hours) {
-
         hourText.setText(getFormattedTime(hours));
     }
 
     private void setMinText(int minutes) {
-
         minText.setText(getFormattedTime(minutes));
     }
 
     private void setSecText(int seconds) {
-
         secText.setText(getFormattedTime(seconds));
     }
 
     //---Прочее--
 
     private String getFormattedTime(int time) {
-
         String formattedTime = String.valueOf(time);
         while (formattedTime.length() < 2) {
             formattedTime = "0" + formattedTime;
@@ -287,11 +275,7 @@ public class MainController extends AbstractElementController<TimerWatch> {
     }
 
     private int nullOrInt(Integer value) {
-
         if (value == null) return 0;
         else return value;
     }
-
-
-
 }

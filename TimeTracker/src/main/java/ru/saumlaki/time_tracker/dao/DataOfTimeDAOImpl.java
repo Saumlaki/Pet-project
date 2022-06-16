@@ -140,4 +140,18 @@ public class DataOfTimeDAOImpl implements DataOfTimeDAO {
 
         return id;
     }
+
+    @Override
+    public void createTable() {
+        //1. Создаем таблицу если она отсутствует
+        String sqlQuery = "CREATE TABLE IF NOT EXISTS data_fo_time(id int  PRIMARY KEY,date_day date,time_id int,seconds int,CONSTRAINT time_id FOREIGN KEY (time_id) REFERENCES time(id))";
+
+        try (Statement stmt = TimeTracker.connection.createStatement()) {
+            stmt.execute(sqlQuery);
+
+        } catch (SQLException ex) {
+            System.out.println("err.Ошибка создания таблицы таблицы DataOfTime");
+            System.out.println("--" + ex.getMessage());
+        }
+    }
 }

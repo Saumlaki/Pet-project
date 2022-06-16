@@ -55,7 +55,7 @@ public class DataOfTime {
      * Возвращает представление времени в виде ТипВремени(время)
      *
      * @return String - строка типа: 10 мин. 20 сек.
-     * */
+     */
     public String getValueToStr() {
 
         int hors = values / 3600;
@@ -65,7 +65,7 @@ public class DataOfTime {
         String result = hors == 0 ? "" : (hors + " ч.");
         result += min == 0 ? "" : " " + (min + " мин.");
         result += sec == 0 ? "" : " " + (sec + " сек.");
-        return  result;
+        return result;
     }
 
     @Override

@@ -29,9 +29,10 @@ public class TimeServiceImpl implements TimeService {
     public void remove(Time object) {
 
         //При удалении в начале удалим данные по временным затратам, потом переданные данные
-        if(object!=null){
-        ServiceFactory.getService(DataOfTime.class).getAll().stream().filter(a->((DataOfTime)a).getTime().equals(object)).forEach(a->ServiceFactory.getService(DataOfTime.class).remove(a));
-        dao.remove(object);}
+        if (object != null) {
+            ServiceFactory.getService(DataOfTime.class).getAll().stream().filter(a -> ((DataOfTime) a).getTime().equals(object)).forEach(a -> ServiceFactory.getService(DataOfTime.class).remove(a));
+            dao.remove(object);
+        }
     }
 
     @Override
@@ -44,5 +45,10 @@ public class TimeServiceImpl implements TimeService {
         List<Time> list = dao.getAll();
         list.sort(Comparator.comparing(a -> a.toString()));
         return list;
+    }
+
+    @Override
+    public void createTable() {
+        dao.createTable();
     }
 }

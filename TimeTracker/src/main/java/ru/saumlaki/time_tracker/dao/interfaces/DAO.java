@@ -24,12 +24,14 @@ public interface DAO<T> {
 
     /**
      * Метод поиска объекта в БД по id.
+     *
      * @return Null или найденный объект
      */
     T getByID(int id);
 
     /**
      * Метод возвращает все объекты данного типа
+     *
      * @return объект типа List
      */
     List<T> getAll();
@@ -39,4 +41,8 @@ public interface DAO<T> {
      */
     int getNextId();
 
+    /**
+     * Метод создает таблицу в случае ее отсутствия
+     */
+    void createTable();
 }

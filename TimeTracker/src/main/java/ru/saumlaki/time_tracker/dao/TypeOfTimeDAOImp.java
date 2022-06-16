@@ -118,4 +118,43 @@ public class TypeOfTimeDAOImp implements TypeOfTimeDAO {
 
         return id;
     }
+
+    @Override
+    public void createTable() {
+        //1. Смотрим есть ли таблица в БД
+        String sqlQuery = "SELECT count(*) AS tableIsExist FROM sqlite_master WHERE type='table' AND name='type_of_time'";
+        boolean tableIsExist = false;
+
+        try (Statement stmt = TimeTracker.connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sqlQuery)) {
+
+            while (resultSet.next()) {
+                tableIsExist = resultSet.getBoolean("tableIsExist");
+            }
+        } catch (SQLException ex) {
+            System.out.println("err.Ошибка проверки наличия таблицы TypeOfTime");
+            System.out.println("--" + ex.getMessage());
+        }
+
+        //2. Создаем таблицу если она отсутствует
+        sqlQuery = "CREATE TABLE IF NOT EXISTS type_of_time(id int PRIMARY KEY,description varchar(150))";
+
+        try (Statement stmt = TimeTracker.connection.createStatement()) {
+            stmt.execute(sqlQuery);
+        } catch (SQLException ex) {
+            System.out.println("err.Ошибка создания таблицы таблицы TypeOfTime");
+            System.out.println("--" + ex.getMessage());
+        }
+
+        //3. Если в п.1 таблица не была найдена, то созданную в п.2 таблицу заполняем начальными данными
+        if (!tableIsExist) {
+            sqlQuery = "INSERT OR IGNORE INTO type_of_time VALUES (1,'Работа'),(2,'Учеба'),(3,'Спорт'),(4,'Еда'),(5,'Отдых'),(6,'Развлечения')";
+            try (Statement stmt = TimeTracker.connection.createStatement()) {
+                stmt.execute(sqlQuery);
+            } catch (SQLException ex) {
+                System.out.println("err.Ошибка начального заполнения таблицы таблицы TypeOfTime");
+                System.out.println("--" + ex.getMessage());
+            }
+        }
+    }
 }

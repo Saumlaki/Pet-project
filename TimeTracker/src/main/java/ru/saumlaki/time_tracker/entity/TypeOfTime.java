@@ -3,8 +3,10 @@ package ru.saumlaki.time_tracker.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-/**Класс описывает возможные типы времени.
+/**
+ * Класс описывает возможные типы времени.
  * Допустим мы можем работать как по основной работе, так и по подработке. В этом случае у нас будет 2 Time с одним TimeType.
+ *
  * @see Time
  */
 public class TypeOfTime {
@@ -35,7 +37,7 @@ public class TypeOfTime {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeOfTime that = (TypeOfTime) o;
-        return id == that.id||description.equals(that.description);
+        return id == that.id || description.equals(that.description);
     }
 
     @Override

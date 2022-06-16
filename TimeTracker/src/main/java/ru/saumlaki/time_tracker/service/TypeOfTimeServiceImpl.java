@@ -28,12 +28,13 @@ public class TypeOfTimeServiceImpl implements TypeOfTimeService {
     @Override
     public void remove(TypeOfTime object) {
 
-        if(object!=null){
-        //При удалении в начале удаляем все данные по типам времени, потом текущие данные
-        //При удалении в начале удалим данные по временным затратам, потом переданные данные
-        ServiceFactory.getService(Time.class).getAll().stream().filter(a->((Time)a).getTypeOfTime().equals(object)).forEach(a->ServiceFactory.getService(Time.class).remove(a));
-        dao.remove(object);
-        dao.remove(object);}
+        if (object != null) {
+            //При удалении в начале удаляем все данные по типам времени, потом текущие данные
+            //При удалении в начале удалим данные по временным затратам, потом переданные данные
+            ServiceFactory.getService(Time.class).getAll().stream().filter(a -> ((Time) a).getTypeOfTime().equals(object)).forEach(a -> ServiceFactory.getService(Time.class).remove(a));
+            dao.remove(object);
+            dao.remove(object);
+        }
     }
 
     @Override
@@ -46,5 +47,10 @@ public class TypeOfTimeServiceImpl implements TypeOfTimeService {
         List<TypeOfTime> list = dao.getAll();
         list.sort(Comparator.comparing(a -> a.toString()));
         return dao.getAll();
+    }
+
+    @Override
+    public void createTable() {
+        dao.createTable();
     }
 }

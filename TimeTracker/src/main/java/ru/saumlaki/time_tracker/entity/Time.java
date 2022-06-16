@@ -3,10 +3,12 @@ package ru.saumlaki.time_tracker.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-/**Класс описывает вид времени(работа на основной работе, отдых, игры в ПК, подработка и пр.).
+/**
+ * Класс описывает вид времени(работа на основной работе, отдых, игры в ПК, подработка и пр.).
  * Каждый тип времени работы имеет обобщенный тип времени(работа, отдых и пр.)
+ *
  * @see TypeOfTime
- * */
+ */
 public class Time {
 
     @Setter
@@ -40,7 +42,7 @@ public class Time {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Time that = (Time) o;
-        return id == that.id||description.equals(that.description);
+        return id == that.id || description.equals(that.description);
     }
 
     @Override

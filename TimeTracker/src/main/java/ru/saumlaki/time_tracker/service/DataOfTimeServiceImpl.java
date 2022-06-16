@@ -21,7 +21,7 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
         // Если на текущую дату есть запись с текущим днем и типом времени то просто приплюсовываем к ней значения
         List<DataOfTime> allElements = dao.getAll();
 
-        if (allElements.contains(object)&&object.getId()==0) {
+        if (allElements.contains(object) && object.getId() == 0) {
 
             DataOfTime oldDataOfTime = allElements.stream().filter(a -> a.equals(object)).findFirst().get();
             oldDataOfTime.setValues(oldDataOfTime.getValues() + object.getValues());
@@ -38,8 +38,8 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
     @Override
     public void remove(DataOfTime object) {
 
-        if(object!=null)
-        dao.remove(object);
+        if (object != null)
+            dao.remove(object);
     }
 
     @Override
@@ -58,9 +58,13 @@ public class DataOfTimeServiceImpl implements DataOfTimeService {
     public List<DataOfTime> getByPeriod(Date beginDate, Date endDate) {
 
         List<DataOfTime> list = dao.getAll();
-        list = list.stream().filter(a-> a.getCalendar().getTime().getTime()>=beginDate.getTime() &&a.getCalendar().getTime().getTime()<=endDate.getTime()).
+        list = list.stream().filter(a -> a.getCalendar().getTime().getTime() >= beginDate.getTime() && a.getCalendar().getTime().getTime() <= endDate.getTime()).
                 sorted(Comparator.comparing(a -> a.getTime().toString())).collect(Collectors.toList());
         return list;
     }
 
+    @Override
+    public void createTable() {
+        dao.createTable();
+    }
 }
