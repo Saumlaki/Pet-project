@@ -15,7 +15,9 @@ import ru.saumlaki.price_dynamic.service.interfaces.ProductService;
 import ru.saumlaki.price_dynamic.service.interfaces.ShopService;
 import ru.saumlaki.price_dynamic.starters.main.MainViewStarter;
 
-
+/**
+ * Класс инициализации программы. Из него стартует главное окно приложения
+ */
 public class PriceDynamic extends Application {
 
     //Начальное заполнение списков
@@ -32,7 +34,6 @@ public class PriceDynamic extends Application {
 
     @Override
     public void init() {
-
         shops.addAll(shopService.getAll());
         products.addAll(productService.getAll());
         prices.addAll(priceService.getAll());

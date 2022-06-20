@@ -12,6 +12,7 @@ import ru.saumlaki.price_dynamic.service.ProductServiceImpl;
 import ru.saumlaki.price_dynamic.starters.element.ProductElementStarter;
 import ru.saumlaki.price_dynamic.starters.group.ProductGroupStarter;
 
+/**Класс отвечает за обработку событий списка товаров*/
 @Component
 @FxmlView("ProductList.fxml")
 public class ProductListController extends AbstractTreeListController<Product> {

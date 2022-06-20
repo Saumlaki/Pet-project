@@ -14,6 +14,9 @@ import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
 import ru.saumlaki.price_dynamic.supporting.SimpleObject;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Properties;
 
 @SpringBootApplication
@@ -49,9 +52,16 @@ public class Main {
 
     @Bean
     public DriverManagerDataSource dataSource() {
+
+        //1. Получаем путь до БД во временных файлах
+        String dbAddress = getTempFileCatalog() + "\\DBPriceDynamic.sqlite";
+
+        //2. Проверяем что файл базы данных существует. Если его нет, то создаем его
+        createDBFile(dbAddress);
+
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("org.sqlite.JDBC");
-        driverManagerDataSource.setUrl("jdbc:sqlite:C:/Git/Pet-project/PriceDynamic/src/main/resources/DB.sqlite");
+        driverManagerDataSource.setUrl("jdbc:sqlite:" + dbAddress);
 
         return driverManagerDataSource;
     }
@@ -68,5 +78,43 @@ public class Main {
         localSessionFactoryBean.setAnnotatedClasses(Shop.class,Product.class,Price.class);
 
         return  localSessionFactoryBean;
+    }
+
+    //****МЕТОДЫ РАБОТЫ С ФАЙЛОВОЙ СИСТЕМОЙ
+
+    /**
+     * Метод возвращает путь до каталога временных файлов
+     */
+    private static String getTempFileCatalog() {
+        String tempFile = "";
+        try {
+            tempFile = Files.createTempFile("", ".tmp").toFile().getParentFile().getCanonicalPath();
+        } catch (IOException e) {
+            System.out.println("err.Ошибка получения каталога временных файлов");
+            e.printStackTrace();
+        }
+        return tempFile;
+    }
+
+    /**
+     * Метод создает файл базы данных по полному пути <code>dbName</code> в случае его отсутствия
+     */
+    private static void createDBFile(String dbName) {
+        System.out.println("Проверка наличия файла БД:");
+        System.out.println("--Путь: " + dbName);
+
+        File dbFile = new File(dbName);
+
+        if (!dbFile.exists()) {
+            try {
+                System.out.println("Файл БД не обнаружен. Пытаюсь создать");
+                if (!dbFile.createNewFile()) {
+                    System.out.println("err.Не смог создать файл БД");
+                }
+            } catch (IOException ex) {
+                System.out.println("err.Ошибка создания файла БД");
+                System.out.println("--" + ex.getMessage());
+            }
+        }
     }
 }

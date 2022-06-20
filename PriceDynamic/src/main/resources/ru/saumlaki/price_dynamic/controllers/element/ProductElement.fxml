@@ -32,6 +32,9 @@
                         <Label prefHeight="25.0" text="Группа" />
                         <Label prefHeight="25.0" text="Наименование:" />
                      </children>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
                   </VBox>
                   <VBox spacing="5.0">
                      <children>

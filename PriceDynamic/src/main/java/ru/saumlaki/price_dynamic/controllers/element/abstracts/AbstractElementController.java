@@ -50,7 +50,7 @@ public abstract class AbstractElementController<T> extends AbstractController {
     //***ДЕЙСТВИЯ БАЗОВЫХ КНОПОК
 
     @FXML
-    void saveOnAction(ActionEvent event) throws SQLDataException {
+    public void  saveOnAction(ActionEvent event) throws SQLDataException {
         updateElement();
         if (protoObject.isCorrectly()) {
             //Сохраняем дубликат объекта для того что бы в случае ошибки транзакции не было рассогласованных данных между формой и БД

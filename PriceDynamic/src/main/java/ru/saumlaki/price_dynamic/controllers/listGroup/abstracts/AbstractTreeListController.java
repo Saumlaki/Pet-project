@@ -83,7 +83,7 @@ public abstract class AbstractTreeListController<T> extends AbstractController {
 
     @FXML
     void addOnAction(ActionEvent event) {
-        addGroup();
+        addObject();
     }
 
     @FXML
