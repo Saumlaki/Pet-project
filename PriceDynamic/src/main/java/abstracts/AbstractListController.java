@@ -174,8 +174,6 @@ public abstract class AbstractListController<T> extends AbstractController {
 
         /**Добавляем колонки к таблице и устанавливаем для них источник данных*/
         for (IndexedColumn a : columnList) {
-
-
             if (a.name.equals("image")) {
                 TableColumn<T, ImageView> column = new TableColumn<>(a.description);
                 column.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -208,15 +206,6 @@ public abstract class AbstractListController<T> extends AbstractController {
                 });
                 list.getColumns().add(column);
             }
-
-
-
-
-
-
-
-
-
         }
     }
 

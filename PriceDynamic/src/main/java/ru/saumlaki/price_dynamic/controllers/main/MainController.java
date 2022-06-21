@@ -2,10 +2,12 @@ package ru.saumlaki.price_dynamic.controllers.main;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValueBase;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import lombok.Getter;
@@ -14,6 +16,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
+import ru.saumlaki.price_dynamic.controllers.listGroup.Imageeble;
 import ru.saumlaki.price_dynamic.entity.Price;
 import ru.saumlaki.price_dynamic.entity.Product;
 import ru.saumlaki.price_dynamic.entity.Shop;
@@ -31,6 +34,8 @@ import ru.saumlaki.price_dynamic.starters.list.PriceListStarter;
 import ru.saumlaki.price_dynamic.starters.list.ProductListStarter;
 import ru.saumlaki.price_dynamic.starters.list.ShopListStarter;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -108,6 +113,8 @@ public class MainController extends AbstractController {
 
     protected void createTable() {
 
+        TreeTableColumn<PriceDataElement, String> columnTemp = new TreeTableColumn("");
+        TreeTableColumn<PriceDataElement, ImageView> columnImg = new TreeTableColumn();
         TreeTableColumn<PriceDataElement, String> columnShop = new TreeTableColumn("Магазин/Товар");
 
         TreeTableColumn<PriceDataElement, Number> columnPrice = new TreeTableColumn("Цена");
@@ -121,7 +128,8 @@ public class MainController extends AbstractController {
         TreeTableColumn<PriceDataElement, Number> columnDynamic2 = new TreeTableColumn("С прошлого месяца");
         columnDynamic.getColumns().addAll(columnDynamic1, columnDynamic2);
 
-        list.getColumns().addAll(columnShop, columnPrice, columnDynamic);
+        list.getColumns().addAll(columnTemp, columnImg, columnShop, columnPrice, columnDynamic);
+        list.getColumns().addAll(columnImg, columnShop, columnPrice, columnDynamic);
 
         columnShop.setCellValueFactory(a -> a.getValue().getValue().getDescription());
         columnPrice1.setCellValueFactory(a -> a.getValue().getValue().getPriceToBeginYear());
@@ -129,13 +137,35 @@ public class MainController extends AbstractController {
         columnPrice3.setCellValueFactory(a -> a.getValue().getValue().getPriceActual());
         columnDynamic1.setCellValueFactory(a -> a.getValue().getValue().getDeviationToBeginYear());
         columnDynamic2.setCellValueFactory(a -> a.getValue().getValue().getDeviationToLastMonth());
+        columnImg.setCellValueFactory(a -> new ObservableValueBase<ImageView>() {
+                    @Override
+                    public ImageView getValue() {
+                        if (a.getValue().getValue().getShop() != null) {
+                            URL iconURL = Helper.getResourcesURLForPropertyName("ShopIcon");
+                            Image image = null;
+                            try {
+                                image = new Image(iconURL.openStream());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return new ImageView(image);
+                        } else {
+                            return a.getValue().getValue().getProduct().getImage();
+                        }
+                    }
+                }
+        );
 
+        columnTemp.setPrefWidth(50);
 
         //Cоздание корня таблицы
         update();
+
+        list.setShowRoot(false);
     }
 
     protected void createItems(TreeItem root, Product group) {
+        /*Заполнение верхнего уровня*/
         productObsList.stream().filter(a -> a.getParent() != null && a.getParent().equals(group)).forEach(b -> {
             TreeItem<PriceDataElement> elementGroup = new TreeItem<>(new PriceDataElement(b));
             if (b.isGroup()) {
@@ -143,7 +173,6 @@ public class MainController extends AbstractController {
             } else {
                 createItemsShop(elementGroup, b);
             }
-
             root.getChildren().add(elementGroup);
         });
     }
@@ -265,7 +294,9 @@ public class MainController extends AbstractController {
     private void changeElement() {
         PriceDataElement priceDataElement = getCurrentObject();
 
-        if(priceDataElement.getProduct()!=null&&priceDataElement.getProduct().getId()==-1)return;
+        if (priceDataElement == null) return;
+
+        if (priceDataElement.getProduct() != null && priceDataElement.getProduct().getId() == -1) return;
 
         if (priceDataElement.getProduct() != null && priceDataElement.getShop() != null) {
             shopChange(priceDataElement.getShop());
@@ -303,17 +334,20 @@ public class MainController extends AbstractController {
     //**** МЕТОДЫ ОБНОВЛЕНИЯ ФОРМЫ
 
     protected void update() {
-
+        /*Заполнение верхнего уровня*/
         TreeItem<PriceDataElement> root = new TreeItem<PriceDataElement>(new PriceDataElement(new Product(-1, null, true, "Все товары")));
         list.setRoot(root);
 
         productObsList.stream().filter(a -> a.getParent() == null).forEach(b -> {
+
             TreeItem<PriceDataElement> elementGroup = new TreeItem<>(new PriceDataElement(b));
+
             if (b.isGroup()) {
                 createItems(elementGroup, b);
             } else {
                 createItemsShop(elementGroup, b);
             }
+
             root.getChildren().add(elementGroup);
         });
     }
@@ -328,7 +362,9 @@ public class MainController extends AbstractController {
      * Метод возвращает значение текущего элемента списка
      */
     protected PriceDataElement getCurrentObject() {
-        return list.getSelectionModel().getSelectedItem().getValue();
+        if (list.getSelectionModel().getSelectedItem() == null) return null;
+        else
+            return list.getSelectionModel().getSelectedItem().getValue();
     }
 
     //**** СПОМОГАТЕЛЬНЫЕ КЛАССЫ

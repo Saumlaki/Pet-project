@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.saumlaki.price_dynamic.controllers.listGroup.Imageeble;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 @Entity(name = "product")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product implements Imageeble {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +36,7 @@ public class Product {
     @Setter
     private boolean isGroup;
 
-    @TableViewColumn(name = "Наименование")
+    @TableViewColumn(name = "Наименование", order = 1)
     @Column
     @Getter
     @Setter
@@ -44,7 +45,6 @@ public class Product {
     @TableViewColumn(name = "", order = 0)
     @Transient
     private Image image;
-
 
     public Product(int id, Product parent, boolean isGroup, String description) {
         this.id = id;

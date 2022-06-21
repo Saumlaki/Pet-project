@@ -40,7 +40,7 @@
                      <children>
                         <HBox spacing="5.0">
                            <children>
-                              <TextField fx:id="group" />
+                              <TextField fx:id="group" editable="false"/>
                               <Button mnemonicParsing="false" onAction="#groupSelect" text="..." />
                            </children>
                         </HBox>

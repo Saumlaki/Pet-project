@@ -2,7 +2,9 @@ package ru.saumlaki.price_dynamic.controllers.listGroup.abstracts;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ObservableValueBase;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,10 +16,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.saumlaki.price_dynamic.controllers.abstracts.AbstractController;
+import ru.saumlaki.price_dynamic.controllers.listGroup.Imageeble;
 import ru.saumlaki.price_dynamic.entity.annotatons.TableViewColumn;
 import ru.saumlaki.price_dynamic.supporting.AlertMessage;
 import ru.saumlaki.price_dynamic.supporting.Helper;
 
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -127,7 +131,9 @@ public abstract class AbstractTreeListController<T> extends AbstractController {
 
     protected T getCurrentObject() {
 
-        return list.getSelectionModel().getSelectedItem().getValue();
+        if (list.getSelectionModel().getSelectedItem() == null) return null;
+        else
+            return list.getSelectionModel().getSelectedItem().getValue();
     }
 
     public abstract void addObject();
@@ -187,10 +193,28 @@ public abstract class AbstractTreeListController<T> extends AbstractController {
         /**Добавляем колонки к таблице и устанавливаем для них источник данных*/
         for (IndexedColumn a : columnList) {
 
+            /*Колонку с картинкой обрабатываем отдельно*/
+            if (a.name.equals("image")) {
 
+                /*Вводим вспомогательную колонку для корректного отображения маркера групп*/
+                TreeTableColumn<T, String> columnTemp = new TreeTableColumn<>("");
+
+                /*Колонка с картинкой*/
+                TreeTableColumn<T, ImageView> column = new TreeTableColumn<>(a.description);
+                column.setCellValueFactory(cellData-> new ObservableValueBase<ImageView>() {
+                    @Override
+                    public ImageView getValue() {
+                        return ((Imageeble)cellData.getValue().getValue()).getImage();
+                    }
+                });
+
+                columnTemp.setPrefWidth(50);
+                list.getColumns().add(columnTemp);
+                list.getColumns().add(column);
+                continue;
+            }
 
             TreeTableColumn<T, String> column = new TreeTableColumn<>(a.description);
-
 
             column.setCellValueFactory(StringCellDataFeatures -> {
                 String value = null;

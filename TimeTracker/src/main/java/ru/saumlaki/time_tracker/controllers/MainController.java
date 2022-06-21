@@ -186,6 +186,8 @@ public class MainController extends AbstractElementController<TimerWatch> {
      */
     @FXML
     void settingOnAction(ActionEvent event) {
+        /*В начале перечитаем информацию по всем временным затратам для формы корректровки данных*/
+        TimeTracker.dataOfTimeObsListAllUpdate();
         new Setting().showForm(null, stage);
     }
 

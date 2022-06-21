@@ -48,13 +48,13 @@
                         </HBox>
                         <HBox spacing="5.0">
                            <children>
-                              <TextField fx:id="shop" prefWidth="175.0" />
+                              <TextField fx:id="shop" prefWidth="175.0" editable="false" />
                               <Button maxWidth="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#shopSelect" text="..." />
                            </children>
                         </HBox>
                         <HBox spacing="5.0">
                            <children>
-                              <TextField fx:id="product" prefWidth="175.0" />
+                              <TextField fx:id="product" prefWidth="175.0" editable="false"/>
                               <Button mnemonicParsing="false" onAction="#productSelect" prefWidth="25.0" text="..." />
                            </children>
                         </HBox>

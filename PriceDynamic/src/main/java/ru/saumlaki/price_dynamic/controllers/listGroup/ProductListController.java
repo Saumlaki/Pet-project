@@ -47,6 +47,8 @@ public class ProductListController extends AbstractTreeListController<Product> {
 
             createItems(elementGroup, b);
         });
+
+        list.setShowRoot(false);
     }
 
     protected void createItems(TreeItem root, Product group) {
@@ -72,6 +74,7 @@ public class ProductListController extends AbstractTreeListController<Product> {
 
     @Override
     public void changeObject(Product object) {
+        if(object==null) return;
         if(object.getId()==-1) return;//Корневой элемент
 
         if(object.isGroup())
